@@ -10,6 +10,7 @@
 #import "SellerProfileVC.h"
 #import "SellerPropertyVC.h"
 #import "SignInViewController.h"
+#import "BuyerProfileViewController.h"
 
 @import GoogleMaps;
 @import GooglePlaces;
@@ -33,9 +34,12 @@
     [ self.manager requestAlwaysAuthorization ];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    SignInViewController *signIn = [[SignInViewController alloc] initWithNibName:@"SignInView" bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
-    self.window.rootViewController = nav;
+//    SignInViewController *signIn = [[SignInViewController alloc] initWithNibName:@"SignInView" bundle:nil];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
+//    self.window.rootViewController = nav;
+    
+    BuyerProfileViewController *root = [[BuyerProfileViewController alloc] init];
+    self.window.rootViewController = root;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
