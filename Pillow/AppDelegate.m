@@ -8,11 +8,12 @@
 
 #import "AppDelegate.h"
 #import "SellerProfileVC.h"
+#import "SellerPropertyVC.h"
 
 @interface AppDelegate ()
 
 @property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
-
+@property (strong, nonatomic) SellerPropertyVC *sellerPropertyVC;
 @end
 
 @implementation AppDelegate
@@ -20,8 +21,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    _sellerprofileVC = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
-    self.window.rootViewController =_sellerprofileVC ;
+//    _sellerprofileVC = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
+//    self.window.rootViewController =_sellerprofileVC ;
+    _sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
+    self.window.rootViewController = _sellerPropertyVC;
     [self.window makeKeyAndVisible];
     return YES;
 }

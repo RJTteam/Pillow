@@ -16,6 +16,14 @@
 		C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01F81E26E18700045D5D /* SellerPropertyVC.m */; };
 		C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */; };
 		C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D02031E270EF600045D5D /* SellerProfileCell.xib */; };
+		C32D020B1E27168C00045D5D /* SellerInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020A1E27168C00045D5D /* SellerInfoCell.xib */; };
+		C32D020D1E27182F00045D5D /* SellerPropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */; };
+		C32D020F1E2726AF00045D5D /* PropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020E1E2726AF00045D5D /* PropertyCell.xib */; };
+		C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02111E272CEA00045D5D /* SellerOwnPropertyCell.m */; };
+		C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02141E2744FD00045D5D /* EditPropertyVC.m */; };
+		C32D02171E2744FD00045D5D /* EditPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D02151E2744FD00045D5D /* EditPropertyVC.xib */; };
+		C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02191E274E6900045D5D /* ImageCollectionCell.m */; };
+		C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +41,17 @@
 		C32D01F81E26E18700045D5D /* SellerPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerPropertyVC.m; sourceTree = "<group>"; };
 		C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerPropertyVC.xib; sourceTree = "<group>"; };
 		C32D02031E270EF600045D5D /* SellerProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerProfileCell.xib; sourceTree = "<group>"; };
+		C32D020A1E27168C00045D5D /* SellerInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerInfoCell.xib; sourceTree = "<group>"; };
+		C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerPropertyCell.xib; sourceTree = "<group>"; };
+		C32D020E1E2726AF00045D5D /* PropertyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyCell.xib; sourceTree = "<group>"; };
+		C32D02101E272CEA00045D5D /* SellerOwnPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerOwnPropertyCell.h; sourceTree = "<group>"; };
+		C32D02111E272CEA00045D5D /* SellerOwnPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerOwnPropertyCell.m; sourceTree = "<group>"; };
+		C32D02131E2744FD00045D5D /* EditPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPropertyVC.h; sourceTree = "<group>"; };
+		C32D02141E2744FD00045D5D /* EditPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPropertyVC.m; sourceTree = "<group>"; };
+		C32D02151E2744FD00045D5D /* EditPropertyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPropertyVC.xib; sourceTree = "<group>"; };
+		C32D02181E274E6900045D5D /* ImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionCell.h; sourceTree = "<group>"; };
+		C32D02191E274E6900045D5D /* ImageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionCell.m; sourceTree = "<group>"; };
+		C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +90,20 @@
 				C32D01F31E26E14B00045D5D /* SellerProfileVC.m */,
 				C32D01F41E26E14B00045D5D /* SellerProfileVC.xib */,
 				C32D02031E270EF600045D5D /* SellerProfileCell.xib */,
+				C32D020A1E27168C00045D5D /* SellerInfoCell.xib */,
+				C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */,
 				C32D01F71E26E18700045D5D /* SellerPropertyVC.h */,
 				C32D01F81E26E18700045D5D /* SellerPropertyVC.m */,
+				C32D02101E272CEA00045D5D /* SellerOwnPropertyCell.h */,
+				C32D02111E272CEA00045D5D /* SellerOwnPropertyCell.m */,
 				C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */,
+				C32D020E1E2726AF00045D5D /* PropertyCell.xib */,
+				C32D02131E2744FD00045D5D /* EditPropertyVC.h */,
+				C32D02141E2744FD00045D5D /* EditPropertyVC.m */,
+				C32D02151E2744FD00045D5D /* EditPropertyVC.xib */,
+				C32D02181E274E6900045D5D /* ImageCollectionCell.h */,
+				C32D02191E274E6900045D5D /* ImageCollectionCell.m */,
+				C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */,
 				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
 				C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */,
 				C32D01EC1E26DDFA00045D5D /* Info.plist */,
@@ -150,9 +180,14 @@
 			files = (
 				C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
+				C32D020B1E27168C00045D5D /* SellerInfoCell.xib in Resources */,
 				C32D01F61E26E14B00045D5D /* SellerProfileVC.xib in Resources */,
+				C32D02171E2744FD00045D5D /* EditPropertyVC.xib in Resources */,
 				C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */,
 				C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */,
+				C32D020F1E2726AF00045D5D /* PropertyCell.xib in Resources */,
+				C32D020D1E27182F00045D5D /* SellerPropertyCell.xib in Resources */,
+				C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,8 +200,11 @@
 			files = (
 				C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
+				C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */,
 				C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
+				C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */,
+				C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

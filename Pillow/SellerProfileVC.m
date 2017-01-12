@@ -11,9 +11,9 @@
 @interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     AppDelegate *appDele;
+    NSArray *infoItem;
 }
 @property (weak, nonatomic) IBOutlet UITableView *profileTable;
-
 @end
 
 @implementation SellerProfileVC
@@ -22,11 +22,9 @@
     [super viewDidLoad];
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.profileTable.allowsSelection = NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.profileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    infoItem = @[@"SellerProfileCell",@"SellerInfoCell",@"SellerPropertyCell"];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -34,14 +32,26 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    if (! cell) {
-        NSArray *parts = [[NSBundle mainBundle] loadNibNamed:@"SellerProfileCell" owner:nil options:nil];
+
+    NSString *cellIdentifier = [infoItem objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        NSArray *parts = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = [parts objectAtIndex:0];
     }
-
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        return 127;
+    }
+    else if(indexPath.row == 1){
+        return 180;
+    }
+    else{
+        return 177;
+    }
 }
 
 /*
