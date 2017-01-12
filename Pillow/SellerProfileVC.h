@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SellerProfileVC.h
 //  Pillow
 //
 //  Created by Lucas Luo on 1/11/17.
@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface SellerProfileVC : UIViewController
 
-@property (strong, nonatomic) UIWindow *window;
 
 @end
-

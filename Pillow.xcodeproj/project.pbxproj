@@ -11,6 +11,11 @@
 		C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DF1E26DDFA00045D5D /* AppDelegate.m */; };
 		C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E71E26DDFA00045D5D /* Assets.xcassets */; };
 		C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */; };
+		C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01F31E26E14B00045D5D /* SellerProfileVC.m */; };
+		C32D01F61E26E14B00045D5D /* SellerProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D01F41E26E14B00045D5D /* SellerProfileVC.xib */; };
+		C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01F81E26E18700045D5D /* SellerPropertyVC.m */; };
+		C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */; };
+		C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D02031E270EF600045D5D /* SellerProfileCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +26,13 @@
 		C32D01E71E26DDFA00045D5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C32D01EA1E26DDFA00045D5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C32D01EC1E26DDFA00045D5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C32D01F21E26E14B00045D5D /* SellerProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerProfileVC.h; sourceTree = "<group>"; };
+		C32D01F31E26E14B00045D5D /* SellerProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerProfileVC.m; sourceTree = "<group>"; };
+		C32D01F41E26E14B00045D5D /* SellerProfileVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerProfileVC.xib; sourceTree = "<group>"; };
+		C32D01F71E26E18700045D5D /* SellerPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerPropertyVC.h; sourceTree = "<group>"; };
+		C32D01F81E26E18700045D5D /* SellerPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerPropertyVC.m; sourceTree = "<group>"; };
+		C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerPropertyVC.xib; sourceTree = "<group>"; };
+		C32D02031E270EF600045D5D /* SellerProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerProfileCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +67,13 @@
 			children = (
 				C32D01DE1E26DDFA00045D5D /* AppDelegate.h */,
 				C32D01DF1E26DDFA00045D5D /* AppDelegate.m */,
+				C32D01F21E26E14B00045D5D /* SellerProfileVC.h */,
+				C32D01F31E26E14B00045D5D /* SellerProfileVC.m */,
+				C32D01F41E26E14B00045D5D /* SellerProfileVC.xib */,
+				C32D02031E270EF600045D5D /* SellerProfileCell.xib */,
+				C32D01F71E26E18700045D5D /* SellerPropertyVC.h */,
+				C32D01F81E26E18700045D5D /* SellerPropertyVC.m */,
+				C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */,
 				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
 				C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */,
 				C32D01EC1E26DDFA00045D5D /* Info.plist */,
@@ -129,7 +148,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
+				C32D01F61E26E14B00045D5D /* SellerProfileVC.xib in Resources */,
+				C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */,
 				C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +163,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
+				C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SellerPropertyVC.h
 //  Pillow
 //
 //  Created by Lucas Luo on 1/11/17.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface SellerPropertyVC : UIViewController
 
 @end
-

@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "SellerProfileVC.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
 
 @end
 
@@ -16,7 +19,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    _sellerprofileVC = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
+    self.window.rootViewController =_sellerprofileVC ;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
