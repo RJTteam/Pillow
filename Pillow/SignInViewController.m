@@ -21,6 +21,8 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skipSignInClicked)];
+    self.navigationItem.rightBarButtonItem = skipButton;
     
 }
 
@@ -30,6 +32,11 @@
 }
 
 #pragma mark - Even Method
+
+- (void)skipSignInClicked{
+    //TODO Go to Home view directly without Sign in or sign up
+    assert(NO);
+}
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
     BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
@@ -41,6 +48,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //TODO jump to home view, set current user to the login user
+        assert(NO);
         NSLog(@"Login success");
     }
 }

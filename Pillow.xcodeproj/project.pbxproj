@@ -17,6 +17,8 @@
 		E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CB71E26E5F400B1902D /* SignInViewController.m */; };
 		E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CB81E26E5F400B1902D /* SignUpView.xib */; };
 		E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */; };
+		E84A3CCD1E27068A00B1902D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CCB1E27068A00B1902D /* ProfileViewController.m */; };
+		E84A3CCE1E27068A00B1902D /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CCC1E27068A00B1902D /* ProfileView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,9 @@
 		E84A3CB81E26E5F400B1902D /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		E84A3CB91E26E5F400B1902D /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		E84A3CCA1E27068A00B1902D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		E84A3CCB1E27068A00B1902D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		E84A3CCC1E27068A00B1902D /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,9 @@
 				E84A3CC81E26E61600B1902D /* Views */,
 				E84A3CC91E26E62100B1902D /* Controllers */,
 				C32D01DB1E26DDFA00045D5D /* Supporting Files */,
+				E84A3CCA1E27068A00B1902D /* ProfileViewController.h */,
+				E84A3CCB1E27068A00B1902D /* ProfileViewController.m */,
+				E84A3CCC1E27068A00B1902D /* ProfileView.xib */,
 			);
 			path = Pillow;
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84A3CCE1E27068A00B1902D /* ProfileView.xib in Resources */,
 				E84A3CC31E26E5F400B1902D /* SignInView.xib in Resources */,
 				E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
@@ -188,6 +197,7 @@
 				E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */,
 				E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
+				E84A3CCD1E27068A00B1902D /* ProfileViewController.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
