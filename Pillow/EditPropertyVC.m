@@ -34,12 +34,10 @@
 }
 
 - (IBAction)cancelBtn:(id)sender {
-    SellerPropertyVC *editVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
-    [self presentViewController:editVC animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)doneBtn:(id)sender {
-    SellerPropertyVC *editVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
-    [self presentViewController:editVC animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(NSString*)getDocumentDirLocation{

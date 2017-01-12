@@ -7,6 +7,7 @@
 //
 
 #import "SellerProfileVC.h"
+#import "SellerPropertyVC.h"
 
 @interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -26,7 +27,13 @@
     
     infoItem = @[@"SellerProfileCell",@"SellerInfoCell",@"SellerPropertyCell"];
 }
+- (IBAction)viewBtnClicked:(id)sender {
+    SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
+//    [self presentViewController:sellerPropertyVC animated:YES completion:nil];
+    [self.navigationController pushViewController:sellerPropertyVC animated:YES];
+}
 
+#pragma mark - TableView Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
 }
