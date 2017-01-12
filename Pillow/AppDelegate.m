@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SignInViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    SignInViewController *signIn = [[SignInViewController alloc] initWithNibName:@"SignInView" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
+    self.window.rootViewController = nav;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
