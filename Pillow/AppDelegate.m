@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "SellerProfileVC.h"
+#import "SellerPropertyVC.h"
 #import "SignInViewController.h"
 
 @import GoogleMaps;

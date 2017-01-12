@@ -23,11 +23,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
+    UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
+    buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
+    [buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
+    buyerVSseller.selectedSegmentIndex = 1;
+    
+    [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)buyerVSsellerAction:(UISegmentedControl *)segment{
+    if(segment.selectedSegmentIndex == 0)
+    {
+        //Sign in as Buyer
+    }
+    else{
+        //Sign in as Seller
+    }
 }
 
 #pragma mark - Even Method
