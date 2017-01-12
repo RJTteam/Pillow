@@ -10,10 +10,13 @@
 #import "SignupViewController.h"
 #import "ForgetPwdViewController.h"
 #import "HomeViewController.h"
+#import "BuyerProfileViewController.h"
+#import "SellerProfileVC.h"
 
 @interface SignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
+@property (nonatomic)BOOL isBuyer;
 
 @end
 
@@ -38,9 +41,11 @@
     if(segment.selectedSegmentIndex == 0)
     {
         //Sign in as Buyer
+        self.isBuyer = true;
     }
     else{
         //Sign in as Seller
+        self.isBuyer = false;
     }
 }
 
@@ -60,9 +65,8 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        //TODO jump to home view, set current user to the login user
-
         HomeViewController* hvc = [[HomeViewController alloc]init];
+        //TODO set the logined user 's type here
         [self presentViewController:hvc animated:YES completion:nil];
         NSLog(@"Login success");
     }
@@ -81,6 +85,10 @@
 }
 - (IBAction)googleClicked {
     //TODO jump to google login service
+    assert(NO);
+}
+- (IBAction)facebookClicked {
+    //TODO jump to facebook sigin clicked
     assert(NO);
 }
 #pragma mark - Private Method
