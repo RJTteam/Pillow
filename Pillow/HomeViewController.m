@@ -20,7 +20,7 @@
     
     MapViewController * first = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     ListTableViewController * second = [[ListTableViewController alloc] initWithNibName:@"ListTableViewController" bundle:nil];
-    SellerPropertyVC * third = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
+    SellerProfileVC * third = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
     
     UINavigationController* nvOfThird = [[UINavigationController alloc]initWithRootViewController:third];
     UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];

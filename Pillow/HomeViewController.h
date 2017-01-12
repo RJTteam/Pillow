@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MapViewController.h"
 #import "ListTableViewController.h"
-#import "SellerPropertyVC.h"
+#import "SellerProfileVC.h"
 
 @interface HomeViewController : UITabBarController
 
