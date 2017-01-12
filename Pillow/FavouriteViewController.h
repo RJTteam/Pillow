@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.h
+//  FavourateViewController.h
 //  Pillow
 //
 //  Created by Xinyuan Wang on 1/11/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@interface FavouriteViewController : UICollectionViewController
 
 @end

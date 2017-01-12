@@ -17,8 +17,12 @@
 		E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CB71E26E5F400B1902D /* SignInViewController.m */; };
 		E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CB81E26E5F400B1902D /* SignUpView.xib */; };
 		E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */; };
-		E84A3CCD1E27068A00B1902D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CCB1E27068A00B1902D /* ProfileViewController.m */; };
-		E84A3CCE1E27068A00B1902D /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CCC1E27068A00B1902D /* ProfileView.xib */; };
+		E84A3CD21E2709F800B1902D /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CD01E2709F800B1902D /* FavouriteViewController.m */; };
+		E84A3CDE1E272EA900B1902D /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CDD1E272EA900B1902D /* FavouriteCell.m */; };
+		E84A3CE21E27854000B1902D /* BuyerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CE01E27854000B1902D /* BuyerProfileViewController.m */; };
+		E84A3CE31E27854000B1902D /* BuyerProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CE11E27854000B1902D /* BuyerProfileView.xib */; };
+		E84A3CE61E278A1400B1902D /* PropertyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */; };
+		E84A3CE81E278A2100B1902D /* PropertyDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,9 +42,16 @@
 		E84A3CB81E26E5F400B1902D /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
 		E84A3CB91E26E5F400B1902D /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		E84A3CCA1E27068A00B1902D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		E84A3CCB1E27068A00B1902D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		E84A3CCC1E27068A00B1902D /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		E84A3CCF1E2709F800B1902D /* FavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewController.h; sourceTree = "<group>"; };
+		E84A3CD01E2709F800B1902D /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
+		E84A3CDC1E272EA900B1902D /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
+		E84A3CDD1E272EA900B1902D /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
+		E84A3CDF1E27854000B1902D /* BuyerProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuyerProfileViewController.h; path = ../BuyerProfileViewController.h; sourceTree = "<group>"; };
+		E84A3CE01E27854000B1902D /* BuyerProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuyerProfileViewController.m; path = ../BuyerProfileViewController.m; sourceTree = "<group>"; };
+		E84A3CE11E27854000B1902D /* BuyerProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BuyerProfileView.xib; path = ../BuyerProfileView.xib; sourceTree = "<group>"; };
+		E84A3CE41E278A1400B1902D /* PropertyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetailViewController.h; sourceTree = "<group>"; };
+		E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetailViewController.m; sourceTree = "<group>"; };
+		E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyDetailView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,15 +86,13 @@
 			children = (
 				C32D01DE1E26DDFA00045D5D /* AppDelegate.h */,
 				C32D01DF1E26DDFA00045D5D /* AppDelegate.m */,
-				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
-				C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */,
-				C32D01EC1E26DDFA00045D5D /* Info.plist */,
 				E84A3CC81E26E61600B1902D /* Views */,
 				E84A3CC91E26E62100B1902D /* Controllers */,
+				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
 				C32D01DB1E26DDFA00045D5D /* Supporting Files */,
-				E84A3CCA1E27068A00B1902D /* ProfileViewController.h */,
-				E84A3CCB1E27068A00B1902D /* ProfileViewController.m */,
-				E84A3CCC1E27068A00B1902D /* ProfileView.xib */,
+				E84A3CE41E278A1400B1902D /* PropertyDetailViewController.h */,
+				E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */,
+				E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */,
 			);
 			path = Pillow;
 			sourceTree = "<group>";
@@ -91,6 +100,8 @@
 		C32D01DB1E26DDFA00045D5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */,
+				C32D01EC1E26DDFA00045D5D /* Info.plist */,
 				C32D01DC1E26DDFA00045D5D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -99,9 +110,12 @@
 		E84A3CC81E26E61600B1902D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E84A3CE11E27854000B1902D /* BuyerProfileView.xib */,
 				E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */,
 				E84A3CB51E26E5F400B1902D /* SignInView.xib */,
 				E84A3CB81E26E5F400B1902D /* SignUpView.xib */,
+				E84A3CDC1E272EA900B1902D /* FavouriteCell.h */,
+				E84A3CDD1E272EA900B1902D /* FavouriteCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -109,6 +123,10 @@
 		E84A3CC91E26E62100B1902D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E84A3CDF1E27854000B1902D /* BuyerProfileViewController.h */,
+				E84A3CE01E27854000B1902D /* BuyerProfileViewController.m */,
+				E84A3CCF1E2709F800B1902D /* FavouriteViewController.h */,
+				E84A3CD01E2709F800B1902D /* FavouriteViewController.m */,
 				E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */,
 				E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */,
 				E84A3CB61E26E5F400B1902D /* SignInViewController.h */,
@@ -177,7 +195,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E84A3CCE1E27068A00B1902D /* ProfileView.xib in Resources */,
+				E84A3CE81E278A2100B1902D /* PropertyDetailView.xib in Resources */,
+				E84A3CE31E27854000B1902D /* BuyerProfileView.xib in Resources */,
 				E84A3CC31E26E5F400B1902D /* SignInView.xib in Resources */,
 				E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
@@ -195,9 +214,12 @@
 			files = (
 				E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */,
 				E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */,
+				E84A3CE21E27854000B1902D /* BuyerProfileViewController.m in Sources */,
 				E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
-				E84A3CCD1E27068A00B1902D /* ProfileViewController.m in Sources */,
+				E84A3CD21E2709F800B1902D /* FavouriteViewController.m in Sources */,
+				E84A3CDE1E272EA900B1902D /* FavouriteCell.m in Sources */,
+				E84A3CE61E278A1400B1902D /* PropertyDetailViewController.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

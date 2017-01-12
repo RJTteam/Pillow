@@ -2,17 +2,21 @@
 //  ProfileViewController.m
 //  Pillow
 //
-//  Created by Xinyuan Wang on 1/11/17.
+//  Created by Xinyuan Wang on 1/12/17.
 //  Copyright © 2017 RJT. All rights reserved.
 //
 
-#import "ProfileViewController.h"
+#import "BuyerProfileViewController.h"
+#import "FavouriteViewController.h"
 
-@interface ProfileViewController ()
+@interface BuyerProfileViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *usernameTxt;
+@property (weak, nonatomic) IBOutlet UITextField *emailTxt;
+@property (weak, nonatomic) IBOutlet UITextField *mobileTxt;
 
 @end
 
-@implementation ProfileViewController
+@implementation BuyerProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +26,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)favouriteClicked {
+    FavouriteViewController *fav = [[FavouriteViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    //TODO pass para
+    
+    [self presentViewController:fav animated:YES completion:nil];
 }
 
 /*
