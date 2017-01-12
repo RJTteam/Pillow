@@ -11,6 +11,12 @@
 		C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DF1E26DDFA00045D5D /* AppDelegate.m */; };
 		C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E71E26DDFA00045D5D /* Assets.xcassets */; };
 		C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */; };
+		E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */; };
+		E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */; };
+		E84A3CC31E26E5F400B1902D /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CB51E26E5F400B1902D /* SignInView.xib */; };
+		E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CB71E26E5F400B1902D /* SignInViewController.m */; };
+		E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CB81E26E5F400B1902D /* SignUpView.xib */; };
+		E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +27,15 @@
 		C32D01E71E26DDFA00045D5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C32D01EA1E26DDFA00045D5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C32D01EC1E26DDFA00045D5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdView.xib; sourceTree = "<group>"; };
+		E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
+		E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
+		E84A3CB51E26E5F400B1902D /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInView.xib; sourceTree = "<group>"; };
+		E84A3CB61E26E5F400B1902D /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		E84A3CB71E26E5F400B1902D /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		E84A3CB81E26E5F400B1902D /* SignUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpView.xib; sourceTree = "<group>"; };
+		E84A3CB91E26E5F400B1902D /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,8 @@
 				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
 				C32D01E91E26DDFA00045D5D /* LaunchScreen.storyboard */,
 				C32D01EC1E26DDFA00045D5D /* Info.plist */,
+				E84A3CC81E26E61600B1902D /* Views */,
+				E84A3CC91E26E62100B1902D /* Controllers */,
 				C32D01DB1E26DDFA00045D5D /* Supporting Files */,
 			);
 			path = Pillow;
@@ -69,6 +86,29 @@
 				C32D01DC1E26DDFA00045D5D /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E84A3CC81E26E61600B1902D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */,
+				E84A3CB51E26E5F400B1902D /* SignInView.xib */,
+				E84A3CB81E26E5F400B1902D /* SignUpView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E84A3CC91E26E62100B1902D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */,
+				E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */,
+				E84A3CB61E26E5F400B1902D /* SignInViewController.h */,
+				E84A3CB71E26E5F400B1902D /* SignInViewController.m */,
+				E84A3CB91E26E5F400B1902D /* SignUpViewController.h */,
+				E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,8 +169,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84A3CC31E26E5F400B1902D /* SignInView.xib in Resources */,
+				E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
 				C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */,
+				E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +184,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */,
+				E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */,
+				E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 			);
