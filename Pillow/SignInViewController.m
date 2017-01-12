@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import "SignupViewController.h"
 #import "ForgetPwdViewController.h"
+#import "HomeViewController.h"
 
 @interface SignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
@@ -24,11 +25,23 @@
     UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skipSignInClicked)];
     self.navigationItem.rightBarButtonItem = skipButton;
     
+    NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
+    UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
+    buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
+    [buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
+    buyerVSseller.selectedSegmentIndex = 1;
+    
+    [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)buyerVSsellerAction:(UISegmentedControl *)segment{
+    if(segment.selectedSegmentIndex == 0)
+    {
+        //Sign in as Buyer
+    }
+    else{
+        //Sign in as Seller
+    }
 }
 
 #pragma mark - Even Method
@@ -48,7 +61,9 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //TODO jump to home view, set current user to the login user
-        assert(NO);
+
+        HomeViewController* hvc = [[HomeViewController alloc]init];
+        [self presentViewController:hvc animated:YES completion:nil];
         NSLog(@"Login success");
     }
 }

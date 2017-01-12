@@ -7,10 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "SellerProfileVC.h"
+#import "SellerPropertyVC.h"
 #import "SignInViewController.h"
+
+@import GoogleMaps;
+@import GooglePlaces;
 
 @interface AppDelegate ()
 
+@property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
+@property (strong, nonatomic) SellerPropertyVC *sellerPropertyVC;
 @end
 
 @implementation AppDelegate
@@ -18,6 +25,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [GMSServices provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
+    [GMSPlacesClient provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
+    self.manager = [ [ CLLocationManager alloc ] init ];
+    self.manager.delegate = (id)self;
+    [ self.manager requestAlwaysAuthorization ];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     SignInViewController *signIn = [[SignInViewController alloc] initWithNibName:@"SignInView" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
@@ -25,6 +39,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if( status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse )
+    {
+        [ self.manager startUpdatingLocation ];
+    }
 }
 
 
