@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import "SignupViewController.h"
 #import "ForgetPwdViewController.h"
+#import "HomeViewController.h"
 
 @interface SignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
@@ -41,6 +42,8 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //TODO jump to home view, set current user to the login user
+        HomeViewController* hvc = [[HomeViewController alloc]init];
+        [self presentViewController:hvc animated:YES completion:nil];
         NSLog(@"Login success");
     }
 }
