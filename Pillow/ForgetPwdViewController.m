@@ -38,7 +38,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //TODO send reset password request and email to server;
-        
+        assert(NO);
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
