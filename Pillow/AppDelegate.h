@@ -15,6 +15,5 @@
 @property (strong, nonatomic) UIWindow *window;
 @property( strong ) CLLocationManager* manager;
 
-
 @end
 

@@ -14,6 +14,8 @@
 
 @interface AppDelegate ()
 
+@property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
+@property (strong, nonatomic) SellerPropertyVC *sellerPropertyVC;
 @end
 
 @implementation AppDelegate
