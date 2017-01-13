@@ -16,7 +16,10 @@
 @interface SignInViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
+@property (weak, nonatomic) IBOutlet UIButton *forgetPwdButton;
 @property (nonatomic)BOOL isBuyer;
+@property (nonatomic)CGFloat moveOffset;
+@property (nonatomic)BOOL keyboardShown;
 
 @end
 
@@ -35,6 +38,46 @@
     buyerVSseller.selectedSegmentIndex = 1;
     
     [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    self.moveOffset = self.view.bounds.size.height - self.forgetPwdButton.frame.origin.y - self.forgetPwdButton.frame.size.height - 10;
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [center removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - Even Method
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+    CGFloat keyboardHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGSizeValue].height;
+    CGFloat finalOffset = keyboardHeight - self.moveOffset;
+    if(!self.keyboardShown){
+        self.keyboardShown = true;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGAffineTransformTranslate(self.view.transform, self.view.frame.origin.x, self.view.frame.origin.y - finalOffset);
+        }];
+        self.view.transform = CGAffineTransformIdentity;
+    }
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+    CGFloat keyboardHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGSizeValue].height;
+    CGFloat finalOffset = keyboardHeight - self.moveOffset;
+    if(self.keyboardShown){
+        self.keyboardShown = false;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGAffineTransformTranslate(self.view.transform, self.view.frame.origin.x, self.view.frame.origin.y + finalOffset);
+        }];
+        self.view.transform = CGAffineTransformIdentity;
+    }
 }
 
 - (void)buyerVSsellerAction:(UISegmentedControl *)segment{
@@ -48,8 +91,6 @@
         self.isBuyer = false;
     }
 }
-
-#pragma mark - Even Method
 
 - (void)skipSignInClicked{
     //TODO Go to Home view directly without Sign in or sign up
@@ -102,7 +143,9 @@
 }
 
 - (BOOL)validatePWD:(NSString *)text{
-    return text.length >= 8;
+    BOOL result = text.length >= 8 && text.length <= 12;
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^[A-Z]+[a-z]+[0-9]+[\\.\\?\\"];
+    return result;
 }
 
 /*

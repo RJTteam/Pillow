@@ -24,10 +24,6 @@
     
     MapViewController * first = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     ListTableViewController * second = [[ListTableViewController alloc] initWithNibName:@"ListTableViewController" bundle:nil];
-    SellerProfileVC * third = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
-    
-    UINavigationController* nvOfThird = [[UINavigationController alloc]initWithRootViewController:third];
-    UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];
     UINavigationController* nvOfFirst = [[UINavigationController alloc]initWithRootViewController:first];
     UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];
     NSMutableArray* controllers = [NSMutableArray arrayWithObjects:nvOfFirst,nvOfSecond, nil];
@@ -38,7 +34,7 @@
         UINavigationController *nvOfThird = [[UINavigationController alloc] initWithRootViewController:third];
         [controllers addObject:nvOfThird];
     }else{
-        SellerPropertyVC * third = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
+        SellerProfileVC * third = [[SellerProfileVC alloc]initWithNibName:@"SellerProfileVC" bundle:nil];
         UINavigationController *nvOfThird = [[UINavigationController alloc] initWithRootViewController:third];
         [controllers addObject:nvOfThird];
     }
