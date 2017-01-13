@@ -50,8 +50,8 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [center removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [center removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [center removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 #pragma mark - Even Method
@@ -94,7 +94,8 @@
 
 - (void)skipSignInClicked{
     //TODO Go to Home view directly without Sign in or sign up
-    assert(NO);
+    HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    [self presentViewController:home animated:YES completion:nil];
 }
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
@@ -106,11 +107,12 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        HomeViewController* hvc = [[HomeViewController alloc]init];
-        //TODO set the logined user 's type here
-        [self presentViewController:hvc animated:YES completion:nil];
-        NSLog(@"Login success");
+
     }
+    HomeViewController* hvc = [[HomeViewController alloc]init];
+    //TODO set the logined user 's type here
+    [self presentViewController:hvc animated:YES completion:nil];
+    NSLog(@"Login success");
 }
 
 - (IBAction)signUpButtonClicked:(UIButton *)sender {

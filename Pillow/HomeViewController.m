@@ -20,13 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //For test purpose, delete when model is introduced
-    self.isBuyer = YES;
+    self.isBuyer = NO;
     
     MapViewController * first = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     ListTableViewController * second = [[ListTableViewController alloc] initWithNibName:@"ListTableViewController" bundle:nil];
-    UINavigationController* nvOfFirst = [[UINavigationController alloc]initWithRootViewController:first];
+    
     UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];
-    NSMutableArray* controllers = [NSMutableArray arrayWithObjects:nvOfFirst,nvOfSecond, nil];
+    UINavigationController* nvOfFirst = [[UINavigationController alloc]initWithRootViewController:first];
+    NSMutableArray* controllers = [NSMutableArray arrayWithObjects:nvOfFirst,nvOfSecond,nil];
     
     //TODO read user type from model
     if(self.isBuyer){

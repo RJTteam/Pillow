@@ -36,6 +36,7 @@
 		C32D02171E2744FD00045D5D /* EditPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D02151E2744FD00045D5D /* EditPropertyVC.xib */; };
 		C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02191E274E6900045D5D /* ImageCollectionCell.m */; };
 		C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */; };
+		C389DBB21E286F0B0024F2F0 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = C389DBB11E286F0B0024F2F0 /* Property.m */; };
 		CDB37168AC49947DA0A6B598 /* libPods-Pillow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBF80297698DE6BCDAF229E /* libPods-Pillow.a */; };
 		E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */; };
 		E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */; };
@@ -100,6 +101,8 @@
 		C32D02181E274E6900045D5D /* ImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionCell.h; sourceTree = "<group>"; };
 		C32D02191E274E6900045D5D /* ImageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionCell.m; sourceTree = "<group>"; };
 		C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
+		C389DBB01E286F0B0024F2F0 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
+		C389DBB11E286F0B0024F2F0 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
 		E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdView.xib; sourceTree = "<group>"; };
 		E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
 		E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				E84A3CEB1E27F58300B1902D /* Models */,
 				C32D01DE1E26DDFA00045D5D /* AppDelegate.h */,
 				C32D01DF1E26DDFA00045D5D /* AppDelegate.m */,
+				C389DBB01E286F0B0024F2F0 /* Property.h */,
+				C389DBB11E286F0B0024F2F0 /* Property.m */,
 				C32D021D1E2760DF00045D5D /* Seller */,
 				6C1D68BD1E274FB30060B9A2 /* Home */,
 				C32D01EC1E26DDFA00045D5D /* Info.plist */,
@@ -477,6 +482,7 @@
 				E84A3CFA1E29353700B1902D /* BuyerProfileViewController.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 				C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */,
+				C389DBB21E286F0B0024F2F0 /* Property.m in Sources */,
 				C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */,
 				6C1D68CA1E2750030060B9A2 /* HomeViewController.m in Sources */,
 				6C1D68CE1E2750030060B9A2 /* ListTableViewCell.m in Sources */,

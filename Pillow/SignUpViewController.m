@@ -25,7 +25,12 @@
 @property (nonatomic)BOOL buyerSelected;
 @property (nonatomic)BOOL sellerSelected;
 @property (nonatomic)BOOL termSelected;
-@property (nonatomic)BOOL allFieldValid;
+@property (nonatomic)BOOL validUsername;
+@property (nonatomic)BOOL validDate;
+@property (nonatomic)BOOL validMonth;
+@property (nonatomic)BOOL validYear;
+@property (nonatomic)BOOL validemail;
+@property (nonatomic)BOOL validPwd;
 
 @end
 
@@ -36,7 +41,7 @@
     [super viewDidLoad];
     UIImage *checked = [UIImage imageNamed:@"checked"];
     UIImage *unchecked = [UIImage imageNamed:@"unchecked"];
-    self.allFieldValid = true;
+    
     //set buyer's checker
     [self.buyerCheckButton setBackgroundImage:unchecked forState:UIControlStateNormal];
     [self.buyerCheckButton setBackgroundImage:checked forState:UIControlStateSelected];
@@ -53,7 +58,8 @@
     self.termSelected = false;
     [self.termsButton setSelected:self.termSelected];
     //set register button status
-    [self.signUpButton setEnabled:self.termSelected];
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    [self.signUpButton setEnabled:self.termSelected && allValid];
     [self.signUpButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
 }
 
@@ -91,7 +97,8 @@
 - (IBAction)termsCheckClicked:(UIButton *)sender {
     self.termSelected = !self.termSelected;
     [sender setSelected:self.termSelected];
-    [self.signUpButton setEnabled:self.termSelected && self.allFieldValid];
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    [self.signUpButton setEnabled:self.termSelected && allValid];
     
 }
 
@@ -139,20 +146,33 @@
 
 #pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if([textField isFirstResponder]){
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     BOOL valid = YES;
     if(textField == self.dobDateTxtFld){
         valid = [self validateDateOfBirth:textField.text type:DateComponentTypeDate];
+        self.validDate = valid;
     }else if(textField == self.dobMonthTxtFld){
         valid = [self validateDateOfBirth:textField.text type:DateComponentTypeMonth];
+        self.validMonth = valid;
     }else if(textField == self.dobYearTxtFld){
         valid = [self validateDateOfBirth:textField.text type:DateComponentTypeYear];
+        self.validYear = valid;
     }else if(textField == self.emailTxtFld){
         valid = [self validateEmailText:textField.text];
+        self.validemail = valid;
     }else if(textField == self.pwdTxtFld){
         valid = [self validatePWD:textField.text];
+        self.validPwd = valid;
     }else {
         valid = textField.text.length > 0;
+        self.validUsername = valid;
     }
     if(!valid){
         textField.layer.borderColor = [UIColor redColor].CGColor;
@@ -161,19 +181,9 @@
         textField.layer.borderColor = [UIColor clearColor].CGColor;
         textField.layer.borderWidth = 0.0;
     }
-    self.allFieldValid &= valid;
-    [self.signUpButton setEnabled:self.termSelected && self.allFieldValid];
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    [self.signUpButton setEnabled:self.termSelected && allValid];
     return true;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
