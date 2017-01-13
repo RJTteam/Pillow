@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="emailTxtFld" destination="ds0-2e-DkU" id="gaW-w6-98b"/>
                 <outlet property="sendEmailButtonClicked" destination="Sne-vL-wEF" id="0BO-ay-bQt"/>
+                <outlet property="view" destination="iN0-l3-epB" id="r8g-Yo-0TB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
