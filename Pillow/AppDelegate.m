@@ -38,7 +38,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
     self.window.rootViewController = nav;
     
-//    BuyerProfileViewController *root = [[BuyerProfileViewController alloc] init];
+//    SellerProfileVC *root = [[SellerProfileVC alloc] init];
 //    self.window.rootViewController = root;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
