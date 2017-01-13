@@ -119,6 +119,12 @@
     cell.priceLabel.text = obj.propertyCost;
     cell.sizeLabel.text = obj.propertySize;
     
+    NSString* urlStr = [obj.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSURL* imageurl = [ NSURL URLWithString:urlStr ];
+    NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
+    UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
+    cell.propertyImage.image = currentdownloadimage;
+    
     return cell;
 
 }

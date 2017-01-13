@@ -21,11 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.profileTable.allowsSelection = NO;
     self.profileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     infoItem = @[@"SellerProfileCell",@"SellerInfoCell",@"SellerPropertyCell"];
+
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
@@ -35,7 +37,7 @@
 
 #pragma mark - TableView Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return infoItem.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
