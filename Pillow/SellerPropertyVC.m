@@ -10,11 +10,13 @@
 #import "SellerOwnPropertyCell.h"
 #import "AppDelegate.h"
 #import "EditPropertyVC.h"
+#import <AFURLSessionManager.h>
+#import "Property.h"
 
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
 {
     AppDelegate *appDele;
-    NSArray *propertyArray;
+    NSMutableArray *propertyArray;
     NSInteger expendRow;
 }
 @property (weak, nonatomic) IBOutlet UITableView *propertyList;
@@ -43,11 +45,32 @@
 
     expendRow = 999;
     
+    propertyArray = [NSMutableArray array];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    
     NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=2"];
-    NSError *error;
-    NSData *propertyData = [NSData dataWithContentsOfURL:url];
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:propertyData options:NSJSONReadingAllowFragments error:&error];
-    propertyArray = jsonObject;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@",error);
+        }
+        else{
+            for (NSDictionary *dic in responseObject) {
+                Property *property = [[Property alloc] initWithDictionary:dic];
+                [propertyArray addObject:property];
+            }
+            [self.propertyList reloadData];
+        }
+    }];
+    [dataTask resume];
+    
+
+//    NSError *error;
+//    NSData *propertyData = [NSData dataWithContentsOfURL:url];
+//    id jsonObject = [NSJSONSerialization JSONObjectWithData:propertyData options:NSJSONReadingAllowFragments error:&error];
+//    propertyArray = jsonObject;
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
      self.propertyList.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -88,6 +111,14 @@
     [cell.zoomButton addTarget:self action:@selector(reSizeCell:) forControlEvents:UIControlEventTouchUpInside];
     cell.detailBtn.tag = indexPath.row+100;
     [cell.detailBtn addTarget:self action:@selector(toDetailVC) forControlEvents:UIControlEventTouchUpInside];
+    
+    Property *obj = [propertyArray objectAtIndex:indexPath.row];
+    cell.nameLabel.text = obj.propertyName;
+    cell.typeLabel.text = obj.propertyType;
+    cell.dateLabel.text = obj.propertyModDate;
+    cell.priceLabel.text = obj.propertyCost;
+    cell.sizeLabel.text = obj.propertySize;
+    
     return cell;
 
 }
@@ -103,9 +134,14 @@
 
 -(void)reSizeCell:(UIButton *)cellBtn{
 //    [self.propertyList reloadRowsAtIndexPaths:[NSIndexSet indexSetWithIndex:cellBtn.tag] withRowAnimation:UITableViewRowAnimationFade];
-    expendRow = cellBtn.tag;
-    [self.propertyList reloadData];
-    
+    if (expendRow != cellBtn.tag) {
+        expendRow = cellBtn.tag;
+        [self.propertyList reloadData];
+    }
+    else{
+        expendRow = 999;
+        [self.propertyList reloadData];
+    }
 }
 
 -(void)toDetailVC{

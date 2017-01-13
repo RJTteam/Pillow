@@ -57,19 +57,20 @@
 }
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
-    BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
-    BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
-    if(!validEmail || !validPwd){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:action];
-        [self presentViewController:alert animated:YES completion:nil];
-    }else{
-        HomeViewController* hvc = [[HomeViewController alloc]init];
-        //TODO set the logined user 's type here
-        [self presentViewController:hvc animated:YES completion:nil];
-        NSLog(@"Login success");
-    }
+//    BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
+//    BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
+//    if(!validEmail || !validPwd){
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+//        [alert addAction:action];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }else{
+//
+//    }
+    HomeViewController* hvc = [[HomeViewController alloc]init];
+    //TODO set the logined user 's type here
+    [self presentViewController:hvc animated:YES completion:nil];
+    NSLog(@"Login success");
 }
 
 - (IBAction)signUpButtonClicked:(UIButton *)sender {

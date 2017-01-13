@@ -26,7 +26,6 @@
                                 <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="257" id="Ibf-gQ-R12"/>
-                                    <constraint firstAttribute="height" constant="176" id="NlX-2H-teZ"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xCQ-Mp-bPK">
@@ -46,13 +45,13 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="oLd-rS-Eyj" firstAttribute="top" secondItem="Z5I-J3-sJM" secondAttribute="top" id="6cP-At-oUl"/>
-                            <constraint firstAttribute="width" constant="375" id="CS1-ew-Ujj"/>
                             <constraint firstAttribute="bottom" secondItem="xCQ-Mp-bPK" secondAttribute="bottom" id="KWi-T8-6HY"/>
                             <constraint firstItem="oq4-qX-sdO" firstAttribute="leading" secondItem="xCQ-Mp-bPK" secondAttribute="trailing" id="Oyl-ae-A2a"/>
                             <constraint firstItem="xCQ-Mp-bPK" firstAttribute="top" secondItem="Z5I-J3-sJM" secondAttribute="top" id="TV6-4I-Hp3"/>
                             <constraint firstAttribute="bottom" secondItem="oq4-qX-sdO" secondAttribute="bottom" id="VQI-NY-mMg"/>
                             <constraint firstAttribute="bottom" secondItem="oLd-rS-Eyj" secondAttribute="bottom" id="YcC-YO-Q7T"/>
                             <constraint firstItem="xCQ-Mp-bPK" firstAttribute="leading" secondItem="oLd-rS-Eyj" secondAttribute="trailing" id="bvJ-pc-Tc3"/>
+                            <constraint firstItem="oLd-rS-Eyj" firstAttribute="centerY" secondItem="Z5I-J3-sJM" secondAttribute="centerY" id="jE9-JE-MrW"/>
                             <constraint firstItem="oLd-rS-Eyj" firstAttribute="leading" secondItem="Z5I-J3-sJM" secondAttribute="leading" id="rsW-my-kSS"/>
                             <constraint firstItem="oq4-qX-sdO" firstAttribute="top" secondItem="Z5I-J3-sJM" secondAttribute="top" id="wmk-xi-467"/>
                             <constraint firstAttribute="trailing" secondItem="oq4-qX-sdO" secondAttribute="trailing" constant="-412" id="y6E-PM-7NN"/>

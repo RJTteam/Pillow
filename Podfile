@@ -9,5 +9,5 @@ target 'Pillow' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
-
+  pod 'AFNetworking', '~> 3.0'
 end

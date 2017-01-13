@@ -15,13 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Suw-y9-P26" id="W65-11-NgS">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="391"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7NC-Id-gJG">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="7NC-Id-gJG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="223"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.59999999999999998" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOi-H8-5AX">
                         <rect key="frame" x="8" y="166" width="45" height="21"/>
@@ -126,4 +125,7 @@
             <point key="canvasLocation" x="64.5" y="228"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="placeholder" width="1280" height="800"/>
+    </resources>
 </document>
