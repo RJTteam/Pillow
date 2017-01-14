@@ -18,11 +18,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *sizeFld;
 @property (weak, nonatomic) IBOutlet UITextField *descTextFld;
 @property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
-@property (weak, nonatomic) IBOutlet UIButton *pickerBtn;
+@property (assign,nonatomic) NSInteger imageBtnTag;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 
 @property (nonatomic,strong)UIImagePickerController*picker;
-@property (weak, nonatomic) IBOutlet UIImageView *pickerImage;
+@property (weak, nonatomic) IBOutlet UIImageView *pickerImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *pickerImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *pickerImage3;
 @end
 
 @implementation EditPropertyVC
@@ -30,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.doneBtn.enabled = NO;
+//    self.doneBtn.enabled = NO;
 }
 
 - (IBAction)cancelBtn:(id)sender {
@@ -38,6 +40,7 @@
 }
 - (IBAction)doneBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 -(NSString*)getDocumentDirLocation{
@@ -58,11 +61,12 @@
     self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:self.picker animated:YES completion:nil];
 }
-- (IBAction)selectImageAction:(id)sender {
+- (IBAction)selectImageAction:(UIButton *)sender {
     self.picker = [[UIImagePickerController alloc]init];
     self.picker.allowsEditing = YES;
     self.picker.delegate = self;//Need confirm NagivationColler Delegate
     
+    self.imageBtnTag = sender.tag;
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Image Source" message:@"Select Image Source" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction*cameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action){
         [self SourceISCamera];
@@ -81,7 +85,17 @@
 }
 #pragma mark-UIImagePickViewController Delegate Netgids
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
-    self.pickerImage.image = image;
+    switch (self.imageBtnTag) {
+        case 100:
+            self.pickerImage1.image = image;
+            break;
+        case 101:
+            self.pickerImage2.image = image;
+            break;
+        case 102:
+            self.pickerImage3.image = image;
+            break;
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 //- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{

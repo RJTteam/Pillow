@@ -13,6 +13,7 @@
 #import <AFURLSessionManager.h>
 #import "Property.h"
 
+
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
 {
     AppDelegate *appDele;
@@ -120,9 +121,12 @@
     cell.sizeLabel.text = obj.propertySize;
     
     NSString* urlStr = [obj.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+//    [cell.propertyBtn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
     NSURL* imageurl = [ NSURL URLWithString:urlStr ];
     NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
     UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
+    
     cell.propertyImage.image = currentdownloadimage;
     
     return cell;
