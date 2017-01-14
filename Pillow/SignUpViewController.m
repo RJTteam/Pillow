@@ -7,7 +7,8 @@
 //
 
 #import "SignUpViewController.h"
-
+#import "User.h"
+#import "Contants.h"
 
 
 @interface SignUpViewController ()<UITextFieldDelegate>
@@ -21,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *dobDateTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *dobMonthTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *dobYearTxtFld;
+@property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addr1TxtFld;
+@property (weak, nonatomic) IBOutlet UITextField *addr2TxtFld;
 
 @property (nonatomic)BOOL buyerSelected;
 @property (nonatomic)BOOL sellerSelected;
@@ -31,6 +35,8 @@
 @property (nonatomic)BOOL validYear;
 @property (nonatomic)BOOL validemail;
 @property (nonatomic)BOOL validPwd;
+@property (nonatomic)BOOL validMobile;
+
 
 @end
 
@@ -58,7 +64,7 @@
     self.termSelected = false;
     [self.termsButton setSelected:self.termSelected];
     //set register button status
-    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate && self.validMobile;
     [self.signUpButton setEnabled:self.termSelected && allValid];
     [self.signUpButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
 }
@@ -97,19 +103,49 @@
 - (IBAction)termsCheckClicked:(UIButton *)sender {
     self.termSelected = !self.termSelected;
     [sender setSelected:self.termSelected];
-    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate && self.validMobile;
     [self.signUpButton setEnabled:self.termSelected && allValid];
     
 }
 
 - (IBAction)signUpButtonClicked:(UIButton *)sender {
-        //TODO validat user info
-        //if success, save user info and back to sign in view;
-        //if failed, inform the user
-        [self.navigationController popViewControllerAnimated:YES];
+    if(self.validUsername && self.validPwd && self.validemail && self.validDate && self.validMonth && self.validYear && self.validMobile){
+        NSString *dobString = [self formatDob:self.dobDateTxtFld.text.integerValue month:self.dobMonthTxtFld.text.integerValue year:self.dobYearTxtFld.text.integerValue];
+        NSDictionary *dict = @{
+                               usernameKey:self.usernameTxtFld.text,
+                               passwordKey:self.pwdTxtFld.text,
+                               emailKey:self.emailTxtFld.text,
+                               mobileKey : self.mobileTextField.text,
+                               dobKey : dobString,
+                               usertypeKey:self.buyerSelected? @"buyer" : @"seller",
+                               address1Key: self.addr1TxtFld.text.length != 0 ? self.addr1TxtFld.text : @"addressLine1",
+                               address2Key: self.addr2TxtFld.text.length != 0 ? self.addr2TxtFld.text : @"addressLine2"
+                               };
+        [User userSignupWithParameters:dict success:^(User *user, NSInteger status) {
+            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setObject:[user dictPresentation] forKey:userKey];
+            [self.navigationController popViewControllerAnimated:true];
+        } faliure:^(NSString *errorMessage) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+            [alert addAction:action];
+            [self presentViewController:alert animated:true completion:nil];
+        }];
+    }
 }
 
 #pragma mark - Private Methods
+
+- (NSString *)formatDob:(NSInteger)date month:(NSInteger)month year:(NSInteger)year{
+    NSString *dateformat = date <= 9 ? @"0%lu" : @"%lu";
+    NSString *monthformat = month <= 9 ? @"0%lu" : @"%lu";
+    NSString *yearformat = @"%lu";
+    NSString *dateString = [NSString stringWithFormat:dateformat, date];
+    NSString *monthString = [NSString stringWithFormat:monthformat, month];
+    NSString *yearString = [NSString stringWithFormat:yearformat, year];
+    NSString *ret = [NSString stringWithFormat:@"%@-%@-%@", dateString, monthString, yearString];
+    return  ret;
+}
 
 - (BOOL)validateDateOfBirth:(NSString *)text type:(DateComponentType)type{
     BOOL valid = false;
@@ -170,9 +206,12 @@
     }else if(textField == self.pwdTxtFld){
         valid = [self validatePWD:textField.text];
         self.validPwd = valid;
-    }else {
+    }else if(textField == self.usernameTxtFld){
         valid = textField.text.length > 0;
         self.validUsername = valid;
+    }else if(textField == self.mobileTextField){
+        valid = self.mobileTextField.text >= 10;
+        self.validMobile = valid;
     }
     if(!valid){
         textField.layer.borderColor = [UIColor redColor].CGColor;
@@ -181,7 +220,7 @@
         textField.layer.borderColor = [UIColor clearColor].CGColor;
         textField.layer.borderWidth = 0.0;
     }
-    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate;
+    BOOL allValid = self.validUsername && self.validPwd && self.validemail && self.validYear && self.validMonth && self.validDate && self.validMobile;
     [self.signUpButton setEnabled:self.termSelected && allValid];
     return true;
 }
