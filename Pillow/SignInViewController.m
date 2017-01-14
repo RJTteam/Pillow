@@ -43,8 +43,8 @@
     UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
     buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
     [buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
-    buyerVSseller.selectedSegmentIndex = 1;
-    
+    buyerVSseller.selectedSegmentIndex = 0;
+    self.isBuyer = true;
     [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -120,7 +120,7 @@
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
     BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
-    BOOL validPwd = YES;//[self validatePWD:self.pwdTxtFld.text];
+    BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
     if(!validEmail || !validPwd){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
@@ -177,7 +177,7 @@
 }
 
 - (BOOL)validatePWD:(NSString *)text{
-    BOOL result = text.length >= 8 && text.length <= 12;
+    BOOL result = text.length >= 6 && text.length <= 12;
     return result;
 }
 
