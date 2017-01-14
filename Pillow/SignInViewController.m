@@ -121,8 +121,13 @@
 - (IBAction)signInButtonClicked:(UIButton *)sender {
     BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
     BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
-    if(!validEmail || !validPwd){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
+    if(!validEmail){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please input a valid email" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if(!validPwd){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Password must be 6 ~ 12 characters!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
