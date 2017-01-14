@@ -11,11 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController">
             <connections>
+                <outlet property="addr1TxtFld" destination="62B-Qo-9W2" id="WVl-hZ-L4Y"/>
+                <outlet property="addr2TxtFld" destination="SqW-5Q-tEW" id="ueA-Ss-YLS"/>
                 <outlet property="buyerCheckButton" destination="iIn-yh-hmS" id="aD0-aZ-BpX"/>
                 <outlet property="dobDateTxtFld" destination="ZbC-xI-rbq" id="EKt-mf-i32"/>
                 <outlet property="dobMonthTxtFld" destination="M74-e3-YPg" id="QsW-Zh-8ib"/>
                 <outlet property="dobYearTxtFld" destination="z8g-Tc-Dwd" id="Fp8-gb-QLG"/>
                 <outlet property="emailTxtFld" destination="bwn-Is-1Kx" id="DmD-TF-gm5"/>
+                <outlet property="mobileTextField" destination="tPp-Jb-2Ja" id="AOS-qX-jKW"/>
                 <outlet property="pwdTxtFld" destination="K9J-W7-N9t" id="Swd-Qh-u6e"/>
                 <outlet property="sellerCheckButton" destination="5zG-tU-I9f" id="wIV-YA-D5l"/>
                 <outlet property="signUpButton" destination="vQN-GZ-f2w" id="oDm-Bk-utb"/>
@@ -235,10 +238,21 @@
                         <outlet property="delegate" destination="-1" id="dsh-Xr-uRW"/>
                     </connections>
                 </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tPp-Jb-2Ja">
+                    <rect key="frame" x="66" y="418" width="240" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Qeh-mH-u69"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <point key="canvasLocation" x="33.5" y="54.5"/>
+            <point key="canvasLocation" x="-244.5" y="-102.5"/>
         </view>
     </objects>
     <resources>

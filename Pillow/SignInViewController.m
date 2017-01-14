@@ -12,11 +12,17 @@
 #import "HomeViewController.h"
 #import "BuyerProfileViewController.h"
 #import "SellerProfileVC.h"
+#import "User.h"
+#import "Contants.h"
 
-@interface SignInViewController ()
+@interface SignInViewController ()<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPwdButton;
+@property (weak, nonatomic) IBOutlet UIButton *buyerCheckButton;
+@property (weak, nonatomic) IBOutlet UIButton *sellerCheckButton;
+
 @property (nonatomic)BOOL isBuyer;
 @property (nonatomic)CGFloat moveOffset;
 @property (nonatomic)BOOL keyboardShown;
@@ -28,8 +34,10 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isBuyer = YES;
     UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skipSignInClicked)];
     self.navigationItem.rightBarButtonItem = skipButton;
+    
     
     NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
     UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
@@ -40,43 +48,55 @@
     [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [center addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     self.moveOffset = self.view.bounds.size.height - self.forgetPwdButton.frame.origin.y - self.forgetPwdButton.frame.size.height - 10;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = [userDefault objectForKey:userKey];
+    if(dict){
+        self.emailTxtFld.text = dict[emailKey];
+        self.pwdTxtFld.text = dict[passwordKey];
+        self.isBuyer = [dict[usertypeKey] isEqualToString:@"seller"] ? false : true;
+        [self signInButtonClicked:nil];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [center removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    [center removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [center removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - Even Method
 
-- (void)keyboardDidShow:(NSNotification *)notification {
-    CGFloat keyboardHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGSizeValue].height;
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGSize keysize =  [value CGRectValue].size;
+    CGFloat keyboardHeight = keysize.height;
     CGFloat finalOffset = keyboardHeight - self.moveOffset;
     if(!self.keyboardShown){
         self.keyboardShown = true;
-        [UIView animateWithDuration:0.1 animations:^{
-            CGAffineTransformTranslate(self.view.transform, self.view.frame.origin.x, self.view.frame.origin.y - finalOffset);
-        }];
-        self.view.transform = CGAffineTransformIdentity;
+        self.view.frame = CGRectMake(0, -finalOffset, self.view.frame.size.width, self.view.frame.size.height);
     }
 }
 
-- (void)keyboardDidHide:(NSNotification *)notification {
-    CGFloat keyboardHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGSizeValue].height;
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *value = userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGSize keysize =  [value CGRectValue].size;
+    CGFloat keyboardHeight = keysize.height;
     CGFloat finalOffset = keyboardHeight - self.moveOffset;
     if(self.keyboardShown){
         self.keyboardShown = false;
-        [UIView animateWithDuration:0.1 animations:^{
-            CGAffineTransformTranslate(self.view.transform, self.view.frame.origin.x, self.view.frame.origin.y + finalOffset);
-        }];
-        self.view.transform = CGAffineTransformIdentity;
+        self.view.frame = CGRectMake(0, self.view.frame.origin.y + finalOffset, self.view.frame.size.width, self.view.frame.size.height);
     }
 }
 
@@ -100,23 +120,35 @@
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
     BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
-    BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
+    BOOL validPwd = YES;//[self validatePWD:self.pwdTxtFld.text];
     if(!validEmail || !validPwd){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-
+        NSDictionary *dict = @{
+                               emailKey : self.emailTxtFld.text,
+                               passwordKey : self.pwdTxtFld.text,
+                               usertypeKey : self.isBuyer ? @"buyer" : @"seller"
+                               };
+        [User userLoginWithParameters:dict success:^(User *user) {
+            NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+            [userdefault setObject:[user dictPresentation] forKey:userKey];
+            HomeViewController* hvc = [[HomeViewController alloc]init];
+            [self presentViewController:hvc animated:YES completion:nil];
+            NSLog(@"Login success");
+        } faliure:^(NSString *errorMessage) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+            [alert addAction:action];
+            [self presentViewController:alert animated:YES completion:nil];
+        }];
     }
-    HomeViewController* hvc = [[HomeViewController alloc]init];
-    //TODO set the logined user 's type here
-    [self presentViewController:hvc animated:YES completion:nil];
-    NSLog(@"Login success");
 }
 
+
 - (IBAction)signUpButtonClicked:(UIButton *)sender {
-    //TODO jump to signUpViewController
     SignUpViewController *signupVC = [[SignUpViewController alloc] initWithNibName:@"SignUpView" bundle:nil];
     [self.navigationController pushViewController:signupVC animated:YES];
     
@@ -146,18 +178,14 @@
 
 - (BOOL)validatePWD:(NSString *)text{
     BOOL result = text.length >= 8 && text.length <= 12;
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", @"^[A-Z]+[a-z]+[0-9]+[\\.\\?\\"];
     return result;
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UITextFieldDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
-*/
 
 @end
