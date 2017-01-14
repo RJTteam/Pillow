@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignInViewController">
             <connections>
                 <outlet property="emailTxtFld" destination="73j-LU-tTM" id="usU-5q-uLS"/>
+                <outlet property="forgetPwdButton" destination="uB9-UW-DFl" id="3eE-ef-RxU"/>
                 <outlet property="pwdTxtFld" destination="Y5K-hC-2pB" id="Txd-ga-cmO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="hMq-Eg-Go6"/>
             </connections>
