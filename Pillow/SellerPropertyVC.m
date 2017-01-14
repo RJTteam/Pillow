@@ -12,7 +12,7 @@
 #import "EditPropertyVC.h"
 #import <AFURLSessionManager.h>
 #import "Property.h"
-
+#import <SDwebImage/UIImageView+WebCache.h>
 
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
 {
@@ -50,7 +50,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
     
-    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=2"];
+    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=8"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
@@ -122,12 +122,11 @@
     
     NSString* urlStr = [obj.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     
-//    [cell.propertyBtn sd_setImageWithURL:[NSURL URLWithString:urlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    NSURL* imageurl = [ NSURL URLWithString:urlStr ];
-    NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
-    UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
-    
-    cell.propertyImage.image = currentdownloadimage;
+    [cell.propertyImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    NSURL* imageurl = [ NSURL URLWithString:urlStr ];
+//    NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
+//    UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
+//    cell.propertyImage.image = currentdownloadimage;
     
     return cell;
 
