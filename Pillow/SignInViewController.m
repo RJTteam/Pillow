@@ -62,8 +62,7 @@
     if(dict){
         self.emailTxtFld.text = dict[emailKey];
         self.pwdTxtFld.text = dict[passwordKey];
-        self.isBuyer = [dict[usertypeKey] isEqualToString:@"seller"] ? false : true;
-        [self signInButtonClicked:nil];
+        self.isBuyer = [dict[usertypeKey] isEqualToString:buyerContent];
     }
 }
 
@@ -113,7 +112,7 @@
 }
 
 - (void)skipSignInClicked{
-    //TODO Go to Home view directly without Sign in or sign up
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
     HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     [self presentViewController:home animated:YES completion:nil];
 }
@@ -135,7 +134,7 @@
         NSDictionary *dict = @{
                                emailKey : self.emailTxtFld.text,
                                passwordKey : self.pwdTxtFld.text,
-                               usertypeKey : self.isBuyer ? @"buyer" : @"seller"
+                               usertypeKey : self.isBuyer ? buyerContent : sellerContent
                                };
         [User userLoginWithParameters:dict success:^(User *user) {
             NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];

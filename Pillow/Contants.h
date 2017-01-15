@@ -36,4 +36,8 @@ static NSString *const dateFormat = @"dd-MM-yyyy";
 
 static NSString *const userKey = @"currentUser";
 
+//buyerKey sellerKey
+static NSString *const buyerContent = @"buyer";
+static NSString *const sellerContent = @"seller";
+
 #endif /* Contants_h */
