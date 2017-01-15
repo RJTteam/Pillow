@@ -60,4 +60,20 @@ static NSString *const propPubDateKey = @"Property Published Date";
 static NSString *const propModDateKey = @"Property Modify Date";
 static NSString *const propStatusKey = @"Property Status";
 
+static NSString *const uppropNameKey = @"propertyname";
+static NSString *const uppropTypeKey = @"propertytype";
+static NSString *const uppropCataKey = @"propertycat";
+static NSString *const uppropAddr1Key = @"propertyaddress1";
+static NSString *const uppropAddr2Key =@"propertyaddress2";
+static NSString *const uppropZipKey = @"propertyzip";
+static NSString *const uppropImg1Key =@"propertyimg1";
+static NSString *const uppropImg2Key =@"propertyimg2";
+static NSString *const uppropImg3Key = @"propertyimg3";
+static NSString *const uppropLatKey = @"propertylat";
+static NSString *const uppropLongKey = @"propertylong";
+static NSString *const uppropCostKey = @"propertycost";
+static NSString *const uppropSizeKey = @"propertysize";
+static NSString *const uppropDescKey = @"propertydesc";
+static NSString *const uppropStatusKey = @"propertystatus";
+
 #endif /* Contants_h */

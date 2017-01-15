@@ -52,8 +52,7 @@
  *@param success: block executed when edit successed (return bool(true)
  *@param failure: block executed when add failed or having network connection error
  */
-+ (void)sellerEditWithParameters:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure;
-
++ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure;
 
 /*Class method: Used for delete property when user type is seller
  *@param dict format: @{"Property Id":propertyID}

@@ -26,10 +26,31 @@
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *menuBtn;
+@property (assign,nonatomic) NSInteger userID;
 
 @end
 
 @implementation SellerPropertyVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    sellerPropertyArray = [NSMutableArray array];
+    
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    userInfoDic = [userdefault objectForKey:userKey];
+    self.userID = [[userInfoDic objectForKey:useridKey] integerValue];
+    
+    [Property sellerGetPropertyWithUserId:self.userID success:^(NSArray *propertyArray) {
+        for (NSDictionary *dic in propertyArray) {
+            Property *property = [[Property alloc] initWithDictionary:dic];
+            [sellerPropertyArray addObject:property];
+        }
+        [self.propertyList reloadData];
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"Error: %@",errorMessage);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,20 +67,6 @@
     self.menuBtn.hidden = NO;
 
     expendRow = 999;
-    
-    sellerPropertyArray = [NSMutableArray array];
-    
-    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
-    userInfoDic = [userdefault objectForKey:userKey];
-    [Property sellerGetPropertyWithUserId:8 success:^(NSArray *propertyArray) {
-            for (NSDictionary *dic in propertyArray) {
-                Property *property = [[Property alloc] initWithDictionary:dic];
-                [sellerPropertyArray addObject:property];
-            }
-        [self.propertyList reloadData];
-    } failure:^(NSString *errorMessage) {
-        NSLog(@"Error: %@",errorMessage);
-    }];
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
      self.propertyList.separatorStyle = UITableViewCellSeparatorStyleNone;

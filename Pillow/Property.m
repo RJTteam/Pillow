@@ -69,8 +69,9 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
     }];
 }
 
-+ (void)sellerEditWithParameters:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure{
-    NSString *destination = [baseUrl stringByAppendingString:@"property&edit&"];
++ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure{
+    NSString *destination = [NSString stringWithFormat:@"%@property&edit&pptyid=%@",baseUrl,propertyID];
+    
     PLNetworking *manager = [PLNetworking manager];
     [manager sendPOSTRequestToURL:destination parameters:dict success:^(NSData *data, NSInteger status) {
         if (status != 200) {
@@ -85,7 +86,7 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
 }
 
 + (void)sellerAddWithParameters:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure{
-    NSString *destination = [baseUrl stringByAppendingString:@"property&add&"];
+    NSString *destination = [baseUrl stringByAppendingString:@"property&add"];
     PLNetworking *manager = [PLNetworking manager];
     [manager sendPOSTRequestToURL:destination parameters:dict success:^(NSData *data, NSInteger status) {
         if (status != 200) {
