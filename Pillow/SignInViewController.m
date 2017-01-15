@@ -43,8 +43,8 @@
     UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
     buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
     [buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
-    buyerVSseller.selectedSegmentIndex = 1;
-    
+    buyerVSseller.selectedSegmentIndex = 0;
+    self.isBuyer = true;
     [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -62,8 +62,7 @@
     if(dict){
         self.emailTxtFld.text = dict[emailKey];
         self.pwdTxtFld.text = dict[passwordKey];
-        self.isBuyer = [dict[usertypeKey] isEqualToString:@"seller"] ? false : true;
-        [self signInButtonClicked:nil];
+        self.isBuyer = [dict[usertypeKey] isEqualToString:buyerContent];
     }
 }
 
@@ -113,16 +112,21 @@
 }
 
 - (void)skipSignInClicked{
-    //TODO Go to Home view directly without Sign in or sign up
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
     HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     [self presentViewController:home animated:YES completion:nil];
 }
 
 - (IBAction)signInButtonClicked:(UIButton *)sender {
     BOOL validEmail = [self validateEmailText:self.emailTxtFld.text];
-    BOOL validPwd = YES;//[self validatePWD:self.pwdTxtFld.text];
-    if(!validEmail || !validPwd){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Not Valid Email or password" preferredStyle:UIAlertControllerStyleAlert];
+    BOOL validPwd = [self validatePWD:self.pwdTxtFld.text];
+    if(!validEmail){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please input a valid email" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if(!validPwd){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Password must be 6 ~ 12 characters!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:nil];
@@ -130,7 +134,7 @@
         NSDictionary *dict = @{
                                emailKey : self.emailTxtFld.text,
                                passwordKey : self.pwdTxtFld.text,
-                               usertypeKey : self.isBuyer ? @"buyer" : @"seller"
+                               usertypeKey : self.isBuyer ? buyerContent : sellerContent
                                };
         [User userLoginWithParameters:dict success:^(User *user) {
             NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
@@ -177,7 +181,7 @@
 }
 
 - (BOOL)validatePWD:(NSString *)text{
-    BOOL result = text.length >= 8 && text.length <= 12;
+    BOOL result = text.length >= 6 && text.length <= 12;
     return result;
 }
 

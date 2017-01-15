@@ -8,10 +8,10 @@
 
 #import "HomeViewController.h"
 #import "BuyerProfileViewController.h"
+#import "Contants.h"
 
 @interface HomeViewController ()
 
-@property(nonatomic)BOOL isBuyer;
 
 @end
 
@@ -20,17 +20,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //For test purpose, delete when model is introduced
-    self.isBuyer = NO;
-    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    BOOL isTourist = NO;
+    BOOL isBuyer = NO;
+    if(!userInfo){
+        isTourist = YES;
+    }else{
+        isBuyer = [userInfo[usertypeKey] isEqualToString:buyerContent];
+    }
     MapViewController * first = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     ListTableViewController * second = [[ListTableViewController alloc] initWithNibName:@"ListTableViewController" bundle:nil];
     
-    UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];
     UINavigationController* nvOfFirst = [[UINavigationController alloc]initWithRootViewController:first];
+    UINavigationController* nvOfSecond = [[UINavigationController alloc]initWithRootViewController:second];
     NSMutableArray* controllers = [NSMutableArray arrayWithObjects:nvOfFirst,nvOfSecond,nil];
     
     //TODO read user type from model
-    if(self.isBuyer){
+    
+        
+    if(isBuyer || isTourist){
         BuyerProfileViewController *third = [[BuyerProfileViewController alloc]initWithNibName:@"BuyerProfileView" bundle:nil];
         UINavigationController *nvOfThird = [[UINavigationController alloc] initWithRootViewController:third];
         [controllers addObject:nvOfThird];
