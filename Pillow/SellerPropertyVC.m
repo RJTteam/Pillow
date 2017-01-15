@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "EditPropertyVC.h"
 #import "Property.h"
+#import "Contants.h"
 #import <SDwebImage/UIImageView+WebCache.h>
 
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
@@ -18,6 +19,7 @@
     AppDelegate *appDele;
     NSMutableArray *sellerPropertyArray;
     NSInteger expendRow;
+    NSDictionary *userInfoDic;
 }
 @property (weak, nonatomic) IBOutlet UITableView *propertyList;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
@@ -47,6 +49,8 @@
     
     sellerPropertyArray = [NSMutableArray array];
     
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    userInfoDic = [userdefault objectForKey:userKey];
     [Property sellerGetPropertyWithUserId:8 success:^(NSArray *propertyArray) {
             for (NSDictionary *dic in propertyArray) {
                 Property *property = [[Property alloc] initWithDictionary:dic];
@@ -56,26 +60,6 @@
     } failure:^(NSString *errorMessage) {
         NSLog(@"Error: %@",errorMessage);
     }];
-    
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
-//    
-//    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=8"];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    
-//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//        if (error) {
-//            NSLog(@"Error: %@",error);
-//        }
-//        else{
-//            for (NSDictionary *dic in responseObject) {
-//                Property *property = [[Property alloc] initWithDictionary:dic];
-//                [propertyArray addObject:property];
-//            }
-//            [self.propertyList reloadData];
-//        }
-//    }];
-//    [dataTask resume];
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
      self.propertyList.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -120,7 +104,7 @@
     Property *obj = [sellerPropertyArray objectAtIndex:indexPath.row];
     cell.nameLabel.text = obj.propertyName;
     cell.typeLabel.text = obj.propertyType;
-    cell.dateLabel.text = [obj dateToString:obj.propertyModDate];
+    cell.dateLabel.text = obj.propertyModDate;
     cell.priceLabel.text = obj.propertyCost;
     cell.sizeLabel.text = obj.propertySize;
     

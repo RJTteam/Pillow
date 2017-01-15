@@ -8,6 +8,8 @@
 
 #import "EditPropertyVC.h"
 #import "SellerPropertyVC.h"
+#import "Property.h"
+#import "Contants.h"
 
 @interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFld;
@@ -40,7 +42,7 @@
 }
 - (IBAction)doneBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+
 }
 
 -(NSString*)getDocumentDirLocation{

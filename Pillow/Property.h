@@ -25,13 +25,14 @@
 @property(strong,nonatomic)NSString *propertyCost;
 @property(strong,nonatomic)NSString *propertySize;
 @property(strong,nonatomic)NSString *propertyDesc;
-@property(strong,nonatomic)NSDate *propertyPubDate;
-@property(strong,nonatomic)NSDate *propertyModDate;
+@property(strong,nonatomic)NSString *propertyPubDate;
+@property(strong,nonatomic)NSString *propertyModDate;
 @property(strong,nonatomic)NSString *propertyStatus;
 @property(strong,nonatomic)NSString *userID;
 
 - (instancetype)initWithDictionary: (NSDictionary *)dic;
--(NSString *)dateToString:(NSDate *)date;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 //****************************GET****************************
 /*Class method: Used for get All Properties with userID
  *@param dict format: @{userid:userID}

@@ -37,14 +37,6 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
     }
     return self;
 }
-
--(NSString *)dateToString:(NSDate *)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.timeZone = [NSTimeZone localTimeZone];
-    formatter.dateFormat = @"dd-MM-yyyy";
-    NSString *stringDate = [formatter stringFromDate:date];
-    return stringDate;
-}
     
 + (void)sellerGetPropertyWithUserId:(NSInteger)userid success:(void(^)(NSArray *propertyArray))success failure:(void(^)(NSString *errorMessage))failure{
     NSString *getPropertyURL = @"http://www.rjtmobile.com/realestate/getproperty.php?all&";
@@ -130,7 +122,7 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
     [aCoder encodeObject:self.userID forKey:loginRespondIdKey];
     
 }
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
     NSArray *keys = @[propIDKey, propNameKey, propTypeKey, propCataKey, propAddr1Key, propAddr2Key, propZipKey, propImg1Key, propImg2Key, propImg3Key, propLatKey, propLongKey, propCostKey, propSizeKey, propDescKey, propPubDateKey, propModDateKey, propStatusKey, loginRespondIdKey];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     for(NSString *key in keys){
