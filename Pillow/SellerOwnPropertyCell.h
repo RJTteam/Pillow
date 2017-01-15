@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SellerOwnPropertyCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *propertyImage;
+@property (weak, nonatomic) IBOutlet UIImageView *propertyImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *propertyImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *propertyImage3;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;

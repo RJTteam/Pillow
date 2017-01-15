@@ -12,6 +12,7 @@
 #import "EditPropertyVC.h"
 #import <AFURLSessionManager.h>
 #import "Property.h"
+#import <SDwebImage/UIImageView+WebCache.h>
 
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
 {
@@ -49,7 +50,7 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
     
-    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=2"];
+    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=8"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
@@ -119,14 +120,22 @@
     cell.priceLabel.text = obj.propertyCost;
     cell.sizeLabel.text = obj.propertySize;
     
-    NSString* urlStr = [obj.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-    NSURL* imageurl = [ NSURL URLWithString:urlStr ];
-    NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
-    UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
-    cell.propertyImage.image = currentdownloadimage;
+    NSString* urlStr1 = [self dealWithURLFormate:obj.propertyImage1];
+    NSString* urlStr2 = [self dealWithURLFormate:obj.propertyImage2];
+    NSString* urlStr3 = [self dealWithURLFormate:obj.propertyImage3];
+
+    [cell.propertyImage1 sd_setImageWithURL:[NSURL URLWithString:urlStr1] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.propertyImage2 sd_setImageWithURL:[NSURL URLWithString:urlStr2] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.propertyImage3 sd_setImageWithURL:[NSURL URLWithString:urlStr3] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     return cell;
 
+}
+
+-(NSString *)dealWithURLFormate:(NSString *)imageURL{
+    NSString *step1 = [imageURL stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSString *step2 = [NSString stringWithFormat:@"%@%@",@"http://",step1];
+    return step2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
