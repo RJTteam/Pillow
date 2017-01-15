@@ -120,16 +120,22 @@
     cell.priceLabel.text = obj.propertyCost;
     cell.sizeLabel.text = obj.propertySize;
     
-    NSString* urlStr = [obj.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-    
-    [cell.propertyImage sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//    NSURL* imageurl = [ NSURL URLWithString:urlStr ];
-//    NSData* data = [ NSData dataWithContentsOfURL: imageurl ];
-//    UIImage *currentdownloadimage = [ UIImage imageWithData: data ];
-//    cell.propertyImage.image = currentdownloadimage;
+    NSString* urlStr1 = [self dealWithURLFormate:obj.propertyImage1];
+    NSString* urlStr2 = [self dealWithURLFormate:obj.propertyImage2];
+    NSString* urlStr3 = [self dealWithURLFormate:obj.propertyImage3];
+
+    [cell.propertyImage1 sd_setImageWithURL:[NSURL URLWithString:urlStr1] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.propertyImage2 sd_setImageWithURL:[NSURL URLWithString:urlStr2] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.propertyImage3 sd_setImageWithURL:[NSURL URLWithString:urlStr3] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     return cell;
 
+}
+
+-(NSString *)dealWithURLFormate:(NSString *)imageURL{
+    NSString *step1 = [imageURL stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSString *step2 = [NSString stringWithFormat:@"%@%@",@"http://",step1];
+    return step2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

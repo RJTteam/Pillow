@@ -155,7 +155,9 @@
                 <outlet property="detailBtn" destination="1p5-yQ-eIf" id="Fug-hf-ice"/>
                 <outlet property="nameLabel" destination="00J-aj-Anh" id="TbC-VX-KHh"/>
                 <outlet property="priceLabel" destination="7Oi-rM-Bj5" id="0yY-Lo-CbC"/>
-                <outlet property="propertyImage" destination="7NC-Id-gJG" id="mgV-FT-eun"/>
+                <outlet property="propertyImage1" destination="7NC-Id-gJG" id="oU9-An-lqj"/>
+                <outlet property="propertyImage2" destination="rWL-oT-kVD" id="8Sq-X9-9gO"/>
+                <outlet property="propertyImage3" destination="X1A-ks-J0m" id="hjG-mD-jMW"/>
                 <outlet property="propertyView" destination="OhT-Hx-YNm" id="9R2-r8-dTs"/>
                 <outlet property="sizeLabel" destination="YgI-77-3Li" id="7QQ-gt-MLQ"/>
                 <outlet property="typeLabel" destination="KbR-Bx-t3S" id="2hv-QG-iQ9"/>
