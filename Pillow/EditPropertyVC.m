@@ -8,8 +8,11 @@
 
 #import "EditPropertyVC.h"
 #import "SellerPropertyVC.h"
+#import "Property.h"
+#import "Contants.h"
 
 @interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (nonatomic) NSInteger userID;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFld;
 @property (weak, nonatomic) IBOutlet UITextField *typeTextFld;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextFld;
@@ -25,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pickerImage1;
 @property (weak, nonatomic) IBOutlet UIImageView *pickerImage2;
 @property (weak, nonatomic) IBOutlet UIImageView *pickerImage3;
+
+@property (strong,nonatomic) NSDictionary *userInfoDic;
 @end
 
 @implementation EditPropertyVC
@@ -33,14 +38,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    self.doneBtn.enabled = NO;
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    self.userInfoDic = [userdefault objectForKey:userKey];
+    self.userID = [[self.userInfoDic objectForKey:useridKey] integerValue];
+    
 }
 
 - (IBAction)cancelBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)doneBtn:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
+    NSDictionary *dic = @{
+                          useridKey:[NSString stringWithFormat:@"%ld",self.userID],
+                          uppropNameKey:self.nameTextFld.text,
+                          uppropTypeKey:self.typeTextFld.text,
+                          uppropCataKey:@"1",
+                          uppropAddr1Key:self.addressTextFld.text,
+                          uppropZipKey:self.zipCode.text,
+                          uppropLatKey:@"40.6162155",
+                          uppropLongKey:@"-86.8267314,8",
+                          uppropCostKey:self.costTextFld.text,
+                          uppropSizeKey:self.sizeFld.text,
+                          uppropDescKey:self.descTextFld.text,
+                          uppropStatusKey:[NSString stringWithFormat:@"%@",self.statusSwitch.on ? @"yes" : @"no"],
+                          
+                          };
+    [Property sellerAddWithParameters:dic faliure:^(NSString *errorMessage) {
+        NSLog(@"Error %@",errorMessage);
+    }];
 }
 
 -(NSString*)getDocumentDirLocation{

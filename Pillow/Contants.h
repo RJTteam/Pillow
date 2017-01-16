@@ -33,7 +33,6 @@ static NSString *const searchUserRespondEmailKey = @"User Email";
 static NSString *const dateFormat = @"dd-MM-yyyy";
 
 //key in UserDefaults
-
 static NSString *const userKey = @"currentUser";
 
 //buyerKey sellerKey
@@ -66,6 +65,22 @@ static NSString *const propStatusKey = @"Property Status";
 
 //Property post keys for sending post request for property
 //Note: key for userid in a property, please use [useridKey]
+static NSString *const uppropNameKey = @"propertyname";
+static NSString *const uppropTypeKey = @"propertytype";
+static NSString *const uppropCataKey = @"propertycat";
+static NSString *const uppropAddr1Key = @"propertyaddress1";
+static NSString *const uppropAddr2Key =@"propertyaddress2";
+static NSString *const uppropZipKey = @"propertyzip";
+static NSString *const uppropImg1Key =@"propertyimg1";
+static NSString *const uppropImg2Key =@"propertyimg2";
+static NSString *const uppropImg3Key = @"propertyimg3";
+static NSString *const uppropLatKey = @"propertylat";
+static NSString *const uppropLongKey = @"propertylong";
+static NSString *const uppropCostKey = @"propertycost";
+static NSString *const uppropSizeKey = @"propertysize";
+static NSString *const uppropDescKey = @"propertydesc";
+static NSString *const uppropStatusKey = @"propertystatus";
+
 
 static NSString *const propSendNameKey = @"propertyname";
 static NSString *const propSendTypeKey = @"propertytype";
@@ -89,4 +104,5 @@ static NSString *const propSearchNameKey = @"pname";
 static NSString *const propSearchTypeKey = @"pptype";
 static NSString *const propSearchZipKey = @"ploc";
 static NSString *const propSearchCatIDKey = @"pcatid";
+
 #endif /* Contants_h */

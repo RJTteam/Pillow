@@ -8,7 +8,7 @@
 
 #import "PropertyDetailViewController.h"
 
-@interface PropertyDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface PropertyDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;

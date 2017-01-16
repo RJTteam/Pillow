@@ -10,25 +10,47 @@
 #import "SellerOwnPropertyCell.h"
 #import "AppDelegate.h"
 #import "EditPropertyVC.h"
-#import <AFURLSessionManager.h>
 #import "Property.h"
+#import "Contants.h"
 #import <SDwebImage/UIImageView+WebCache.h>
 
 @interface SellerPropertyVC ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDelegate>
 {
     AppDelegate *appDele;
-    NSMutableArray *propertyArray;
+    NSMutableArray *sellerPropertyArray;
     NSInteger expendRow;
+    NSDictionary *userInfoDic;
 }
 @property (weak, nonatomic) IBOutlet UITableView *propertyList;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleBtn;
 @property (weak, nonatomic) IBOutlet UIButton *menuBtn;
+@property (assign,nonatomic) NSInteger userID;
 
 @end
 
 @implementation SellerPropertyVC
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    sellerPropertyArray = [NSMutableArray array];
+    
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    userInfoDic = [userdefault objectForKey:userKey];
+    self.userID = [[userInfoDic objectForKey:useridKey] integerValue];
+    
+    [Property sellerGetPropertyWithUserId:self.userID success:^(NSArray *propertyArray) {
+        for (NSDictionary *dic in propertyArray) {
+            Property *property = [[Property alloc] initWithDictionary:dic];
+            [sellerPropertyArray addObject:property];
+        }
+        [self.propertyList reloadData];
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"Error: %@",errorMessage);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,33 +67,6 @@
     self.menuBtn.hidden = NO;
 
     expendRow = 999;
-    
-    propertyArray = [NSMutableArray array];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
-    
-    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all&userid=8"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error: %@",error);
-        }
-        else{
-            for (NSDictionary *dic in responseObject) {
-                Property *property = [[Property alloc] initWithDictionary:dic];
-                [propertyArray addObject:property];
-            }
-            [self.propertyList reloadData];
-        }
-    }];
-    [dataTask resume];
-    
-
-//    NSError *error;
-//    NSData *propertyData = [NSData dataWithContentsOfURL:url];
-//    id jsonObject = [NSJSONSerialization JSONObjectWithData:propertyData options:NSJSONReadingAllowFragments error:&error];
-//    propertyArray = jsonObject;
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
      self.propertyList.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -98,7 +93,7 @@
 
 #pragma mark- TableView Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return propertyArray.count;
+    return sellerPropertyArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -113,7 +108,7 @@
     cell.detailBtn.tag = indexPath.row+100;
     [cell.detailBtn addTarget:self action:@selector(toDetailVC) forControlEvents:UIControlEventTouchUpInside];
     
-    Property *obj = [propertyArray objectAtIndex:indexPath.row];
+    Property *obj = [sellerPropertyArray objectAtIndex:indexPath.row];
     cell.nameLabel.text = obj.propertyName;
     cell.typeLabel.text = obj.propertyType;
     cell.dateLabel.text = obj.propertyModDate;

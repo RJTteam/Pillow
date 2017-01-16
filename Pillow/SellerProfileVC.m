@@ -8,11 +8,13 @@
 
 #import "SellerProfileVC.h"
 #import "SellerPropertyVC.h"
+#import "Contants.h"
 
 @interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     AppDelegate *appDele;
     NSArray *infoItem;
+    NSDictionary *userInfoDic;
 }
 @property (weak, nonatomic) IBOutlet UITableView *profileTable;
 @end
@@ -28,6 +30,8 @@
     
     infoItem = @[@"SellerProfileCell",@"SellerInfoCell",@"SellerPropertyCell"];
 
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    userInfoDic = [userdefault objectForKey:userKey];
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
