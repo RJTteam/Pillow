@@ -13,7 +13,7 @@
 #import "SellerInfoCell.h"
 #import "SellerProfileCell.h"
 
-@interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     AppDelegate *appDele;
     NSArray *infoItem;
@@ -24,12 +24,24 @@
 @property (strong, nonatomic) NSString *userMobile;
 @property (strong, nonatomic) NSString *userEmail;
 @property (strong, nonatomic) UIImage *userIcon;
+@property (nonatomic,strong)UIImagePickerController*picker;
+
 @end
 
 @implementation SellerProfileVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
+    backImageView.frame = self.view.bounds;
+    backImageView.contentMode = UIViewContentModeScaleAspectFill;
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
+    [backImageView addSubview:effect];
+    [self.view insertSubview:backImageView atIndex:0];
+
+    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *userInfo = [userDefault objectForKey:userKey];
     if(!userInfo){
@@ -75,8 +87,42 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)SourceISCamera{
+    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:self.picker animated:YES completion:nil];
+}
+
+-(void)sourceIsPhotoLibrary{
+    self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.picker animated:YES completion:nil];
+}
+
 -(void)pickImage{
+    self.picker = [[UIImagePickerController alloc]init];
+    self.picker.allowsEditing = YES;
+    self.picker.delegate = self;//Need confirm NagivationColler Delegate
     
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Image Source" message:@"Select Image Source" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction*cameraAction = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action){
+        [self SourceISCamera];
+    }];
+    UIAlertAction* galleryAction = [UIAlertAction actionWithTitle:@"Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action){
+        [self sourceIsPhotoLibrary];
+    }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        [actionSheet addAction:cameraAction];
+    }
+    [actionSheet addAction:galleryAction];
+    [actionSheet addAction:cancelAction];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+#pragma mark-UIImagePickViewController Delegate Netgids
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
+    self.userIcon = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.profileTable reloadData];
 }
 
 #pragma mark - TableView Delegate
@@ -95,7 +141,8 @@
         }
         [cell1.pickerBtn addTarget:self action:@selector(pickImage) forControlEvents:UIControlEventTouchUpInside];
         if (self.userIcon == nil) {
-            cell1.userIcon.image = [UIImage imageNamed:@"placeholder"];
+            cell1.userIcon.image = [UIImage imageNamed:@"userAvatar"];
+            cell1.userIcon.layer.cornerRadius = 56.0;
         }
         else{
         cell1.userIcon.image = self.userIcon;
