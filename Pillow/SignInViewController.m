@@ -62,6 +62,10 @@
         self.emailTxtFld.text = dict[emailKey];
         self.pwdTxtFld.text = dict[passwordKey];
         self.isBuyer = [dict[usertypeKey] isEqualToString:buyerContent];
+    }else{
+        self.emailTxtFld.text = @"";
+        self.pwdTxtFld.text = @"";
+        self.isBuyer = true;
     }
 }
 
