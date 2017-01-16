@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPwdButton;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
+@property(strong, nonatomic)UISegmentedControl *buyerVSseller;
 
 @property (nonatomic)BOOL isBuyer;
 @property (nonatomic)CGFloat moveOffset;
@@ -39,12 +40,10 @@
     
     
     NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
-    UISegmentedControl *buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
-    buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
-    [buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
-    buyerVSseller.selectedSegmentIndex = 0;
-    self.isBuyer = true;
-    [self.view insertSubview:buyerVSseller aboveSubview:_emailTxtFld];
+    self.buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
+    _buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
+    [_buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
+    [self.view insertSubview:self.buyerVSseller aboveSubview:_emailTxtFld];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -54,6 +53,8 @@
     
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -62,8 +63,14 @@
         self.emailTxtFld.text = dict[emailKey];
         self.pwdTxtFld.text = dict[passwordKey];
         self.isBuyer = [dict[usertypeKey] isEqualToString:buyerContent];
+    }else{
+        self.emailTxtFld.text = @"";
+        self.pwdTxtFld.text = @"";
+        self.isBuyer = true;
     }
+    [self setSegmentStatus];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -188,6 +195,14 @@
     assert(NO);
 }
 #pragma mark - Private Method
+
+- (void)setSegmentStatus{
+    if(self.isBuyer){
+        self.buyerVSseller.selectedSegmentIndex = 0;
+    }else{
+        self.buyerVSseller.selectedSegmentIndex = 1;
+    }
+}
 
 - (BOOL)validateEmailText:(NSString *)text{
     if(text.length == 0){

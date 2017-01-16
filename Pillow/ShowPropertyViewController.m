@@ -7,6 +7,7 @@
 //
 
 #import "ShowPropertyViewController.h"
+#import "FavouriteList.h"
 
 @interface ShowPropertyViewController ()
 
@@ -91,9 +92,11 @@
 }
 
 - (IBAction)addToFavirate:(UIButton *)sender {
-    
-     assert(NO);
-    
+    [[FavouriteList sharedInstance] addPropertyToFavourite:self.propertyToShow];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Successfully add property to favourite" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 -(void)downLoadImage:(NSString*)url forImageView:(UIImageView *)imageView{
