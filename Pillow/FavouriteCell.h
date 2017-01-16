@@ -13,5 +13,6 @@
 
 @property(strong, nonatomic)UICollectionView *collection;
 @property(strong, nonatomic)Property *property;
+@property(weak, nonatomic)UINavigationController *navControl;
 
 @end
