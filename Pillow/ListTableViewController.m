@@ -7,8 +7,13 @@
 //
 
 #import "ListTableViewController.h"
+#import <AFURLSessionManager.h>
+#import "Property.h"
 
-@interface ListTableViewController ()<UITableViewDelegate>
+@interface ListTableViewController ()<UITableViewDelegate,NSURLSessionDelegate>
+{
+    NSMutableArray *propertyArray;
+}
 
 @end
 
@@ -21,13 +26,37 @@
     self.clearsSelectionOnViewWillAppear = YES;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    propertyArray = [NSMutableArray array];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@",error);
+        }
+        else{
+            for (NSDictionary *dic in responseObject) {
+                Property *property = [[Property alloc] initWithDictionary:dic];
+                [propertyArray addObject:property];
+            }
+            [self.tableView reloadData];
+        }
+    }];
+    [dataTask resume];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 #pragma mark - Table view data source
 
@@ -36,7 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return propertyArray.count;
 }
 
 
@@ -47,7 +76,72 @@
         NSArray *parts = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = [parts objectAtIndex:0];
     }
+    
+    
+    UIButton* addToFavirate = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    addToFavirate.imageView.image = [UIImage imageNamed:@"favirate"];
+    [addToFavirate addTarget:self action:@selector(addFavirate) forControlEvents:UIControlEventTouchUpInside];
+    [cell addSubview:addToFavirate];
+    
+//    UILabel* price = [[UILabel alloc]initWithFrame:CGRectMake(120, 10, 25, 15)];
+//    price.text = @"Price:";
+//    [cell addSubview:price];
+//    UILabel* type = [[UILabel alloc]initWithFrame:CGRectMake(120, 36, 25, 15)];
+//    type.text = @"Type:";
+//    [cell addSubview:type];
+//    UILabel* status = [[UILabel alloc]initWithFrame:CGRectMake(120, 62, 25, 15)];
+//    status.text = @"Status:";
+//    [cell addSubview:status];
+    
+    Property* p = [propertyArray objectAtIndex:indexPath.row];
+    cell.cellType.text = p.propertyType;
+    if(p.propertyCost.length < 1){
+        cell.cellPrice.text = @"N/A";
+    }else{
+        cell.cellPrice.text = p.propertyCost;
+    }
+    if(p.propertyStatus.length < 1){
+        cell.cellStatus.text = @"N/A";
+    }else{
+        cell.cellStatus.text = p.propertyStatus;
+    }
+    
+    UIActivityIndicatorView* act = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [act startAnimating];
+    
+    NSString* url = [p.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    
+    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    webProvider* listProvider = delegate.provider;
+    
+    [listProvider getPic:url withHandler:^(NSData *data, NSError *error, NSURLResponse *webStatus) {
+        if(error){
+            cell.cellImage.image = [UIImage imageNamed:@"noImage"];
+            [act stopAnimating];
+            [act hidesWhenStopped];
+            //[self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
+        }else if(!data){
+            cell.cellImage.image = [UIImage imageNamed:@"noImage"];
+            [act stopAnimating];
+            [act hidesWhenStopped];
+            //[self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
+        }else{
+            cell.cellImage.image = [UIImage imageWithData:data];
+            [act stopAnimating];
+            [act hidesWhenStopped];
+        }
+    }];
+    
+    [cell.addFavirate addTarget:self action:@selector(addFavirate) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
+}
+
+-(void)addFavirate{
+
+    assert(NO);
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -96,15 +190,15 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    ShowPropertyViewController *detailViewController = [[ShowPropertyViewController alloc] initWithNibName:@"ShowPropertyViewController" bundle:nil];
     
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
+    ShowPropertyViewController *detailViewController = [[ShowPropertyViewController alloc]initWithNibName:@"ShowPropertyViewController" bundle:nil];
+    Property* p = [propertyArray objectAtIndex:indexPath.row];
+    detailViewController.propertyToShow = p;
+                                                        
     [self.navigationController pushViewController:detailViewController animated:YES];
-    //[self presentViewController:detailViewController animated:YES completion:nil];
+                                                        
+//    ShowPropertyViewController* spvc = [[ShowPropertyViewController alloc]init];
+//    [self.navigationController pushViewController:spvc animated:YES];
 }
 
 
