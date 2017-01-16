@@ -50,9 +50,10 @@
     UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
     backImageView.frame = self.view.bounds;
     backImageView.contentMode = UIViewContentModeScaleAspectFill;
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
-    [backImageView addSubview:effect];
+//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+//    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
+//    effect.frame = backImageView.bounds;
+//    [backImageView addSubview:effect];
     [self.view insertSubview:backImageView atIndex:0];
     //initilize favourite list singleton and load data from local
 //    [self testAddPropertyToFav];

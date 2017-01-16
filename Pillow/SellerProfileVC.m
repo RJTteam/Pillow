@@ -36,9 +36,7 @@
     UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
     backImageView.frame = self.view.bounds;
     backImageView.contentMode = UIViewContentModeScaleAspectFill;
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
-    [backImageView addSubview:effect];
+   
     [self.view insertSubview:backImageView atIndex:0];
 
     
@@ -147,6 +145,7 @@
         else{
         cell1.userIcon.image = self.userIcon;
         }
+        cell1.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.62f];
         return cell1;
     }
     else{
@@ -158,6 +157,7 @@
         cell2.nameLabel.text = self.userName;
         cell2.mobileLabel.text = self.userMobile;
         cell2.emailLabel.text = self.userEmail;
+        cell2.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.62f];
         return cell2;
     }
 }
