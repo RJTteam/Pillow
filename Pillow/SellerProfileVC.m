@@ -60,6 +60,7 @@
         self.userName = user.username;
         self.userMobile = user.mobile;
         self.userEmail = user.email;
+        
         ImageStoreManager *imageManager = [[ImageStoreManager alloc]init];
         NSString *iconWithID = [NSString stringWithFormat:@"%@",userID];
         NSData *iconData = [imageManager readimageDataWithimageName:iconWithID];
