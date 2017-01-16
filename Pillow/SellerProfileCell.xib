@@ -18,15 +18,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="CUw-wj-57Z">
-                        <rect key="frame" x="99" y="7" width="133" height="112"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="CUw-wj-57Z">
+                        <rect key="frame" x="104" y="7" width="112" height="112"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="112" id="O1g-5M-LlR"/>
+                            <constraint firstAttribute="width" constant="112" id="lFJ-EK-n89"/>
+                        </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-fG-fJI">
-                        <rect key="frame" x="99" y="7" width="133" height="112"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-fG-fJI">
+                        <rect key="frame" x="107" y="8" width="106" height="112"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="112" id="IZ4-73-0S2"/>
+                            <constraint firstAttribute="width" constant="106" id="spP-Qn-CnI"/>
+                        </constraints>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="CUw-wj-57Z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NE0-9X-jyr"/>
+                    <constraint firstItem="ndi-fG-fJI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RsL-LB-IpO"/>
+                    <constraint firstItem="ndi-fG-fJI" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="t3H-D6-U3m"/>
+                    <constraint firstItem="CUw-wj-57Z" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xEH-E7-0Tw"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="pickerBtn" destination="ndi-fG-fJI" id="ogA-pD-1jp"/>

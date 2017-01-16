@@ -17,7 +17,7 @@
 {
     AppDelegate *appDele;
     NSArray *infoItem;
-    NSInteger userID;
+    NSNumber *userID;
 }
 @property (weak, nonatomic) IBOutlet UITableView *profileTable;
 @property (strong, nonatomic) NSString *userName;
@@ -36,7 +36,7 @@
         [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     }
     else{
-        userID = [[userInfo objectForKey:useridKey]integerValue];
+        userID = [userInfo objectForKey:useridKey];
     }
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -45,14 +45,23 @@
     
     infoItem = @[@"SellerProfileCell",@"SellerInfoCell"];
 
-    [User userGetUserInfoWithUserId:userID success:^(User *user) {
+    [User userGetUserInfoWithUserId:userID.integerValue success:^(User *user) {
         self.userName = user.username;
         self.userMobile = user.mobile;
         self.userEmail = user.email;
+        [self.profileTable reloadData];
     } failure:^(NSString *errorMessage) {
         NSLog(@"Error ------ %@",errorMessage);
-
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ERROR" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.tabBarController dismissViewControllerAnimated:true completion:^{
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
+            }];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:true completion:nil];
     }];
+    
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
@@ -85,7 +94,12 @@
             cell1 = [parts objectAtIndex:0];
         }
         [cell1.pickerBtn addTarget:self action:@selector(pickImage) forControlEvents:UIControlEventTouchUpInside];
+        if (self.userIcon == nil) {
+            cell1.userIcon.image = [UIImage imageNamed:@"placeholder"];
+        }
+        else{
         cell1.userIcon.image = self.userIcon;
+        }
         return cell1;
     }
     else{
