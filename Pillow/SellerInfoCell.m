@@ -2,7 +2,7 @@
 //  SellerInfoCell.m
 //  Pillow
 //
-//  Created by Lucas Luo on 1/15/17.
+//  Created by Lucas Luo on 1/16/17.
 //  Copyright © 2017 RJT. All rights reserved.
 //
 
