@@ -45,14 +45,14 @@
  *@param success: block executed when add successed (return bool(true)
  *@param failure: block executed when add failed or having network connection error
  */
-+ (void)sellerAddWithParameters:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure;
++ (void)sellerAddWithParameters:(NSDictionary *)dict;
 
 /*Class method: Used for edit property when user type is seller
  *@param dict format: @{"Property Id":propertyID, "Property Name":propertyName, "Property Type":propertyType, "Property Category":propertyCategory, "Property Address1":propertyAdd1, "Property Address2",propertyAdd2, "Property Zip":propertyZip, "Property Image 1":propertyImage2,"Property Image 1":propertyImage2, "Property Image 3":propertyImage3, "Property Latitude":propertyLatitute, "Property Longitude":propertyLongitute, "Property Cost":propertyCost, "Property Size":propertySize, "Property Desc":propertyDesc, "Property Published Date":propertyPubDate, "Property Modify Date":propertyModDate, "Property Status":propertyStatus, "User Id":userID}
  *@param success: block executed when edit successed (return bool(true)
  *@param failure: block executed when add failed or having network connection error
  */
-+ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure;
++ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict;
 
 /*Class method: Used for delete property when user type is seller
  *@param dict format: @{"Property Id":propertyID}

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Property.h"
 
 @interface EditPropertyVC : UIViewController
-
+@property(strong,nonatomic) Property *aProperty;
 @end
