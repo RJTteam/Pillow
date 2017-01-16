@@ -318,13 +318,15 @@ didFailAutocompleteWithError:(NSError *)error {
     [self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
     UIActivityIndicatorView* act = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
-    if(self.imageView){
-        act.frame = CGRectMake(round((self.imageView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
-        [self.imageView addSubview:act];
-    }else{
-        act.frame = CGRectMake(round((self.certainSearchView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
-        [self.certainSearchView addSubview:act];
-    }
+//    if(self.imageView){
+//        act.frame = CGRectMake(round((self.imageView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
+//        [self.imageView addSubview:act];
+//    }else{
+//        act.frame = CGRectMake(round((self.certainSearchView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
+//        [self.certainSearchView addSubview:act];
+//    }
+    
+    [self.imageView addSubview:act];
     [act startAnimating];
     
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];

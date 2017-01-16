@@ -55,7 +55,6 @@
     [backImageView addSubview:effect];
     [self.view insertSubview:backImageView atIndex:0];
     //initilize favourite list singleton and load data from local
-    [[FavouriteList sharedInstance] loadFavListForUser: [NSString stringWithFormat:@"%@", userInfo[useridKey]]];
 //    [self testAddPropertyToFav];
 }
 

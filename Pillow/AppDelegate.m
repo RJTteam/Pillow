@@ -11,6 +11,7 @@
 #import "SellerPropertyVC.h"
 #import "SignInViewController.h"
 #import "BuyerProfileViewController.h"
+#import "FavouriteList.h"
 
 @import GoogleMaps;
 @import GooglePlaces;
@@ -26,7 +27,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [FavouriteList sharedInstance];
     [GMSServices provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
     [GMSPlacesClient provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
     self.manager = [ [ CLLocationManager alloc ] init ];

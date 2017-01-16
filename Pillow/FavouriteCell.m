@@ -9,6 +9,7 @@
 #import "FavouriteCell.h"
 #import "PLNetworking.h"
 #import "FavouriteList.h"
+#import "ShowPropertyViewController.h"
 
 @interface ThumbnailCell : UICollectionViewCell
 
@@ -80,6 +81,7 @@
 @property(strong, nonatomic)UIButton *detailButton;
 
 @property(strong, nonatomic)Property *property;
+@property(weak, nonatomic)UINavigationController *navControl;
 
 
 @end
@@ -142,7 +144,11 @@
 
 - (void)toDetailClicked:(UIButton *)sender{
     //TODO to detail view Controller;
-    assert(NO);
+    ShowPropertyViewController *vc = [[ShowPropertyViewController alloc] init];
+    vc.propertyToShow = self.property;
+    if(self.navControl){
+        [self.navControl pushViewController:vc animated:YES];
+    }
 }
 
 @end
@@ -173,6 +179,12 @@
     self.collection.backgroundColor = [UIColor colorWithRed:(CGFloat)(252.0/255) green:(CGFloat)(67.0/255) blue:(CGFloat)(117.0/255) alpha:1.0f];
     self.isDownloaded = false;
 
+}
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.isDownloaded = false;
+    self.propIMG = nil;
 }
 
 #pragma mark - Private Methods
@@ -207,8 +219,7 @@
             cell.property = self.property;
             cell.typeLabel.text = self.property.propertyType;
             if(!self.isDownloaded){
-                NSString *rawUrl = [self.property.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-                NSString *finalUrl = [NSString stringWithFormat:@"http://%@", rawUrl];
+                NSString *finalUrl = [self refineUrl:self.property.propertyImage1];
                 [[PLNetworking manager] sendGETRequestToURL:finalUrl parameters:@{} success:^(NSData *data, NSInteger status) {
                     if(status == 200){
                         self.propIMG = [UIImage imageWithData:data];
@@ -232,8 +243,9 @@
         cell.addrLabel.text = [NSString stringWithFormat:@"%@, %@", self.property.propertyAdd1, self.property.propertyadd2];
         cell.descriptAndSize.text = [NSString stringWithFormat:@"Descrition: %@ / Size: %@ sqft", self.property.propertyDesc, self.property.propertySize];
         cell.property = self.property;
+        cell.navControl = self.navControl;
         if(!self.isDownloaded){
-            NSString *imgUrl = self.property.propertyImage1;
+            NSString *imgUrl = [self refineUrl:self.property.propertyImage1];
             [[PLNetworking manager] sendGETRequestToURL:imgUrl parameters:@{} success:^(NSData *data, NSInteger status) {
                 if(status == 200){
                     self.propIMG = [UIImage imageWithData:data];
@@ -253,6 +265,14 @@
     }
     return cell;
     
+}
+
+#pragma mark - Favourite Cell private method
+
+- (NSString *)refineUrl:(NSString *)rawUrl{
+    NSString * interUrl = [rawUrl stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSString *finalUrl = [NSString stringWithFormat:@"http://%@", interUrl];
+    return finalUrl;
 }
 
 #pragma mark - UICollectionViewFlowlayoutDelegate
