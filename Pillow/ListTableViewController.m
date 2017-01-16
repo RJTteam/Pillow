@@ -13,6 +13,18 @@
 @interface ListTableViewController ()<UITableViewDelegate,NSURLSessionDelegate>
 {
     NSMutableArray *propertyArray;
+    
+    UIPickerView *myPicker;
+    
+    NSString *textStr;
+    
+    UIToolbar *toolBar;
+    
+    NSArray *demoArray;
+    
+    UITextField* type;
+    
+    UIButton* search;
 }
 
 @end
@@ -44,10 +56,30 @@
                 Property *property = [[Property alloc] initWithDictionary:dic];
                 [propertyArray addObject:property];
             }
-            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         }
     }];
     [dataTask resume];
+    
+    
+    //prepare the customized picker for use
+//    demoArray = @[@"1000",@"3000",@"6000",@"9000",@"15000",@"20000",@"30000",@"40000",@"other"];
+//    
+//    myPicker = [[UIPickerView alloc]init];
+//    myPicker.dataSource = (id)self;
+//    myPicker.delegate = (id)self;
+//    
+//    toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+//    [toolBar setBarStyle:UIBarStyleDefault];
+//    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(changeFromLabel:)];
+//    toolBar.items = @[barButtonDone];
+//    barButtonDone.tintColor=[UIColor blackColor];
+//    
+//    
+//    self.type.inputView = pickerDemo;
+//    self.type.inputAccessoryView = toolBar;
     
 }
 
@@ -117,19 +149,29 @@
     
     [listProvider getPic:url withHandler:^(NSData *data, NSError *error, NSURLResponse *webStatus) {
         if(error){
-            cell.cellImage.image = [UIImage imageNamed:@"noImage"];
-            [act stopAnimating];
-            [act hidesWhenStopped];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setNeedsDisplay];
+                cell.cellImage.image = [UIImage imageNamed:@"noImage"];
+                [act stopAnimating];
+                [act hidesWhenStopped];
+            });
             //[self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
         }else if(!data){
-            cell.cellImage.image = [UIImage imageNamed:@"noImage"];
-            [act stopAnimating];
-            [act hidesWhenStopped];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setNeedsDisplay];
+                cell.cellImage.image = [UIImage imageNamed:@"noImage"];
+                [act stopAnimating];
+                [act hidesWhenStopped];
+            });
             //[self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
         }else{
-            cell.cellImage.image = [UIImage imageWithData:data];
-            [act stopAnimating];
-            [act hidesWhenStopped];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setNeedsDisplay];
+                cell.cellImage.image = [UIImage imageWithData:data];
+                [act stopAnimating];
+                [act hidesWhenStopped];
+            });
         }
     }];
     
