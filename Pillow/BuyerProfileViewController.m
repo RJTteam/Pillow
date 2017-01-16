@@ -8,6 +8,7 @@
 
 #import "BuyerProfileViewController.h"
 #import "FavouriteViewController.h"
+#import "FavouriteList.h"
 #import "Contants.h"
 
 @interface BuyerProfileViewController ()
@@ -30,6 +31,16 @@
     }
     UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"sign out" style:UIBarButtonItemStylePlain target:self action:@selector(signOutButtonClicked)];
     self.navigationItem.rightBarButtonItem = signOutButton;
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
+    backImageView.frame = self.view.bounds;
+    backImageView.contentMode = UIViewContentModeScaleAspectFill;
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
+    [backImageView addSubview:effect];
+    [self.view insertSubview:backImageView atIndex:0];
+    //initilize favourite list singleton and load data from local
+    [[FavouriteList sharedInstance] loadFavListForUser: [NSString stringWithFormat:@"%@", userInfo[useridKey]]];
+    [self testAddPropertyToFav];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,19 +58,16 @@
 
 - (IBAction)favouriteClicked {
     FavouriteViewController *fav = [[FavouriteViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
-    //Send Current user id to favourite controller
-    
+    NSInteger userid = [[[[NSUserDefaults standardUserDefaults] objectForKey:userKey] objectForKey:useridKey] integerValue];
+    fav.userid = userid;
     [self.navigationController pushViewController:fav animated:true];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - test method
+- (void)testAddPropertyToFav{
+    NSDictionary *dict = @{@"Property Id":@"12",@"Property Name":@"vdbsn",@"Property Type":@"Apartment",@"Property Category":@"1",@"Property Address1":@"vdndm",@"Property Address2":@"vxbnx",@"Property Zip":@"99",@"Property Image 1":@"www.rjtmobile.com/realestate/images/99/file_avatar1.jpg",@"Property Image 2":@"",@"Property Image 3":@"",@"Property Latitude":@"41.9425260",@"Property Longitude":@"-88.2673400",@"Property Cost":@"8598",@"Property Size":@"965",@"Property Desc":@"cvxn",@"Property Published Date":@"2016-07-20 14:11:25",@"Property Modify Date":@"0000-00-00 00:00:00",@"Property Status":@"yes",@"User Id":@"0"};
+    Property *p = [[Property alloc] initWithDictionary:dict];
+    [[FavouriteList sharedInstance] addPropertyToFavourite:p];
 }
-*/
 
 @end

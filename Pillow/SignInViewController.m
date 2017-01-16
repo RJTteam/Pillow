@@ -20,8 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
 @property (weak, nonatomic) IBOutlet UIButton *forgetPwdButton;
-@property (weak, nonatomic) IBOutlet UIButton *buyerCheckButton;
-@property (weak, nonatomic) IBOutlet UIButton *sellerCheckButton;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @property (nonatomic)BOOL isBuyer;
 @property (nonatomic)CGFloat moveOffset;
@@ -103,10 +102,28 @@
     if(segment.selectedSegmentIndex == 0)
     {
         //Sign in as Buyer
+        [UIView animateWithDuration:0.5 delay:0.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.backgroundImage.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            self.backgroundImage.image = [UIImage imageNamed:@"signInBuyerBack.jpg"];
+            self.backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+            [UIView animateWithDuration:0.5f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.backgroundImage.alpha = 1.0f;
+            } completion:nil];
+        }];
         self.isBuyer = true;
     }
     else{
         //Sign in as Seller
+         [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.backgroundImage.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            self.backgroundImage.image = [UIImage imageNamed:@"signInSellerBack.jpg"];
+            self.backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+            [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.backgroundImage.alpha = 1.0f;
+            } completion:nil];
+        }];
         self.isBuyer = false;
     }
 }
