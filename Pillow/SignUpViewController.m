@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *mobileTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addr1TxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *addr2TxtFld;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @property (nonatomic)BOOL buyerSelected;
 @property (nonatomic)BOOL sellerSelected;
@@ -87,6 +88,15 @@
         [self.sellerCheckButton setSelected:self.sellerSelected];
         [self.buyerCheckButton setSelected:!self.buyerSelected];
     }
+    [UIView animateWithDuration:0.5 delay:0.2f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.backgroundImage.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.backgroundImage.image = [UIImage imageNamed:@"signInBuyerBack.jpg"];
+        self.backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+        [UIView animateWithDuration:0.5f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.backgroundImage.alpha = 1.0f;
+        } completion:nil];
+    }];
     self.buyerSelected = !self.buyerSelected;
 }
 
@@ -98,6 +108,15 @@
         [self.buyerCheckButton setSelected:self.buyerSelected];
         [self.sellerCheckButton setSelected:!self.sellerSelected];
     }
+    [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.backgroundImage.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.backgroundImage.image = [UIImage imageNamed:@"signInSellerBack.jpg"];
+        self.backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+        [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.backgroundImage.alpha = 1.0f;
+        } completion:nil];
+    }];
     self.sellerSelected = !self.sellerSelected;
 }
 - (IBAction)termsCheckClicked:(UIButton *)sender {
@@ -210,7 +229,7 @@
         valid = textField.text.length > 0;
         self.validUsername = valid;
     }else if(textField == self.mobileTextField){
-        valid = self.mobileTextField.text >= 10;
+        valid = self.mobileTextField.text.integerValue >= 10;
         self.validMobile = valid;
     }
     if(!valid){

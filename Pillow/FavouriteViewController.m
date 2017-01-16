@@ -8,8 +8,10 @@
 
 #import "FavouriteViewController.h"
 #import "FavouriteCell.h"
+#import "FavouriteList.h"
 
 @interface FavouriteViewController ()<UICollectionViewDelegateFlowLayout>
+
 
 @end
 
@@ -24,6 +26,15 @@
     [self.collectionView registerClass:[FavouriteCell class] forCellWithReuseIdentifier:@"favCell"];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.collectionView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [[FavouriteList sharedInstance] saveToLocalForUser:[NSString stringWithFormat:@"%lu", self.userid]];
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -31,13 +42,21 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-        return 4;
+        return [FavouriteList sharedInstance].favList.count;
 }
 
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FavouriteCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    [[FavouriteList sharedInstance] getPropertyAtIndex:indexPath.item success:^(Property *property) {
+        cell.property = property;
+        [cell.collection reloadData];
+    } failure:^(NSString *errorMessage) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:true completion:nil];
+    }];
     return cell;
 }
 

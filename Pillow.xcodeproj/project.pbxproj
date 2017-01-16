@@ -52,6 +52,10 @@
 		E84A3CFA1E29353700B1902D /* BuyerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CF81E29353700B1902D /* BuyerProfileViewController.m */; };
 		E84A3D011E2935C100B1902D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3D001E2935C100B1902D /* User.m */; };
 		E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3D031E293D3A00B1902D /* PLNetworking.m */; };
+		E881A1361E2BDE3900DC960D /* FavouriteList.m in Sources */ = {isa = PBXBuildFile; fileRef = E881A1351E2BDE3900DC960D /* FavouriteList.m */; };
+		E881A13A1E2C6B8A00DC960D /* signInSellerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */; };
+		E881A13C1E2C6F2300DC960D /* signInBuyerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */; };
+		E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13D1E2C763500DC960D /* buyerProfile.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +131,11 @@
 		E84A3D021E293D3A00B1902D /* PLNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLNetworking.h; sourceTree = "<group>"; };
 		E84A3D031E293D3A00B1902D /* PLNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLNetworking.m; sourceTree = "<group>"; };
 		E84A3D051E293D9E00B1902D /* Contants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contants.h; sourceTree = "<group>"; };
+		E881A1341E2BDE3900DC960D /* FavouriteList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteList.h; sourceTree = "<group>"; };
+		E881A1351E2BDE3900DC960D /* FavouriteList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteList.m; sourceTree = "<group>"; };
+		E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signInSellerBack.jpg; sourceTree = "<group>"; };
+		E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signInBuyerBack.jpg; sourceTree = "<group>"; };
+		E881A13D1E2C763500DC960D /* buyerProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = buyerProfile.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +290,7 @@
 		E84A3CE91E27F47C00B1902D /* Buyer */ = {
 			isa = PBXGroup;
 			children = (
+				E881A13D1E2C763500DC960D /* buyerProfile.jpg */,
 				E84A3CCF1E2709F800B1902D /* FavouriteViewController.h */,
 				E84A3CD01E2709F800B1902D /* FavouriteViewController.m */,
 				E84A3CF71E29353700B1902D /* BuyerProfileViewController.h */,
@@ -292,6 +302,8 @@
 		E84A3CEA1E27F48800B1902D /* User Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */,
+				E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */,
 				E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */,
 				E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */,
 				E84A3CB61E26E5F400B1902D /* SignInViewController.h */,
@@ -311,6 +323,8 @@
 				C389DBB01E286F0B0024F2F0 /* Property.h */,
 				C389DBB11E286F0B0024F2F0 /* Property.m */,
 				E84A3D051E293D9E00B1902D /* Contants.h */,
+				E881A1341E2BDE3900DC960D /* FavouriteList.h */,
+				E881A1351E2BDE3900DC960D /* FavouriteList.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -394,6 +408,9 @@
 				6C1D68DA1E27551F0060B9A2 /* ListTableViewCell.xib in Resources */,
 				6C1D68DB1E27551F0060B9A2 /* ListTableViewController.xib in Resources */,
 				E84A3CF91E29353700B1902D /* BuyerProfileView.xib in Resources */,
+				E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */,
+				E881A13A1E2C6B8A00DC960D /* signInSellerBack.jpg in Resources */,
+				E881A13C1E2C6F2300DC960D /* signInBuyerBack.jpg in Resources */,
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
 				C32D020B1E27168C00045D5D /* SellerInfoCell.xib in Resources */,
 				C32D01F61E26E14B00045D5D /* SellerProfileVC.xib in Resources */,
@@ -466,6 +483,7 @@
 				C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */,
 				E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */,
 				6C1D68CD1E2750030060B9A2 /* CSMarker.m in Sources */,
+				E881A1361E2BDE3900DC960D /* FavouriteList.m in Sources */,
 				E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */,
 				6C1D68CF1E2750030060B9A2 /* ListTableViewController.m in Sources */,
 				E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */,

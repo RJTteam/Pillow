@@ -39,7 +39,10 @@ static NSString *const userKey = @"currentUser";
 static NSString *const buyerContent = @"buyer";
 static NSString *const sellerContent = @"seller";
 
-//Property keys Note: (for key of userID in property, please use LoginRespondIdKey)
+//favourite directory name key
+static NSString *const favDirKey = @"favourite";
+
+//Property respond keys Note: (for key of userID in property, please use LoginRespondIdKey)
 
 static NSString *const propIDKey = @"Property Id";
 static NSString *const propNameKey = @"Property Name";
@@ -60,6 +63,8 @@ static NSString *const propPubDateKey = @"Property Published Date";
 static NSString *const propModDateKey = @"Property Modify Date";
 static NSString *const propStatusKey = @"Property Status";
 
+//Property post keys for sending post request for property
+//Note: key for userid in a property, please use [useridKey]
 static NSString *const uppropNameKey = @"propertyname";
 static NSString *const uppropTypeKey = @"propertytype";
 static NSString *const uppropCataKey = @"propertycat";
@@ -75,5 +80,29 @@ static NSString *const uppropCostKey = @"propertycost";
 static NSString *const uppropSizeKey = @"propertysize";
 static NSString *const uppropDescKey = @"propertydesc";
 static NSString *const uppropStatusKey = @"propertystatus";
+
+
+static NSString *const propSendNameKey = @"propertyname";
+static NSString *const propSendTypeKey = @"propertytype";
+static NSString *const propSendCataKey = @"propertycat";
+static NSString *const propSendAddr1Key = @"propertyaddress1";
+static NSString *const propSendAddr2Key =@"propertyaddress2";
+static NSString *const propSendZipKey = @"propertyzip";
+static NSString *const propSendImg1Key =@"propertyimg1";
+static NSString *const propSendImg2Key =@"propertyimg2";
+static NSString *const propSendImg3Key = @"propertyimg3";
+static NSString *const propSendLatKey = @"propertylat";
+static NSString *const propSendLongKey = @"propertylong";
+static NSString *const propSendCostKey = @"propertycost";
+static NSString *const propSendSizeKey = @"propertysize";
+static NSString *const propSendDescKey = @"propertydesc";
+static NSString *const propSendStatusKey = @"propertystatus";
+
+//Property search key
+static NSString *const propSearchIDKey = @"ppid";
+static NSString *const propSearchNameKey = @"pname";
+static NSString *const propSearchTypeKey = @"pptype";
+static NSString *const propSearchZipKey = @"ploc";
+static NSString *const propSearchCatIDKey = @"pcatid";
 
 #endif /* Contants_h */
