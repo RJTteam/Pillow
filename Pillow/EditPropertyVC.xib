@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="costTextFld" destination="Eaw-cu-xgo" id="I51-Kz-dSK"/>
                 <outlet property="descTextFld" destination="XiM-dY-yBI" id="d4O-zV-9Ud"/>
-                <outlet property="doneBtn" destination="EFJ-uA-qMu" id="R2S-BA-dHQ"/>
                 <outlet property="nameTextFld" destination="NHD-mM-VWs" id="3pu-Mv-85p"/>
                 <outlet property="pickerImage1" destination="Mah-Ee-ef8" id="UOy-lj-t1D"/>
                 <outlet property="pickerImage2" destination="9eb-zu-bdu" id="mDO-mX-yI3"/>
@@ -84,14 +83,6 @@
                             <rect key="frame" x="105" y="370" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </switch>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFJ-uA-qMu">
-                            <rect key="frame" x="323" y="41" width="37" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Done"/>
-                            <connections>
-                                <action selector="doneBtn:" destination="-1" eventType="touchUpInside" id="o3z-h1-QWI"/>
-                            </connections>
-                        </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NHD-mM-VWs">
                             <rect key="frame" x="87" y="115" width="259" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,28 +90,28 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Jv-Ri-tVS">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7Jv-Ri-tVS">
                             <rect key="frame" x="87" y="157" width="259" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-cu-xgo">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Eaw-cu-xgo">
                             <rect key="frame" x="87" y="242" width="259" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-j4-gjG">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-j4-gjG">
                             <rect key="frame" x="87" y="198" width="259" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XiM-dY-yBI">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XiM-dY-yBI">
                             <rect key="frame" x="87" y="322" width="259" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -190,7 +181,7 @@
                                 <constraint firstAttribute="bottom" secondItem="Mah-Ee-ef8" secondAttribute="bottom" id="ZmM-gx-AnP"/>
                                 <constraint firstAttribute="bottom" secondItem="XWZ-nj-jzf" secondAttribute="bottom" id="nbs-EU-Huo"/>
                                 <constraint firstAttribute="width" constant="375" id="qu8-Te-zAa"/>
-                                <constraint firstAttribute="trailing" secondItem="XWZ-nj-jzf" secondAttribute="trailing" constant="-395" id="uT4-sX-1ek"/>
+                                <constraint firstAttribute="trailing" secondItem="XWZ-nj-jzf" secondAttribute="trailing" id="uT4-sX-1ek"/>
                                 <constraint firstItem="XWZ-nj-jzf" firstAttribute="top" secondItem="aSU-Gf-r7V" secondAttribute="top" id="vOx-fV-orH"/>
                                 <constraint firstItem="9eb-zu-bdu" firstAttribute="leading" secondItem="Mah-Ee-ef8" secondAttribute="trailing" constant="1" id="xq3-m0-6Qo"/>
                             </constraints>

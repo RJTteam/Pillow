@@ -139,7 +139,7 @@
 
 -(void)addNewProperty{
     EditPropertyVC *editVC = [[EditPropertyVC alloc]initWithNibName:@"EditPropertyVC" bundle:nil];
-    [self presentViewController:editVC animated:YES completion:nil];
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 
