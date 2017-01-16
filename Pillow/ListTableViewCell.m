@@ -25,4 +25,14 @@
     
 }
 
+//- (IBAction)addToFavirate:(UIButton *)sender {
+//    
+//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Successfully Operation" message:@"this property has been added to your favirate list" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//    [alert addAction:action];
+//    [self presentViewController:alert animated:YES completion:nil];
+//    
+//}
+
+
 @end

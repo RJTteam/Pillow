@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ListTableViewCell.h"
+#import "webProvider.h"
+#import "MapViewController.h"
+#import "AppDelegate.h"
 
 @interface ListTableViewController : UITableViewController
+
 
 @end
