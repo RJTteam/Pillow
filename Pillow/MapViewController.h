@@ -10,20 +10,32 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "ShowPropertyViewController.h"
 #import "CSMarker.h"
-//#import "manager.h"
-//#import "webService.h"
+#import "manager.h"
+#import "webProvider.h"
+#import "Property.h"
+#import <AFURLSessionManager.h>
+#import "AppDelegate.h"
+#import <SDwebImage/UIImageView+WebCache.h>
 
 @import GooglePlaces;
 @import GoogleMaps;
 
-@interface MapViewController : UIViewController
+@interface MapViewController : UIViewController<NSURLSessionDelegate>
 
 @property (nonatomic,strong) GMSMapView* mapView;
-@property (copy,nonatomic) NSSet* markers;
-@property (strong, nonatomic) IBOutlet UISlider *slider;
+@property (copy,nonatomic) NSMutableSet* markers;
 @property (strong,nonatomic) NSString* zipCode;
 //@property (strong, nonatomic) IBOutlet UITextField *range;
 @property (strong, nonatomic) IBOutlet UITextField *range;
+@property (weak,nonatomic) manager* mapManager;
+@property (strong, nonatomic) IBOutlet UIView *searchBarView;
+@property (strong, nonatomic) IBOutlet UIView *certainSearchView;
+@property (strong,nonatomic) webProvider* mapProvider;
+@property (strong,nonatomic) CSMarker* userSearchMarker;
+@property (strong,nonatomic) UIImageView* imageView;
+@property (strong,nonatomic) UIImage* image;
+@property (strong,nonatomic) Property* currentProperty;
+@property (strong,nonatomic) UIButton* cancelCertainButton;
 
 -(void)drawMarkers;
 

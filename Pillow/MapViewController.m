@@ -8,6 +8,8 @@
 
 #import "MapViewController.h"
 
+#define METERS_PER_MILE  1609
+
 @interface MapViewController ()<GMSMapViewDelegate,GMSAutocompleteResultsViewControllerDelegate>
 {
     UIPickerView *pickerDemo;
@@ -32,6 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    //config the searchBar
     _resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
     _resultsViewController.delegate = self;
     
@@ -39,37 +43,43 @@
                          initWithSearchResultsController:_resultsViewController];
     _searchController.searchResultsUpdater = _resultsViewController;
     
-    UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 50)];
+    self.searchBarView = [[UIView alloc]initWithFrame:CGRectMake(0,65, self.view.bounds.size.width, 50)];
     
-    
-    [subView addSubview:_searchController.searchBar];
     [_searchController.searchBar sizeToFit];
-     _searchController.hidesNavigationBarDuringPresentation = NO;
+    _searchController.hidesNavigationBarDuringPresentation = NO;
+    [self.searchBarView addSubview:_searchController.searchBar];
     self.navigationController.navigationBar.translucent = YES;
-    //[self.view addSubview:subView];
-    self.navigationItem.titleView = subView;
+    [self.view addSubview:self.searchBarView];
+    
+    
+    //add the buttons on navigation bar
+    //UIBarButtonItem* filter = [[UIBarButtonItem alloc]initWithTitle:@"certainSearch" style:UIBarButtonItemStylePlain target:self action:@selector(filerButton)];
+    UIBarButtonItem* showAll = [[UIBarButtonItem alloc]initWithTitle:@"showAll" style:UIBarButtonItemStylePlain target:self action:@selector(shwoAll)];
+    NSMutableArray* buttonArray = [[NSMutableArray alloc]initWithObjects:showAll, nil];
+    self.navigationItem.rightBarButtonItems = buttonArray;
+
     
     self.range.text = @"5";
     
+    //prepare the customized picker for use
     demoArray = @[@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",@"21",@"23"];
     
     pickerDemo = [[UIPickerView alloc]init];
     pickerDemo.dataSource = (id)self;
     pickerDemo.delegate = (id)self;
     
-    
     toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
     [toolBar setBarStyle:UIBarStyleDefault];
-    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                      style:UIBarButtonItemStyleDone target:self action:@selector(changeFromLabel:)];
+    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(changeFromLabel:)];
     toolBar.items = @[barButtonDone];
     barButtonDone.tintColor=[UIColor blackColor];
     
     self.range.inputView = pickerDemo;
     self.range.inputAccessoryView = toolBar;
     
+    // config the default location to Chicago below
     GMSCameraPosition* camera = [GMSCameraPosition cameraWithLatitude:41.942526 longitude:-88.26734 zoom:8 bearing:0 viewingAngle:0];
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 110, self.view.bounds.size.width, self.view.bounds.size.height-150) camera:camera];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 140, self.view.bounds.size.width, self.view.bounds.size.height-180) camera:camera];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.myLocationEnabled = YES;
     self.mapView.settings.compassButton = YES;
@@ -77,19 +87,109 @@
     [self.mapView setMinZoom:5 maxZoom:12];
     
     self.mapView.delegate = self;
-    self.markers = [[NSSet alloc]init];
+    self.markers = [[NSMutableSet alloc]init];
     
-//    webService* service = [webService sharedInstance];
-//    manager* m = [manager sharedInstance];
-//    [service returnSearchAll:nil completionHandler:^(NSArray *array, NSError *error, NSString *httpStatus) {
-//        self.markers = [m createMarkerArrayWithJson:array];
-//        [self drawMarkers];
-//    }];
+    //have the connection with web stuff
+    self.mapProvider = [webProvider sharedInstance];
+    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    delegate.provider = self.mapProvider;
+    //get data from web and translate
+    self.mapManager = [manager sharedInstance];
     
+    //customize the certain search view
+    self.certainSearchView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height - 175, self.view.bounds.size.width, 150)];
+    self.certainSearchView.alpha = 0.6;
+    self.certainSearchView.backgroundColor = [UIColor lightGrayColor];
+    self.cancelCertainButton = [[UIButton alloc]initWithFrame:CGRectMake(self.certainSearchView.bounds.size.width-25, 25, 20, 20)];
+    [self.cancelCertainButton addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
+    //[self.certainSearchView addSubview:self.cancelCertainButton];
     
+    //finally to add the map view
     [self.view addSubview:self.mapView];
     
 }
+
+//tap anywhere
+-(void)didTapAnywhere: (UITapGestureRecognizer*) recognizer {
+    [self.certainSearchView removeFromSuperview];
+    [self.imageView removeFromSuperview];
+}
+
+
+-(void)remove{
+
+
+}
+
+//handle taps inside the certainSearchView, to pop to the detail view
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event  {
+    NSLog(@"touches began");
+    UITouch *touch = [touches anyObject];
+    if(self.certainSearchView){
+        if(touch.view == self.certainSearchView){
+            NSLog(@"self touched");
+            ShowPropertyViewController* spvc = [[ShowPropertyViewController alloc]init];
+            spvc.propertyToShow = self.currentProperty;
+            spvc.myProvider = self.mapProvider;
+            [self.certainSearchView removeFromSuperview];
+            [self.navigationController pushViewController:spvc animated:YES];
+        }
+//        if(touch.view == self.mapView)
+//        {
+//            self.certainSearchView.hidden = YES;
+//            self.imageView.hidden = YES;
+//            NSLog(@"touch outside certainSearchView");
+//        }
+    }
+}
+
+
+- (void)shwoAll {
+    
+    NSMutableArray* propertyArray = [NSMutableArray array];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.rjtmobile.com/realestate/getproperty.php?all"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@",error);
+        }
+        else{
+            for (NSDictionary *dic in responseObject) {
+                Property *property = [[Property alloc] initWithDictionary:dic];
+                [propertyArray addObject:property];
+            }
+            //self.markers = [self.mapManager createMarkerArrayWithArray:propertyArray];
+            NSMutableSet* mutableSet = [[NSMutableSet alloc]initWithSet:self.markers];
+            for(Property* d in propertyArray){
+                
+                CSMarker* marker = [[CSMarker alloc]init];
+                marker.objectID = d.propertyID;
+                marker.position = CLLocationCoordinate2DMake(d.propertyLatitute.doubleValue, d.propertyLongitute.doubleValue);
+                marker.title = d.propertyName;
+                marker.snippet = d.propertyType;
+                marker.propertyStoredInMarker = d;
+                [mutableSet addObject:marker];
+            }
+            self.markers = mutableSet;
+            [self drawMarkers];
+        }
+    }];
+    [dataTask resume];
+}
+
+- (IBAction)certainSearch:(UIButton *)sender {
+    
+    
+    
+}
+
+- (IBAction)searchAround:(UIButton *)sender {
+}
+
 
 //draw all markers
 -(void)drawMarkers{
@@ -111,11 +211,15 @@
 
 - (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
  didAutocompleteWithPlace:(GMSPlace *)place {
-    _searchController.active = NO;
-    // Do something with the selected place.
-    NSLog(@"Place name %@", place.name);
-    NSLog(@"Place address %@", place.formattedAddress);
-    NSLog(@"Place attributions %@", place.attributions.string);
+    
+    self.markers = [[NSMutableSet alloc]init];
+    for(CSMarker* c in self.markers){
+        c.map = nil;
+    }
+    if(self.markers.count > 0){
+        [self.markers removeAllObjects];
+    }
+    [self.mapView clear];
     
     CSMarker* marker = [[CSMarker alloc]init];
     marker.position = place.coordinate;
@@ -123,18 +227,38 @@
     marker.snippet = place.formattedAddress;
     marker.map = self.mapView;
     marker.icon = [UIImage imageNamed:@"self"];
-    [self.mapView animateToLocation:marker.position];
+    self.userSearchMarker = marker;
+    [self.mapView animateToLocation:self.userSearchMarker.position];
+    
+    _searchController.active = NO;
+    // Do something with the selected place.
+    NSLog(@"Place name %@", place.name);
+    NSLog(@"Place address %@", place.formattedAddress);
+    NSLog(@"Place attributions %@", place.attributions.string);
+    NSLog(@"placeID %@",place.placeID);
+    
+
     
     [[GMSGeocoder geocoder]reverseGeocodeCoordinate:CLLocationCoordinate2DMake(place.coordinate.latitude,place.coordinate.longitude)
                                   completionHandler:^(GMSReverseGeocodeResponse * response, NSError *error){
                                       for(GMSReverseGeocodeResult *result in response.results){
-                                          if(result.postalCode){
-                                              NSLog(@"postal code :%@", result.postalCode);
+                                         if(result.postalCode){
                                               self.zipCode = result.postalCode;
-                                          }
+                                              NSLog(@"postal code :%@", self.zipCode);
+                                         }
                                       }
+                                      NSDictionary* dic = @{@"ploc":self.zipCode,
+                                                            @"pnear":self.range.text
+                                                            };
+                                      [self.mapProvider webServiceCall:dic withHandler:^(NSArray *arrayOfProperty, NSError *error, NSURLResponse *webStatus) {
+                                          [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+                                               self.markers = [self.mapManager createMarkerArrayWithArray:arrayOfProperty];
+                                              [self drawMarkers];
+                                          }];
+                                      }];
                                   }];
 }
+
 
 - (void)resultsController:(GMSAutocompleteResultsViewController *)resultsController
 didFailAutocompleteWithError:(NSError *)error {
@@ -156,8 +280,8 @@ didFailAutocompleteWithError:(NSError *)error {
 }
 
 //delegate from GMSMapViewDelegate
--(UIView*)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker{
-    
+-(UIView*)mapView:(GMSMapView *)mapView markerInfoWindow:(CSMarker *)marker{
+//    
     UIView* info = [[UIView alloc]init];
     info.frame = CGRectMake(0, 0, 200, 65);
     info.backgroundColor = [UIColor whiteColor];
@@ -184,6 +308,82 @@ didFailAutocompleteWithError:(NSError *)error {
     [self.navigationController pushViewController:spvc animated:YES];
 }
 
+//Marker tapped
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(CSMarker *)marker{
+
+    self.currentProperty = marker.propertyStoredInMarker;
+    NSString* url = [self.currentProperty.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSMutableString* newurl = [[NSMutableString alloc]initWithString:@"http://"];
+    url = [newurl stringByAppendingString:url];
+    [self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
+    UIActivityIndicatorView* act = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    if(self.imageView){
+        act.frame = CGRectMake(round((self.imageView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
+        [self.imageView addSubview:act];
+    }else{
+        act.frame = CGRectMake(round((self.certainSearchView.frame.size.width - 25) / 2), round((self.certainSearchView.frame.size.height - 25) / 2), 100, 100);
+        [self.certainSearchView addSubview:act];
+    }
+    [act startAnimating];
+    
+    self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+    [self.certainSearchView addSubview:self.imageView];
+    
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if(image == nil){
+            //dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = [UIImage imageNamed:@"noImage"];
+            self.certainSearchView.alpha = 1.0;
+                [act stopAnimating];
+                [act hidesWhenStopped];
+           // });
+        }else{
+           //dispatch_async(dispatch_get_main_queue(), ^{
+               // [self.certainSearchView addSubview:self.imageView];
+            self.certainSearchView.alpha = 1.0;
+                [act stopAnimating];
+                [act hidesWhenStopped];
+            //});
+        }
+    }];
+    
+//    [self.mapProvider getPic:url withHandler:^(NSData *data, NSError *error, NSURLResponse *webStatus) {
+//        if(error){
+//            self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+//            self.image = [UIImage imageNamed:@"error"];
+//            self.imageView.image = self.image;
+//            self.certainSearchView.alpha = 1.0;
+//            [self.certainSearchView addSubview:self.imageView];
+//            //[self.certainSearchView insertSubview:self.cancelCertainButton aboveSubview:self.imageView];
+//            [act stopAnimating];
+//            [act hidesWhenStopped];
+//            //[self.view insertSubview: self.certainSearchView  aboveSubview:self.mapView];
+//        }else if(!data){
+//            self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+//            self.image = [UIImage imageNamed:@"default"];
+//            self.imageView.image = self.image;
+//            self.certainSearchView.alpha = 1.0;
+//            [self.certainSearchView addSubview:self.imageView];
+//           // [self.certainSearchView insertSubview:self.cancelCertainButton aboveSubview:self.imageView];
+//            [act stopAnimating];
+//            [act hidesWhenStopped];
+//        }else{
+//            self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+//            self.image = [UIImage imageWithData:data];
+//            self.imageView.image = self.image;
+//            [self.certainSearchView addSubview:self.imageView];
+//           // [self.certainSearchView insertSubview:self.cancelCertainButton aboveSubview:self.imageView];
+//            self.certainSearchView.alpha = 1.0;
+//            [act stopAnimating];
+//            [act hidesWhenStopped];
+//        }
+//        
+//    }];
+    
+    return YES;
+}
+
 
 //slider to set range of search
 //- (IBAction)setRange:(UISlider *)sender {
@@ -191,10 +391,12 @@ didFailAutocompleteWithError:(NSError *)error {
 //    //self.range.text = [NSString stringWithFormat:@"%f",sender.value];
 //}
 
-- (IBAction)searchWithRange:(UIButton *)sender {
-    
-    
-    
+
+//filter button
+-(void)filerButton{
+
+    //[self.view addSubview:self.certainSearchView];
+
 }
 
 

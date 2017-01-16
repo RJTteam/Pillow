@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		6C1D68CA1E2750030060B9A2 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68BF1E2750030060B9A2 /* HomeViewController.m */; };
-		6C1D68CB1E2750030060B9A2 /* ShowPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68C11E2750030060B9A2 /* ShowPropertyViewController.m */; };
-		6C1D68CC1E2750030060B9A2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68C31E2750030060B9A2 /* MapViewController.m */; };
-		6C1D68CD1E2750030060B9A2 /* CSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68C51E2750030060B9A2 /* CSMarker.m */; };
-		6C1D68CE1E2750030060B9A2 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68C71E2750030060B9A2 /* ListTableViewCell.m */; };
-		6C1D68CF1E2750030060B9A2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D68C91E2750030060B9A2 /* ListTableViewController.m */; };
 		6C1D68D11E2752EA0060B9A2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1D68D01E2752EA0060B9A2 /* CoreLocation.framework */; };
 		6C1D68D71E27551F0060B9A2 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D21E27551F0060B9A2 /* HomeViewController.xib */; };
-		6C1D68D81E27551F0060B9A2 /* ShowPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D31E27551F0060B9A2 /* ShowPropertyViewController.xib */; };
-		6C1D68D91E27551F0060B9A2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D41E27551F0060B9A2 /* MapViewController.xib */; };
-		6C1D68DA1E27551F0060B9A2 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D51E27551F0060B9A2 /* ListTableViewCell.xib */; };
-		6C1D68DB1E27551F0060B9A2 /* ListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D61E27551F0060B9A2 /* ListTableViewController.xib */; };
+		6C1D69361E2C70EE0060B9A2 /* ShowPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */; };
+		6C1D69371E2C70EE0060B9A2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69311E2C70EE0060B9A2 /* MapViewController.m */; };
+		6C1D69381E2C70EE0060B9A2 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */; };
+		6C1D69391E2C70EE0060B9A2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69351E2C70EE0060B9A2 /* ListTableViewController.m */; };
+		6C1D693C1E2C71200060B9A2 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D693A1E2C71200060B9A2 /* ListTableViewCell.xib */; };
+		6C1D693D1E2C71200060B9A2 /* ListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D693B1E2C71200060B9A2 /* ListTableViewController.xib */; };
+		6C1D693F1E2C71410060B9A2 /* ShowPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D693E1E2C71410060B9A2 /* ShowPropertyViewController.xib */; };
+		6C1D69421E2C735F0060B9A2 /* webProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69411E2C735F0060B9A2 /* webProvider.m */; };
+		6C1D69451E2C76110060B9A2 /* manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69441E2C76110060B9A2 /* manager.m */; };
+		6C1D69481E2C76990060B9A2 /* CSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69471E2C76990060B9A2 /* CSMarker.m */; };
+		6C1D694A1E2C777C0060B9A2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D69491E2C777C0060B9A2 /* MapViewController.xib */; };
+		6C1D694B1E2C94680060B9A2 /* FavouriteList.m in Sources */ = {isa = PBXBuildFile; fileRef = E881A1351E2BDE3900DC960D /* FavouriteList.m */; };
+		6C1D694C1E2C94970060B9A2 /* BuyerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CF81E29353700B1902D /* BuyerProfileViewController.m */; };
 		C32D01DD1E26DDFA00045D5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DC1E26DDFA00045D5D /* main.m */; };
 		C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DF1E26DDFA00045D5D /* AppDelegate.m */; };
 		C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E71E26DDFA00045D5D /* Assets.xcassets */; };
@@ -48,13 +52,10 @@
 		E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */; };
 		E84A3CD21E2709F800B1902D /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CD01E2709F800B1902D /* FavouriteViewController.m */; };
 		E84A3CDE1E272EA900B1902D /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CDD1E272EA900B1902D /* FavouriteCell.m */; };
-		E84A3CE61E278A1400B1902D /* PropertyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */; };
 		E84A3CE81E278A2100B1902D /* PropertyDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */; };
 		E84A3CF91E29353700B1902D /* BuyerProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CF61E29353700B1902D /* BuyerProfileView.xib */; };
-		E84A3CFA1E29353700B1902D /* BuyerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CF81E29353700B1902D /* BuyerProfileViewController.m */; };
 		E84A3D011E2935C100B1902D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3D001E2935C100B1902D /* User.m */; };
 		E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3D031E293D3A00B1902D /* PLNetworking.m */; };
-		E881A1361E2BDE3900DC960D /* FavouriteList.m in Sources */ = {isa = PBXBuildFile; fileRef = E881A1351E2BDE3900DC960D /* FavouriteList.m */; };
 		E881A13A1E2C6B8A00DC960D /* signInSellerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */; };
 		E881A13C1E2C6F2300DC960D /* signInBuyerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */; };
 		E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13D1E2C763500DC960D /* buyerProfile.jpg */; };
@@ -66,22 +67,26 @@
 		5EB3670057A941EF569817C2 /* Pods-Pillow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pillow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pillow/Pods-Pillow.debug.xcconfig"; sourceTree = "<group>"; };
 		6C1D68BE1E2750030060B9A2 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1D68BF1E2750030060B9A2 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		6C1D68C01E2750030060B9A2 /* ShowPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPropertyViewController.h; sourceTree = "<group>"; };
-		6C1D68C11E2750030060B9A2 /* ShowPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPropertyViewController.m; sourceTree = "<group>"; };
-		6C1D68C21E2750030060B9A2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		6C1D68C31E2750030060B9A2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		6C1D68C41E2750030060B9A2 /* CSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMarker.h; sourceTree = "<group>"; };
-		6C1D68C51E2750030060B9A2 /* CSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMarker.m; sourceTree = "<group>"; };
-		6C1D68C61E2750030060B9A2 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
-		6C1D68C71E2750030060B9A2 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
-		6C1D68C81E2750030060B9A2 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
-		6C1D68C91E2750030060B9A2 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
 		6C1D68D01E2752EA0060B9A2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6C1D68D21E27551F0060B9A2 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		6C1D68D31E27551F0060B9A2 /* ShowPropertyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowPropertyViewController.xib; sourceTree = "<group>"; };
-		6C1D68D41E27551F0060B9A2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
-		6C1D68D51E27551F0060B9A2 /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
-		6C1D68D61E27551F0060B9A2 /* ListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewController.xib; sourceTree = "<group>"; };
+		6C1D692E1E2C70EE0060B9A2 /* ShowPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPropertyViewController.h; sourceTree = "<group>"; };
+		6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPropertyViewController.m; sourceTree = "<group>"; };
+		6C1D69301E2C70EE0060B9A2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6C1D69311E2C70EE0060B9A2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		6C1D69321E2C70EE0060B9A2 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
+		6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
+		6C1D69341E2C70EE0060B9A2 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
+		6C1D69351E2C70EE0060B9A2 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
+		6C1D693A1E2C71200060B9A2 /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
+		6C1D693B1E2C71200060B9A2 /* ListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewController.xib; sourceTree = "<group>"; };
+		6C1D693E1E2C71410060B9A2 /* ShowPropertyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowPropertyViewController.xib; sourceTree = "<group>"; };
+		6C1D69401E2C735F0060B9A2 /* webProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webProvider.h; sourceTree = "<group>"; };
+		6C1D69411E2C735F0060B9A2 /* webProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = webProvider.m; sourceTree = "<group>"; };
+		6C1D69431E2C76110060B9A2 /* manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = manager.h; sourceTree = "<group>"; };
+		6C1D69441E2C76110060B9A2 /* manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = manager.m; sourceTree = "<group>"; };
+		6C1D69461E2C76990060B9A2 /* CSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMarker.h; sourceTree = "<group>"; };
+		6C1D69471E2C76990060B9A2 /* CSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMarker.m; sourceTree = "<group>"; };
+		6C1D69491E2C777C0060B9A2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		C32D01D81E26DDFA00045D5D /* Pillow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pillow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32D01DC1E26DDFA00045D5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C32D01DE1E26DDFA00045D5D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -127,8 +132,6 @@
 		E84A3CD01E2709F800B1902D /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
 		E84A3CDC1E272EA900B1902D /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
 		E84A3CDD1E272EA900B1902D /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
-		E84A3CE41E278A1400B1902D /* PropertyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDetailViewController.h; sourceTree = "<group>"; };
-		E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDetailViewController.m; sourceTree = "<group>"; };
 		E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyDetailView.xib; sourceTree = "<group>"; };
 		E84A3CF61E29353700B1902D /* BuyerProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyerProfileView.xib; sourceTree = "<group>"; };
 		E84A3CF71E29353700B1902D /* BuyerProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyerProfileViewController.h; sourceTree = "<group>"; };
@@ -163,18 +166,18 @@
 			children = (
 				6C1D68BE1E2750030060B9A2 /* HomeViewController.h */,
 				6C1D68BF1E2750030060B9A2 /* HomeViewController.m */,
-				6C1D68C01E2750030060B9A2 /* ShowPropertyViewController.h */,
-				6C1D68C11E2750030060B9A2 /* ShowPropertyViewController.m */,
-				6C1D68C21E2750030060B9A2 /* MapViewController.h */,
-				6C1D68C31E2750030060B9A2 /* MapViewController.m */,
-				6C1D68C41E2750030060B9A2 /* CSMarker.h */,
-				6C1D68C51E2750030060B9A2 /* CSMarker.m */,
-				6C1D68C61E2750030060B9A2 /* ListTableViewCell.h */,
-				6C1D68C71E2750030060B9A2 /* ListTableViewCell.m */,
-				6C1D68C81E2750030060B9A2 /* ListTableViewController.h */,
-				6C1D68C91E2750030060B9A2 /* ListTableViewController.m */,
-				E84A3CE41E278A1400B1902D /* PropertyDetailViewController.h */,
-				E84A3CE51E278A1400B1902D /* PropertyDetailViewController.m */,
+				6C1D692E1E2C70EE0060B9A2 /* ShowPropertyViewController.h */,
+				6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */,
+				6C1D69301E2C70EE0060B9A2 /* MapViewController.h */,
+				6C1D69311E2C70EE0060B9A2 /* MapViewController.m */,
+				6C1D69321E2C70EE0060B9A2 /* ListTableViewCell.h */,
+				6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */,
+				6C1D69341E2C70EE0060B9A2 /* ListTableViewController.h */,
+				6C1D69351E2C70EE0060B9A2 /* ListTableViewController.m */,
+				6C1D69461E2C76990060B9A2 /* CSMarker.h */,
+				6C1D69471E2C76990060B9A2 /* CSMarker.m */,
+				6C1D69431E2C76110060B9A2 /* manager.h */,
+				6C1D69441E2C76110060B9A2 /* manager.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -274,10 +277,10 @@
 			children = (
 				E84A3CE71E278A2100B1902D /* PropertyDetailView.xib */,
 				6C1D68D21E27551F0060B9A2 /* HomeViewController.xib */,
-				6C1D68D31E27551F0060B9A2 /* ShowPropertyViewController.xib */,
-				6C1D68D41E27551F0060B9A2 /* MapViewController.xib */,
-				6C1D68D51E27551F0060B9A2 /* ListTableViewCell.xib */,
-				6C1D68D61E27551F0060B9A2 /* ListTableViewController.xib */,
+				6C1D693A1E2C71200060B9A2 /* ListTableViewCell.xib */,
+				6C1D693B1E2C71200060B9A2 /* ListTableViewController.xib */,
+				6C1D69491E2C777C0060B9A2 /* MapViewController.xib */,
+				6C1D693E1E2C71410060B9A2 /* ShowPropertyViewController.xib */,
 				E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */,
 				E84A3CB51E26E5F400B1902D /* SignInView.xib */,
 				E84A3CB81E26E5F400B1902D /* SignUpView.xib */,
@@ -346,6 +349,8 @@
 			children = (
 				E84A3D021E293D3A00B1902D /* PLNetworking.h */,
 				E84A3D031E293D3A00B1902D /* PLNetworking.m */,
+				6C1D69401E2C735F0060B9A2 /* webProvider.h */,
+				6C1D69411E2C735F0060B9A2 /* webProvider.m */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -413,13 +418,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */,
-				6C1D68D81E27551F0060B9A2 /* ShowPropertyViewController.xib in Resources */,
 				E84A3CE81E278A2100B1902D /* PropertyDetailView.xib in Resources */,
 				E84A3CC31E26E5F400B1902D /* SignInView.xib in Resources */,
+				6C1D694A1E2C777C0060B9A2 /* MapViewController.xib in Resources */,
 				E84A3CC51E26E5F400B1902D /* SignUpView.xib in Resources */,
-				6C1D68D91E27551F0060B9A2 /* MapViewController.xib in Resources */,
-				6C1D68DA1E27551F0060B9A2 /* ListTableViewCell.xib in Resources */,
-				6C1D68DB1E27551F0060B9A2 /* ListTableViewController.xib in Resources */,
 				E84A3CF91E29353700B1902D /* BuyerProfileView.xib in Resources */,
 				E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */,
 				E881A13A1E2C6B8A00DC960D /* signInSellerBack.jpg in Resources */,
@@ -427,10 +429,13 @@
 				C32D01EB1E26DDFA00045D5D /* LaunchScreen.storyboard in Resources */,
 				C32D020B1E27168C00045D5D /* SellerInfoCell.xib in Resources */,
 				C32D01F61E26E14B00045D5D /* SellerProfileVC.xib in Resources */,
+				6C1D693C1E2C71200060B9A2 /* ListTableViewCell.xib in Resources */,
 				C32D02171E2744FD00045D5D /* EditPropertyVC.xib in Resources */,
 				C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */,
+				6C1D693F1E2C71410060B9A2 /* ShowPropertyViewController.xib in Resources */,
 				C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */,
 				C32D020F1E2726AF00045D5D /* PropertyCell.xib in Resources */,
+				6C1D693D1E2C71200060B9A2 /* ListTableViewController.xib in Resources */,
 				C32D020D1E27182F00045D5D /* SellerPropertyCell.xib in Resources */,
 				C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */,
 				E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */,
@@ -497,29 +502,29 @@
 				C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */,
 				C389DBF81E2BF1180024F2F0 /* ImageStoreManager.m in Sources */,
 				E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */,
-				6C1D68CD1E2750030060B9A2 /* CSMarker.m in Sources */,
-				E881A1361E2BDE3900DC960D /* FavouriteList.m in Sources */,
+				6C1D69391E2C70EE0060B9A2 /* ListTableViewController.m in Sources */,
 				E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */,
-				6C1D68CF1E2750030060B9A2 /* ListTableViewController.m in Sources */,
+				6C1D69421E2C735F0060B9A2 /* webProvider.m in Sources */,
 				E84A3CC61E26E5F400B1902D /* SignUpViewController.m in Sources */,
 				E84A3D011E2935C100B1902D /* User.m in Sources */,
-				6C1D68CC1E2750030060B9A2 /* MapViewController.m in Sources */,
-				6C1D68CB1E2750030060B9A2 /* ShowPropertyViewController.m in Sources */,
 				E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */,
-				C389DC0F1E2C8ABA0024F2F0 /* SellerInfoCell.m in Sources */,
+				6C1D69371E2C70EE0060B9A2 /* MapViewController.m in Sources */,
+				6C1D69361E2C70EE0060B9A2 /* ShowPropertyViewController.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
 				C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */,
 				C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */,
+				6C1D69481E2C76990060B9A2 /* CSMarker.m in Sources */,
 				E84A3CD21E2709F800B1902D /* FavouriteViewController.m in Sources */,
+				6C1D69451E2C76110060B9A2 /* manager.m in Sources */,
 				E84A3CDE1E272EA900B1902D /* FavouriteCell.m in Sources */,
-				E84A3CE61E278A1400B1902D /* PropertyDetailViewController.m in Sources */,
-				E84A3CFA1E29353700B1902D /* BuyerProfileViewController.m in Sources */,
 				C32D01DD1E26DDFA00045D5D /* main.m in Sources */,
 				C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */,
 				C389DBB21E286F0B0024F2F0 /* Property.m in Sources */,
+				6C1D69381E2C70EE0060B9A2 /* ListTableViewCell.m in Sources */,
+				6C1D694B1E2C94680060B9A2 /* FavouriteList.m in Sources */,
 				C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */,
 				6C1D68CA1E2750030060B9A2 /* HomeViewController.m in Sources */,
-				6C1D68CE1E2750030060B9A2 /* ListTableViewCell.m in Sources */,
+				6C1D694C1E2C94970060B9A2 /* BuyerProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

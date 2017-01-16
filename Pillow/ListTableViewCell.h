@@ -11,4 +11,10 @@
 
 @interface ListTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *cellImage;
+@property (strong, nonatomic) IBOutlet UILabel *cellType;
+@property (strong, nonatomic) IBOutlet UILabel *cellPrice;
+@property (strong, nonatomic) IBOutlet UILabel *cellStatus;
+@property (strong, nonatomic) IBOutlet UIButton *addFavirate;
+
 @end
