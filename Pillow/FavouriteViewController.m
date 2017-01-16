@@ -48,6 +48,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     FavouriteCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favCell" forIndexPath:indexPath];
+    cell.navControl = self.navigationController;
     [[FavouriteList sharedInstance] getPropertyAtIndex:indexPath.item success:^(Property *property) {
         cell.property = property;
         [cell.collection reloadData];

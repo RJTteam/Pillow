@@ -9,6 +9,7 @@
 #import "ListTableViewController.h"
 #import <AFURLSessionManager.h>
 #import "Property.h"
+#import "FavouriteList.h"
 
 @interface ListTableViewController ()<UITableViewDelegate,NSURLSessionDelegate>
 {
@@ -112,7 +113,8 @@
     
     UIButton* addToFavirate = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     addToFavirate.imageView.image = [UIImage imageNamed:@"favirate"];
-    [addToFavirate addTarget:self action:@selector(addFavirate) forControlEvents:UIControlEventTouchUpInside];
+    [addToFavirate addTarget:self action:@selector(addFavirate:) forControlEvents:UIControlEventTouchUpInside];
+    addToFavirate.tag = indexPath.row;
     [cell addSubview:addToFavirate];
     
 //    UILabel* price = [[UILabel alloc]initWithFrame:CGRectMake(120, 10, 25, 15)];
@@ -175,15 +177,18 @@
         }
     }];
     
-    [cell.addFavirate addTarget:self action:@selector(addFavirate) forControlEvents:UIControlEventTouchUpInside];
+    [cell.addFavirate addTarget:self action:@selector(addFavirate:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
 
--(void)addFavirate{
-
-    assert(NO);
-
+-(void)addFavirate:(UIButton *)sender{
+    Property *p = [propertyArray objectAtIndex:sender.tag];
+    [[FavouriteList sharedInstance] addPropertyToFavourite:p];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:@"Successfully add property to favourite" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -14,7 +14,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <GooglePlaces/GooglePlaces.h>
 
-@interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,GMSMapViewDelegate,GMSAutocompleteResultsViewControllerDelegate>
+@interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,GMSMapViewDelegate,GMSAutocompleteResultsViewControllerDelegate,UITextFieldDelegate>
 @property (nonatomic) NSInteger userID;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextFld;
 @property (weak, nonatomic) IBOutlet UITextField *typeTextFld;
@@ -89,31 +89,30 @@
     self.userInfoDic = [userdefault objectForKey:userKey];
     self.userID = [[self.userInfoDic objectForKey:useridKey] integerValue];
     
+    UIBarButtonItem *updateBtn = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStylePlain target:self action:@selector(UploadButtonClicked)];
+    self.navigationItem.rightBarButtonItem = updateBtn;
 
 }
 
-- (IBAction)cancelBtn:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-- (IBAction)doneBtn:(id)sender {
-        NSDictionary *dic = @{
-                              useridKey:[NSString stringWithFormat:@"%ld",self.userID],
-                              uppropNameKey:self.nameTextFld.text,
-                              uppropTypeKey:self.typeTextFld.text,
-                              uppropCataKey:@"1",
-                              uppropAddr1Key:self.address1,
-                              uppropAddr2Key:self.address2,
-                              uppropZipKey:self.zipCode,
-                              uppropLatKey:self.latitude,
-                              uppropLongKey:self.longtitude,
-                              uppropCostKey:self.costTextFld.text,
-                              uppropSizeKey:self.sizeFld.text,
-                              uppropDescKey:self.descTextFld.text,
-                              uppropStatusKey:[NSString stringWithFormat:@"%@",self.statusSwitch.on ? @"yes" : @"no"],
-                              uppropImg1Key:self.imageData1,
-                              uppropImg2Key:self.imageData2,
-                              uppropImg3Key:self.imageData3,
-                              };
+- (void)UploadButtonClicked{
+    NSDictionary *dic = @{
+                          useridKey:[NSString stringWithFormat:@"%ld",self.userID],
+                          uppropNameKey:self.nameTextFld.text,
+                          uppropTypeKey:self.typeTextFld.text,
+                          uppropCataKey:@"1",
+                          uppropAddr1Key:self.address1,
+                          uppropAddr2Key:self.address2,
+                          uppropZipKey:self.zipCode,
+                          uppropLatKey:self.latitude,
+                          uppropLongKey:self.longtitude,
+                          uppropCostKey:self.costTextFld.text,
+                          uppropSizeKey:self.sizeFld.text,
+                          uppropDescKey:self.descTextFld.text,
+                          uppropStatusKey:[NSString stringWithFormat:@"%@",self.statusSwitch.on ? @"yes" : @"no"],
+                          uppropImg1Key:self.imageData1,
+                          uppropImg2Key:self.imageData2,
+                          uppropImg3Key:self.imageData3,
+                          };
     if (self.aProperty == nil) {
         [Property sellerAddWithParameters:dic];
     }
