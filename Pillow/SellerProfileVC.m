@@ -12,6 +12,7 @@
 #import "User.h"
 #import "SellerInfoCell.h"
 #import "SellerProfileCell.h"
+#import "ImageStoreManager.h"
 
 @interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -61,6 +62,10 @@
         self.userName = user.username;
         self.userMobile = user.mobile;
         self.userEmail = user.email;
+        ImageStoreManager *imageManager = [[ImageStoreManager alloc]init];
+        NSString *iconWithID = [NSString stringWithFormat:@"%@",userID];
+        NSData *iconData = [imageManager readimageDataWithimageName:iconWithID];
+        self.userIcon = [UIImage imageWithData:iconData];
         [self.profileTable reloadData];
     } failure:^(NSString *errorMessage) {
         NSLog(@"Error ------ %@",errorMessage);
@@ -74,6 +79,7 @@
         [self presentViewController:alert animated:true completion:nil];
     }];
     
+
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
@@ -121,6 +127,10 @@
 #pragma mark-UIImagePickViewController Delegate Netgids
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo{
     self.userIcon = image;
+    NSData *imageData = UIImagePNGRepresentation(image);
+    ImageStoreManager *imageManager = [[ImageStoreManager alloc]init];
+    NSString *iconWithID = [NSString stringWithFormat:@"%@",userID];
+    [imageManager storeImageToFile:imageData ImageName:iconWithID];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.profileTable reloadData];
 }
