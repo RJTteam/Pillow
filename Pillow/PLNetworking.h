@@ -14,5 +14,7 @@
 
 - (void)sendPOSTRequestToURL:(NSString *)url parameters:(NSDictionary *)param success:(void (^)(NSData *data, NSInteger status))success failed:(void(^)(NSError *error))failed;
 
+- (NSURLRequest *)createMutiPartsFormRequestToUrl:(NSString *)url param:(NSDictionary *)param andDataPath:(NSString *)dir;
+
 - (void)sendGETRequestToURL:(NSString *)url parameters:(NSDictionary *)param success:(void(^)(NSData *data, NSInteger status))success failed:(void(^)(NSError *error))failed;
 @end

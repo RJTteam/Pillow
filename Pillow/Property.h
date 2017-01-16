@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Property : NSObject<NSCoding>
+@interface Property : NSObject
 
 @property(strong,nonatomic)NSString *propertyID;
 @property(strong,nonatomic)NSString *propertyName;

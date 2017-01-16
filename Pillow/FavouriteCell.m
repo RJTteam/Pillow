@@ -7,11 +7,17 @@
 //
 
 #import "FavouriteCell.h"
+#import "PLNetworking.h"
+#import "FavouriteList.h"
 
 @interface ThumbnailCell : UICollectionViewCell
 
 @property(strong, nonatomic)UIImageView *thumbnail;
 @property(strong, nonatomic)UILabel *priceLabel;
+@property(strong, nonatomic)UILabel *typeLabel;
+
+@property(strong, nonatomic)UIButton *favButton;
+@property(strong, nonatomic)Property *property;
 
 @end
 
@@ -22,25 +28,45 @@
         self.thumbnail = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.priceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.priceLabel.translatesAutoresizingMaskIntoConstraints = false;
+        self.typeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.typeLabel.translatesAutoresizingMaskIntoConstraints = false;
+        self.favButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.favButton.translatesAutoresizingMaskIntoConstraints = false;
+        [self.favButton addTarget:self action:@selector(favButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
+}
+
+-(void)favButtonClicked:(UIButton *)sender{
+    if(!sender.isSelected){
+        [[FavouriteList sharedInstance] removePropertyFromFavourite:self.property];
+    }else{
+        [[FavouriteList sharedInstance] addPropertyToFavourite:self.property];
+    }
+    [sender setSelected:!sender.isSelected];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.thumbnail.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
     self.thumbnail.image = [UIImage imageNamed:@"placeholder"];
-    self.priceLabel.text = @"$300000.00";
     self.priceLabel.textColor = [UIColor whiteColor];
-    self.priceLabel.font = [UIFont fontWithName:@"Courier" size:36.0f];
+    self.priceLabel.font = [UIFont fontWithName:@"Courier" size:28.0f];
+    self.typeLabel.textColor = [UIColor whiteColor];
+    self.typeLabel.font = [UIFont fontWithName:@"Courier" size:28.0f];
     self.backgroundView = self.thumbnail;
+    [self.favButton setBackgroundImage:[UIImage imageNamed:@"fav"] forState:UIControlStateNormal];
+    [self.favButton setBackgroundImage:[UIImage imageNamed:@"unFav"] forState:UIControlStateSelected];
     [self.contentView addSubview:self.priceLabel];
+    [self.contentView addSubview:self.typeLabel];
+    [self.contentView addSubview:self.favButton];
     
     NSString *hformat = [NSString stringWithFormat:@"H:|-5-[v0]-%.2f-|", self.bounds.size.width / 3];
-    NSString *vformat = [NSString stringWithFormat:@"V:|-%.2f-[v0]|", self.bounds.size.height * 2 / 3];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hformat options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.priceLabel}]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vformat options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.priceLabel}]];
+    NSString *priceHFormat = [NSString stringWithFormat:@"H:|-5-[v0]-%.2f-[v1]-10-|", self.bounds.size.width / 3];
+    NSString *vformat = [NSString stringWithFormat:@"V:|-%0.2f-[v1]-10-[v0]-10-|", self.bounds.size.height / 2];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:priceHFormat options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.priceLabel, @"v1":self.favButton}]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hformat options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.typeLabel}]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:vformat options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.priceLabel, @"v1":self.typeLabel}]];
 }
 
 @end
@@ -53,8 +79,12 @@
 @property(strong, nonatomic)UILabel *descriptAndSize;
 @property(strong, nonatomic)UIButton *detailButton;
 
+@property(strong, nonatomic)Property *property;
+
 
 @end
+
+/************************************************************************************************/
 
 @implementation DescriptCell
 
@@ -76,8 +106,9 @@
         self.backImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.detailButton setTitle:@"More Info" forState:UIControlStateNormal];
+        self.detailButton.titleLabel.font = [UIFont fontWithName:@"Courier" size:17.0f];
         self.detailButton.translatesAutoresizingMaskIntoConstraints = false;
-        [self.detailButton addTarget:self action:@selector(toDetailClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.detailButton addTarget:self action:@selector(toDetailClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -85,15 +116,17 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.backgroundView = self.backImageView;
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
     UIVisualEffectView *effect = [[UIVisualEffectView alloc] initWithEffect:blur];
-    [self insertSubview:effect aboveSubview:self.backgroundView];
-    self.priceLabel.text = @"$300000.00";
+    effect.frame = self.backgroundView.frame;
+    [self.backgroundView addSubview:effect];
     self.priceLabel.textAlignment = NSTextAlignmentCenter;
-    self.addrLabel.text = @"2056 Wessel Ct, St Charles, IL, 60174";
     self.addrLabel.textAlignment = NSTextAlignmentCenter;
-    self.descriptAndSize.text = @"Good Place to live * 5000sqft";
     self.descriptAndSize.textAlignment = NSTextAlignmentCenter;
+    self.detailButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.detailButton.layer.borderWidth = 2;
+    self.detailButton.layer.cornerRadius = 4;
+    self.detailButton.contentMode = UIViewContentModeCenter;
     [self.contentView addSubview:self.priceLabel];
     [self.contentView addSubview:self.addrLabel];
     [self.contentView addSubview:self.descriptAndSize];
@@ -104,9 +137,10 @@
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.descriptAndSize attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.addrLabel attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.detailButton attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [self.detailButton addConstraint:[NSLayoutConstraint constraintWithItem:self.detailButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.contentView.bounds.size.width / 3]];
 }
 
-- (void)toDetailClicked{
+- (void)toDetailClicked:(UIButton *)sender{
     //TODO to detail view Controller;
     assert(NO);
 }
@@ -114,6 +148,13 @@
 @end
 
 /************************************************************************************************/
+
+@interface FavouriteCell()
+
+@property(nonatomic)BOOL isDownloaded;
+@property(strong, nonatomic)UIImage *propIMG;
+
+@end
 
 @implementation FavouriteCell
 
@@ -129,7 +170,8 @@
     [self addSubview:self.collection];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[v0]|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.collection}]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[v0]|" options:NSLayoutFormatDirectionLeftToRight metrics:nil views:@{@"v0":self.collection}]];
-    self.collection.backgroundColor = [UIColor blackColor];
+    self.collection.backgroundColor = [UIColor colorWithRed:(CGFloat)(252.0/255) green:(CGFloat)(67.0/255) blue:(CGFloat)(117.0/255) alpha:1.0f];
+    self.isDownloaded = false;
 
 }
 
@@ -160,10 +202,55 @@
     
     if(indexPath.item == 0){
         ThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"thumbnailCell" forIndexPath:indexPath];
+        if(self.property != nil){
+            cell.priceLabel.text = [NSString stringWithFormat:@"$%@", self.property.propertyCost];
+            cell.property = self.property;
+            cell.typeLabel.text = self.property.propertyType;
+            if(!self.isDownloaded){
+                NSString *rawUrl = [self.property.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+                NSString *finalUrl = [NSString stringWithFormat:@"http://%@", rawUrl];
+                [[PLNetworking manager] sendGETRequestToURL:finalUrl parameters:@{} success:^(NSData *data, NSInteger status) {
+                    if(status == 200){
+                        self.propIMG = [UIImage imageWithData:data];
+                        cell.thumbnail.image = self.propIMG;
+                        self.isDownloaded = true;
+                    }else{
+                        NSLog(@"internet error: %lu", status);
+                    }
+                } failed:^(NSError *error) {
+                    NSLog(@"Image download error: %@", error);
+                }];
+            }
+        }else{
+            cell.thumbnail.image = [UIImage imageNamed:@"placeholder"];
+        }
         return cell;
     }
     DescriptCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"DescriptCell" forIndexPath:indexPath];
-    cell.backImageView.image = [UIImage imageNamed:@"placeholder"];
+    if(self.property != nil){
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%@", self.property.propertyCost];
+        cell.addrLabel.text = [NSString stringWithFormat:@"%@, %@", self.property.propertyAdd1, self.property.propertyadd2];
+        cell.descriptAndSize.text = [NSString stringWithFormat:@"Descrition: %@ / Size: %@ sqft", self.property.propertyDesc, self.property.propertySize];
+        cell.property = self.property;
+        if(!self.isDownloaded){
+            NSString *imgUrl = self.property.propertyImage1;
+            [[PLNetworking manager] sendGETRequestToURL:imgUrl parameters:@{} success:^(NSData *data, NSInteger status) {
+                if(status == 200){
+                    self.propIMG = [UIImage imageWithData:data];
+                    cell.backImageView.image = self.propIMG;
+                    self.isDownloaded = true;
+                }else{
+                    NSLog(@"internet error: %lu", status);
+                }
+            } failed:^(NSError *error) {
+                NSLog(@"Image download error: %@", error);
+            }];
+        }else{
+            cell.backImageView.image = self.propIMG;
+        }
+    }else{
+        cell.backImageView.image = [UIImage imageNamed:@"placeholder"];
+    }
     return cell;
     
 }

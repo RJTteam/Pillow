@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Property.h"
 
 @interface FavouriteCell :UICollectionViewCell<UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(strong, nonatomic)UICollectionView *collection;
+@property(strong, nonatomic)Property *property;
 
 @end

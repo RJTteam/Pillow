@@ -98,7 +98,7 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
         if(status == 200){
             NSArray *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             if(jsonData.count != 0){
-                User *user = [[User alloc] initWithDictionary:[jsonData firstObject]];
+                User *user = [[User alloc] initWithDictionary:[jsonData objectAtIndex:0]];
                 success(user);
             }else{
                 failure(@"User Not Found");
@@ -119,10 +119,22 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
         }else{
             _usertype = dict[loginRespondTypeKey];
         }
-        _username = dict[usernameKey];
+        if(dict[usernameKey]){
+            _username = dict[usernameKey];
+        }else{
+            _username = dict[searchUserRespondNameKey];
+        }
+        if(dict[emailKey]){
+            _email = dict[emailKey];
+        }else{
+            _email = dict[searchUserRespondEmailKey];
+        }
+        if(dict[mobileKey]){
+            _mobile = dict[mobileKey];
+        }else{
+            _mobile = dict[searchUserRespondMobileKey];
+        }
         _password = dict[passwordKey];
-        _email = dict[emailKey];
-        _mobile = dict[mobileKey];
         _birthday = [self stringToDate:dict[dobKey]];
         _address1 = dict[address1Key];
         _address2 = dict[address2Key];
