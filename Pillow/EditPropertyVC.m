@@ -13,6 +13,7 @@
 #import <AFNetworking.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <GooglePlaces/GooglePlaces.h>
+#import <SDwebImage/UIImageView+WebCache.h>
 
 @interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,GMSMapViewDelegate,GMSAutocompleteResultsViewControllerDelegate,UITextFieldDelegate>
 @property (nonatomic) NSInteger userID;
@@ -23,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *descTextFld;
 @property (weak, nonatomic) IBOutlet UISwitch *statusSwitch;
 @property (assign,nonatomic) NSInteger imageBtnTag;
-@property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 
 @property (strong,nonatomic) NSString *address1;
 @property (strong,nonatomic) NSString *address2;
@@ -67,6 +67,13 @@
         else{
             self.statusSwitch.on = NO;
         }
+        NSString* urlStr1 = [self dealWithURLFormate:self.aProperty.propertyImage1];
+        NSString* urlStr2 = [self dealWithURLFormate:self.aProperty.propertyImage2];
+        NSString* urlStr3 = [self dealWithURLFormate:self.aProperty.propertyImage3];
+
+        [self.pickerImage1 sd_setImageWithURL:[NSURL URLWithString:urlStr1] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.pickerImage2 sd_setImageWithURL:[NSURL URLWithString:urlStr2] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.pickerImage3 sd_setImageWithURL:[NSURL URLWithString:urlStr3] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
 }
 
@@ -232,6 +239,12 @@ didFailAutocompleteWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
+
+-(NSString *)dealWithURLFormate:(NSString *)imageURL{
+    NSString *step1 = [imageURL stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    NSString *step2 = [NSString stringWithFormat:@"%@%@",@"http://",step1];
+    return step2;
+}
 /*
 #pragma mark - Navigation
 
