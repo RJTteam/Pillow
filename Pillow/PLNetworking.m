@@ -23,7 +23,8 @@
 
 - (void)sendGETRequestToURL:(NSString *)url parameters:(NSDictionary *)param success:(void(^)(NSData *data, NSInteger status))success failed:(void(^)(NSError *error))failed{
     NSString *fragment = [self httpFragmentForParameters:param];
-    NSURL *final = [NSURL URLWithString:[url stringByAppendingString:fragment]];
+    NSString *rawUrl = [[url stringByAppendingString:fragment]stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    NSURL *final = [NSURL URLWithString:rawUrl];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithURL:final completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error){

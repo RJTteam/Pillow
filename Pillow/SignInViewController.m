@@ -14,6 +14,7 @@
 #import "SellerProfileVC.h"
 #import "User.h"
 #import "Contants.h"
+#import "FavouriteList.h"
 
 @interface SignInViewController ()<UITextFieldDelegate>
 
@@ -164,8 +165,10 @@
             NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
             [userdefault setObject:[user dictPresentation] forKey:userKey];
             HomeViewController* hvc = [[HomeViewController alloc]init];
+            if([user.usertype isEqualToString:buyerContent]){
+                [[FavouriteList sharedInstance] loadFavListForUser:[NSString stringWithFormat:@"%lu", user.userid]];
+            }
             [self presentViewController:hvc animated:YES completion:nil];
-            NSLog(@"Login success");
         } faliure:^(NSString *errorMessage) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
