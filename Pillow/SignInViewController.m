@@ -16,7 +16,8 @@
 #import "Contants.h"
 #import "FavouriteList.h"
 
-@interface SignInViewController ()<UITextFieldDelegate>
+
+@interface SignInViewController ()<UITextFieldDelegate, GIDSignInUIDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
@@ -38,8 +39,10 @@
     self.isBuyer = YES;
     UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skipSignInClicked)];
     self.navigationItem.rightBarButtonItem = skipButton;
-    
-    
+    [GIDSignIn sharedInstance].uiDelegate = self;
+
+    self.signInButton.style = kGIDSignInButtonStyleIconOnly;
+    self.signInButton.colorScheme = kGIDSignInButtonColorSchemeDark;
     NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
     self.buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
     _buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
@@ -225,6 +228,24 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark - GIDSignInUIDelegate
+
+- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
+    
+}
+
+// Present a view that prompts the user to sign in with Google
+- (void)signIn:(GIDSignIn *)signIn
+presentViewController:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+// Dismiss the "Sign in with Google" view
+- (void)signIn:(GIDSignIn *)signIn
+dismissViewController:(UIViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
