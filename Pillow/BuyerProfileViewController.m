@@ -10,6 +10,7 @@
 #import "FavouriteViewController.h"
 #import "FavouriteList.h"
 #import "Contants.h"
+#import "User.h"
 
 @interface BuyerProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxt;
@@ -29,6 +30,21 @@
     if(!userInfo){
         [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     }
+    NSNumber *userid = [userInfo objectForKey:useridKey];
+    [User userGetUserInfoWithUserId:userid.integerValue success:^(User *user) {
+        self.usernameTxt.text = user.username;
+        self.emailTxt.text = user.email;
+        self.mobileTxt.text = user.mobile;
+    } failure:^(NSString *errorMessage) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ERROR" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.tabBarController dismissViewControllerAnimated:true completion:^{
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
+            }];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:true completion:nil];
+    }];
     UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"sign out" style:UIBarButtonItemStylePlain target:self action:@selector(signOutButtonClicked)];
     self.navigationItem.rightBarButtonItem = signOutButton;
     UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
