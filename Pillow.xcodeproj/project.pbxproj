@@ -59,6 +59,7 @@
 		E881A13A1E2C6B8A00DC960D /* signInSellerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */; };
 		E881A13C1E2C6F2300DC960D /* signInBuyerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */; };
 		E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13D1E2C763500DC960D /* buyerProfile.jpg */; };
+		E881A1401E2CAD0200DC960D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E881A13F1E2CAD0200DC960D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signInSellerBack.jpg; sourceTree = "<group>"; };
 		E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signInBuyerBack.jpg; sourceTree = "<group>"; };
 		E881A13D1E2C763500DC960D /* buyerProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = buyerProfile.jpg; sourceTree = "<group>"; };
+		E881A13F1E2CAD0200DC960D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				C32D021D1E2760DF00045D5D /* Seller */,
 				6C1D68BD1E274FB30060B9A2 /* Home */,
 				C32D01EC1E26DDFA00045D5D /* Info.plist */,
+				E881A13F1E2CAD0200DC960D /* GoogleService-Info.plist */,
 				E84A3CC81E26E61600B1902D /* Views */,
 				E84A3CC91E26E62100B1902D /* Controllers */,
 				C32D01E71E26DDFA00045D5D /* Assets.xcassets */,
@@ -436,6 +439,7 @@
 				C32D020F1E2726AF00045D5D /* PropertyCell.xib in Resources */,
 				6C1D693D1E2C71200060B9A2 /* ListTableViewController.xib in Resources */,
 				C389DC171E2CA8970024F2F0 /* SellerInfoCell.xib in Resources */,
+				E881A1401E2CAD0200DC960D /* GoogleService-Info.plist in Resources */,
 				C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */,
 				E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */,
 				6C1D68D71E27551F0060B9A2 /* HomeViewController.xib in Resources */,

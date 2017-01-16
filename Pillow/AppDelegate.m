@@ -12,11 +12,13 @@
 #import "SignInViewController.h"
 #import "BuyerProfileViewController.h"
 #import "FavouriteList.h"
+#import <Google/SignIn.h>
+#import "Contants.h"
 
 @import GoogleMaps;
 @import GooglePlaces;
 
-@interface AppDelegate ()
+@interface AppDelegate ()<GIDSignInDelegate>
 
 @property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
 @property (strong, nonatomic) SellerPropertyVC *sellerPropertyVC;
@@ -27,6 +29,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSError *configError = nil;
+    [[GGLContext sharedInstance] configureWithError:&configError];
+    NSAssert(!configError, @"Error configuring Google services: %@", configError);
+    [GIDSignIn sharedInstance].delegate = self;
+    
     [FavouriteList sharedInstance];
     [GMSServices provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
     [GMSPlacesClient provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
@@ -81,5 +88,33 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary *)options {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
+
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    if(!user){
+        return;
+    }
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *fullName = user.profile.name;
+    NSString *email = user.profile.email;
+    NSDictionary *dict = @{
+                           emailKey : email,
+                           passwordKey : @"",
+                           usertypeKey : buyerContent,
+                           usernameKey : fullName,
+                           useridKey : userId
+                          };
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    [userdefault setObject:dict forKey:userKey];
+}
 
 @end

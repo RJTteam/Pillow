@@ -15,6 +15,7 @@
                 <outlet property="emailTxtFld" destination="73j-LU-tTM" id="usU-5q-uLS"/>
                 <outlet property="forgetPwdButton" destination="uB9-UW-DFl" id="3eE-ef-RxU"/>
                 <outlet property="pwdTxtFld" destination="Y5K-hC-2pB" id="Txd-ga-cmO"/>
+                <outlet property="signInButton" destination="EY8-gk-pCM" id="oYE-MK-gJz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="hMq-Eg-Go6"/>
             </connections>
         </placeholder>
@@ -106,15 +107,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQa-Nl-Hrj">
-                    <rect key="frame" x="221" y="249" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="facebook"/>
-                    <connections>
-                        <action selector="facebookClicked" destination="-1" eventType="touchUpInside" id="4AQ-A0-yrT"/>
-                        <action selector="googleClicked" destination="-1" eventType="touchUpInside" id="oN2-ae-qh1"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign in with:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fua-tU-K2v">
                     <rect key="frame" x="43" y="244" width="133" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -160,12 +152,17 @@
                         <action selector="forgetPwdButtonClicked" destination="-1" eventType="touchUpInside" id="AfL-CW-rt4"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="23O-c7-zio">
-                    <rect key="frame" x="279" y="249" width="30" height="30"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EY8-gk-pCM" customClass="GIDSignInButton">
+                    <rect key="frame" x="274" y="236" width="48" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="google+"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQa-Nl-Hrj">
+                    <rect key="frame" x="210" y="240" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="facebook"/>
                     <connections>
-                        <action selector="googleClicked" destination="-1" eventType="touchUpInside" id="KWD-K8-txC"/>
+                        <action selector="facebookClicked" destination="-1" eventType="touchUpInside" id="4AQ-A0-yrT"/>
+                        <action selector="googleClicked" destination="-1" eventType="touchUpInside" id="oN2-ae-qh1"/>
                     </connections>
                 </button>
             </subviews>
@@ -176,7 +173,6 @@
     </objects>
     <resources>
         <image name="facebook" width="50" height="50"/>
-        <image name="google+" width="60" height="60"/>
         <image name="signInBuyerBack.jpg" width="600" height="400"/>
     </resources>
 </document>
