@@ -9,6 +9,7 @@
 #import "Property.h"
 #import "Contants.h"
 #import "PLNetworking.h"
+#import <AFNetworking.h>
 
 static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?";
 @implementation Property
@@ -69,35 +70,59 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
     }];
 }
 
-+ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure{
++ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict{
     NSString *destination = [NSString stringWithFormat:@"%@property&edit&pptyid=%@",baseUrl,propertyID];
     
-    PLNetworking *manager = [PLNetworking manager];
-    [manager sendPOSTRequestToURL:destination parameters:dict success:^(NSData *data, NSInteger status) {
-        if (status != 200) {
-            failure(@"Internet not connecte");
-        }
-        else{
-            NSLog(@"successful update Property");
-        }
-    } failed:^(NSError *error) {
-        failure(error.localizedDescription);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //********************pramaters***************************
+    //1.request path    2.parameter(not file pramater)dic   3.constructingBodyWithBlock 4.progress infomation 5 success handler 6.failure handler    [manager POST:destination parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:destination parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSData *imageData1 = [dict objectForKey:uppropImg1Key];
+        [formData appendPartWithFileData:imageData1 name:uppropImg1Key fileName:@"image1.jpg" mimeType:@"image/jpeg"];
+        NSData *imageData2 = [dict objectForKey:uppropImg2Key];
+        [formData appendPartWithFileData:imageData2 name:uppropImg2Key fileName:@"image2.jpg" mimeType:@"image/jpeg"];
+        NSData *imageData3 = [dict objectForKey:uppropImg3Key];
+        [formData appendPartWithFileData:imageData3 name:uppropImg3Key fileName:@"image3.jpg" mimeType:@"image/jpeg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"%f",1.0 *uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *responseString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"success----%@----%@",[responseObject class],responseString);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Failure-----%@",error);
     }];
+
 }
 
-+ (void)sellerAddWithParameters:(NSDictionary *)dict faliure:(void(^)(NSString *errorMessage))failure{
++ (void)sellerAddWithParameters:(NSDictionary *)dict{
     NSString *destination = [baseUrl stringByAppendingString:@"property&add"];
-    PLNetworking *manager = [PLNetworking manager];
-    [manager sendPOSTRequestToURL:destination parameters:dict success:^(NSData *data, NSInteger status) {
-        if (status != 200) {
-            failure(@"Internet not connecte");
-        }
-        else{
-            NSLog(@"successful add Property");
-        }
-    } failed:^(NSError *error) {
-        failure(error.localizedDescription);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //********************pramaters***************************
+    //1.request path    2.parameter(not file pramater)dic   3.constructingBodyWithBlock 4.progress infomation 5 success handler 6.failure handler    [manager POST:destination parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:destination parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    
+        NSData *imageData1 = [dict objectForKey:uppropImg1Key];
+        [formData appendPartWithFileData:imageData1 name:uppropImg1Key fileName:@"image1.jpg" mimeType:@"image/jpeg"];
+        NSData *imageData2 = [dict objectForKey:uppropImg2Key];
+        [formData appendPartWithFileData:imageData2 name:uppropImg2Key fileName:@"image2.jpg" mimeType:@"image/jpeg"];
+        NSData *imageData3 = [dict objectForKey:uppropImg3Key];
+        [formData appendPartWithFileData:imageData3 name:uppropImg3Key fileName:@"image3.jpg" mimeType:@"image/jpeg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"%f",1.0 *uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *responseString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"success----%@----%@",[responseObject class],responseString);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Failure-----%@",error);
     }];
+    
 }
 
 #pragma mark - NSCoding

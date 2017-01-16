@@ -29,7 +29,6 @@
 		C32D01FB1E26E18700045D5D /* SellerPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */; };
 		C32D02051E270EF600045D5D /* SellerProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D02031E270EF600045D5D /* SellerProfileCell.xib */; };
 		C32D020B1E27168C00045D5D /* SellerInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020A1E27168C00045D5D /* SellerInfoCell.xib */; };
-		C32D020D1E27182F00045D5D /* SellerPropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */; };
 		C32D020F1E2726AF00045D5D /* PropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D020E1E2726AF00045D5D /* PropertyCell.xib */; };
 		C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02111E272CEA00045D5D /* SellerOwnPropertyCell.m */; };
 		C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02141E2744FD00045D5D /* EditPropertyVC.m */; };
@@ -37,6 +36,9 @@
 		C32D021B1E274E6900045D5D /* ImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D02191E274E6900045D5D /* ImageCollectionCell.m */; };
 		C32D021C1E274E6900045D5D /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */; };
 		C389DBB21E286F0B0024F2F0 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = C389DBB11E286F0B0024F2F0 /* Property.m */; };
+		C389DBF81E2BF1180024F2F0 /* ImageStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C389DBF71E2BF1180024F2F0 /* ImageStoreManager.m */; };
+		C389DC0F1E2C8ABA0024F2F0 /* SellerInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C389DC0E1E2C8ABA0024F2F0 /* SellerInfoCell.m */; };
+		C389DC121E2C8AEB0024F2F0 /* SellerProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C389DC111E2C8AEB0024F2F0 /* SellerProfileCell.m */; };
 		CDB37168AC49947DA0A6B598 /* libPods-Pillow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EBF80297698DE6BCDAF229E /* libPods-Pillow.a */; };
 		E84A3CBD1E26E5F400B1902D /* ForgetPwdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */; };
 		E84A3CBE1E26E5F400B1902D /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */; };
@@ -95,7 +97,6 @@
 		C32D01F91E26E18700045D5D /* SellerPropertyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerPropertyVC.xib; sourceTree = "<group>"; };
 		C32D02031E270EF600045D5D /* SellerProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerProfileCell.xib; sourceTree = "<group>"; };
 		C32D020A1E27168C00045D5D /* SellerInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerInfoCell.xib; sourceTree = "<group>"; };
-		C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerPropertyCell.xib; sourceTree = "<group>"; };
 		C32D020E1E2726AF00045D5D /* PropertyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyCell.xib; sourceTree = "<group>"; };
 		C32D02101E272CEA00045D5D /* SellerOwnPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerOwnPropertyCell.h; sourceTree = "<group>"; };
 		C32D02111E272CEA00045D5D /* SellerOwnPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerOwnPropertyCell.m; sourceTree = "<group>"; };
@@ -107,6 +108,12 @@
 		C32D021A1E274E6900045D5D /* ImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
 		C389DBB01E286F0B0024F2F0 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Property.h; sourceTree = "<group>"; };
 		C389DBB11E286F0B0024F2F0 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Property.m; sourceTree = "<group>"; };
+		C389DBF61E2BF1180024F2F0 /* ImageStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStoreManager.h; sourceTree = "<group>"; };
+		C389DBF71E2BF1180024F2F0 /* ImageStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStoreManager.m; sourceTree = "<group>"; };
+		C389DC0D1E2C8ABA0024F2F0 /* SellerInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerInfoCell.h; sourceTree = "<group>"; };
+		C389DC0E1E2C8ABA0024F2F0 /* SellerInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerInfoCell.m; sourceTree = "<group>"; };
+		C389DC101E2C8AEB0024F2F0 /* SellerProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellerProfileCell.h; sourceTree = "<group>"; };
+		C389DC111E2C8AEB0024F2F0 /* SellerProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellerProfileCell.m; sourceTree = "<group>"; };
 		E84A3CAD1E26E5F400B1902D /* ForgetPwdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPwdView.xib; sourceTree = "<group>"; };
 		E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
 		E84A3CAF1E26E5F400B1902D /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -231,9 +238,12 @@
 				C32D01F21E26E14B00045D5D /* SellerProfileVC.h */,
 				C32D01F31E26E14B00045D5D /* SellerProfileVC.m */,
 				C32D01F41E26E14B00045D5D /* SellerProfileVC.xib */,
+				C389DC101E2C8AEB0024F2F0 /* SellerProfileCell.h */,
+				C389DC111E2C8AEB0024F2F0 /* SellerProfileCell.m */,
 				C32D02031E270EF600045D5D /* SellerProfileCell.xib */,
+				C389DC0D1E2C8ABA0024F2F0 /* SellerInfoCell.h */,
+				C389DC0E1E2C8ABA0024F2F0 /* SellerInfoCell.m */,
 				C32D020A1E27168C00045D5D /* SellerInfoCell.xib */,
-				C32D020C1E27182F00045D5D /* SellerPropertyCell.xib */,
 				C32D01F71E26E18700045D5D /* SellerPropertyVC.h */,
 				C32D01F81E26E18700045D5D /* SellerPropertyVC.m */,
 				C32D02101E272CEA00045D5D /* SellerOwnPropertyCell.h */,
@@ -325,6 +335,8 @@
 				E84A3D051E293D9E00B1902D /* Contants.h */,
 				E881A1341E2BDE3900DC960D /* FavouriteList.h */,
 				E881A1351E2BDE3900DC960D /* FavouriteList.m */,
+				C389DBF61E2BF1180024F2F0 /* ImageStoreManager.h */,
+				C389DBF71E2BF1180024F2F0 /* ImageStoreManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -481,7 +493,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C389DC121E2C8AEB0024F2F0 /* SellerProfileCell.m in Sources */,
 				C32D01F51E26E14B00045D5D /* SellerProfileVC.m in Sources */,
+				C389DBF81E2BF1180024F2F0 /* ImageStoreManager.m in Sources */,
 				E84A3CC41E26E5F400B1902D /* SignInViewController.m in Sources */,
 				6C1D68CD1E2750030060B9A2 /* CSMarker.m in Sources */,
 				E881A1361E2BDE3900DC960D /* FavouriteList.m in Sources */,
@@ -492,6 +506,7 @@
 				6C1D68CC1E2750030060B9A2 /* MapViewController.m in Sources */,
 				6C1D68CB1E2750030060B9A2 /* ShowPropertyViewController.m in Sources */,
 				E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */,
+				C389DC0F1E2C8ABA0024F2F0 /* SellerInfoCell.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
 				C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */,
 				C32D01FA1E26E18700045D5D /* SellerPropertyVC.m in Sources */,

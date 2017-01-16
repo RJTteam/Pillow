@@ -9,34 +9,74 @@
 #import "SellerProfileVC.h"
 #import "SellerPropertyVC.h"
 #import "Contants.h"
+#import "User.h"
+#import "SellerInfoCell.h"
+#import "SellerProfileCell.h"
 
 @interface SellerProfileVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     AppDelegate *appDele;
     NSArray *infoItem;
-    NSDictionary *userInfoDic;
+    NSNumber *userID;
 }
 @property (weak, nonatomic) IBOutlet UITableView *profileTable;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *userMobile;
+@property (strong, nonatomic) NSString *userEmail;
+@property (strong, nonatomic) UIImage *userIcon;
 @end
 
 @implementation SellerProfileVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    if(!userInfo){
+        [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        userID = [userInfo objectForKey:useridKey];
+    }
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.profileTable.allowsSelection = NO;
     self.profileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    infoItem = @[@"SellerProfileCell",@"SellerInfoCell",@"SellerPropertyCell"];
+    infoItem = @[@"SellerProfileCell",@"SellerInfoCell"];
 
-    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
-    userInfoDic = [userdefault objectForKey:userKey];
+    [User userGetUserInfoWithUserId:userID.integerValue success:^(User *user) {
+        self.userName = user.username;
+        self.userMobile = user.mobile;
+        self.userEmail = user.email;
+        [self.profileTable reloadData];
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"Error ------ %@",errorMessage);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ERROR" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.tabBarController dismissViewControllerAnimated:true completion:^{
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
+            }];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:true completion:nil];
+    }];
+    
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
 //    [self presentViewController:sellerPropertyVC animated:YES completion:nil];
     [self.navigationController pushViewController:sellerPropertyVC animated:YES];
+}
+
+- (IBAction)logOutClicked:(id)sender {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault removeObjectForKey:userKey];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)pickImage{
+    
 }
 
 #pragma mark - TableView Delegate
@@ -47,12 +87,32 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     NSString *cellIdentifier = [infoItem objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        NSArray *parts = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        cell = [parts objectAtIndex:0];
+    if ([cellIdentifier isEqualToString:@"SellerProfileCell"]) {
+        SellerProfileCell *cell1 = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell1) {
+            NSArray *parts = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+            cell1 = [parts objectAtIndex:0];
+        }
+        [cell1.pickerBtn addTarget:self action:@selector(pickImage) forControlEvents:UIControlEventTouchUpInside];
+        if (self.userIcon == nil) {
+            cell1.userIcon.image = [UIImage imageNamed:@"placeholder"];
+        }
+        else{
+        cell1.userIcon.image = self.userIcon;
+        }
+        return cell1;
     }
-    return cell;
+    else{
+        SellerInfoCell *cell2 = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell2) {
+            NSArray *parts = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+            cell2 = [parts objectAtIndex:0];
+        }
+        cell2.nameLabel.text = self.userName;
+        cell2.mobileLabel.text = self.userMobile;
+        cell2.emailLabel.text = self.userEmail;
+        return cell2;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

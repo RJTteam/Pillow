@@ -22,10 +22,6 @@
     NSDictionary *userInfoDic;
 }
 @property (weak, nonatomic) IBOutlet UITableView *propertyList;
-@property (weak, nonatomic) IBOutlet UIButton *addBtn;
-@property (weak, nonatomic) IBOutlet UIButton *editBtn;
-@property (weak, nonatomic) IBOutlet UIButton *deleBtn;
-@property (weak, nonatomic) IBOutlet UIButton *menuBtn;
 @property (assign,nonatomic) NSInteger userID;
 
 @end
@@ -50,45 +46,20 @@
     } failure:^(NSString *errorMessage) {
         NSLog(@"Error: %@",errorMessage);
     }];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.addBtn.layer.cornerRadius = 21.0f;
-    self.addBtn.hidden = YES;
-    self.addBtn.tag = 200;
-    self.editBtn.layer.cornerRadius = 21.0f;
-    self.editBtn.hidden = YES;
-    self.editBtn.tag = 201;
-    self.deleBtn.layer.cornerRadius = 21.0f;
-    self.deleBtn.hidden = YES;
-    self.deleBtn.tag = 202;
-    self.menuBtn.layer.cornerRadius = 21.0f;
-    self.menuBtn.hidden = NO;
 
     expendRow = 999;
     
     appDele = (AppDelegate *)[[UIApplication sharedApplication]delegate];
      self.propertyList.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
-- (IBAction)menuClick:(id)sender {
-    if ([self.menuBtn.titleLabel.text  isEqual: @"+"]) {
-        self.addBtn.hidden = NO;
-        self.editBtn.hidden = NO;
-        self.deleBtn.hidden = NO;
-        [self.menuBtn setTitle:@"-" forState:UIControlStateNormal];
-    }
-    else{
-        self.addBtn.hidden = YES;
-        self.editBtn.hidden = YES;
-        self.deleBtn.hidden = YES;
-        [self.menuBtn setTitle:@"+" forState:UIControlStateNormal];
-    }
-}
-
-- (IBAction)settingBtnClicked:(id)sender {
-    EditPropertyVC *editVC = [[EditPropertyVC alloc]initWithNibName:@"EditPropertyVC" bundle:nil];
-    [self presentViewController:editVC animated:YES completion:nil];
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewProperty)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    
 }
 
 #pragma mark- TableView Delegate
@@ -105,8 +76,6 @@
     }
     cell.zoomButton.tag = indexPath.row;
     [cell.zoomButton addTarget:self action:@selector(reSizeCell:) forControlEvents:UIControlEventTouchUpInside];
-    cell.detailBtn.tag = indexPath.row+100;
-    [cell.detailBtn addTarget:self action:@selector(toDetailVC) forControlEvents:UIControlEventTouchUpInside];
     
     Property *obj = [sellerPropertyArray objectAtIndex:indexPath.row];
     cell.nameLabel.text = obj.propertyName;
@@ -142,6 +111,20 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    EditPropertyVC *editVC = [[EditPropertyVC alloc]initWithNibName:@"EditPropertyVC" bundle:nil];
+    editVC.aProperty = [sellerPropertyArray objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:editVC animated:YES];
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Update data source array here, something like [array removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+#pragma mark - privite method
 -(void)reSizeCell:(UIButton *)cellBtn{
 //    [self.propertyList reloadRowsAtIndexPaths:[NSIndexSet indexSetWithIndex:cellBtn.tag] withRowAnimation:UITableViewRowAnimationFade];
     if (expendRow != cellBtn.tag) {
@@ -154,17 +137,26 @@
     }
 }
 
--(void)toDetailVC{
-    
+-(void)addNewProperty{
+    EditPropertyVC *editVC = [[EditPropertyVC alloc]initWithNibName:@"EditPropertyVC" bundle:nil];
+    [self presentViewController:editVC animated:YES completion:nil];
 }
-/*
+
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"EditPropertyVC"]) {
+//        if ([sender isKindOfClass:[UITableViewCell class]]) {
+//            NSIndexPath *indexPath = [self.propertyList indexPathForSelectedRow];
+//            EditPropertyVC *desitViewControl = segue.destinationViewController;
+//            EditPropertyVC.aProperty = [sellerPropertyArray objectAtIndex:indexPath.row];
+//        }
+//        
+//    }
+//}
+
 
 @end
