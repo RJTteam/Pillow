@@ -15,7 +15,7 @@
 #import <GOOGLE/SignIn.h>
 #import "FaceBookSigInController.h"
 
-@interface BuyerProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface BuyerProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, FaceBookLoginControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxt;
 @property (weak, nonatomic) IBOutlet UITextField *emailTxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileTxt;
@@ -42,10 +42,18 @@
     if([loginType isEqualToString:loginTypeNormal]){
         [self getUserIconWithUserId:self.userid];
     }else {
+        self.usernameTxt.text = userInfo[usernameKey];
+        self.emailTxt.text = userInfo[emailKey];
+        self.mobileTxt.text = @"";
         NSString *imageUrl = userInfo[imgUrlKey];
         [self setImageAsync:imageUrl];
     }
     
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [FaceBookSigInController sharedInstance].delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,9 +146,17 @@
 }
 
 - (void)signOutButtonClicked{
-    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault removeObjectForKey:userKey];
+    NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    NSString *loginType = userInfo[loginTypeKey];
+    if([loginType isEqualToString:loginTypeNormal]){
+        [userDefault removeObjectForKey:userKey];
+    }else if([loginType isEqualToString:loginTypeFaceBook]){
+        [[FaceBookSigInController sharedInstance] FBLogOut];
+    }else if([loginType isEqualToString:loginTypeGoogle]){
+        [[GIDSignIn sharedInstance] signOut];
+        [userDefault removeObjectForKey:userKey];
+    }
     [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -164,5 +180,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - FaceBookLoginControllerDelegate
+
+- (void)fbControllerWillLogOut:(FaceBookSigInController *)controller{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+   [userDefault removeObjectForKey:userKey];
+}
 
 @end

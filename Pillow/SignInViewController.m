@@ -38,11 +38,7 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //set GoogleSignInController's deleage to self
-    [GoogleSignInController sharedInstance].destinationController = self;
-    //set up FaceBookSignIn Controller
-    [FaceBookSigInController sharedInstance].delegate = self;
-    [FaceBookSigInController sharedInstance].readPermissions = @[@"public_profile",@"email"];
+    
     if([FBSDKAccessToken currentAccessToken] != nil){
         [self setProfile];
         
@@ -73,6 +69,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //set GoogleSignInController's deleage to self
+    [GoogleSignInController sharedInstance].destinationController = self;
+    //set up FaceBookSignIn Controller
+    [FaceBookSigInController sharedInstance].delegate = self;
+    [FaceBookSigInController sharedInstance].readPermissions = @[@"public_profile",@"email"];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *dict = [userDefault objectForKey:userKey];
     if(dict){
@@ -235,9 +236,8 @@
                                imgUrlKey : imgUrl,
                                loginTypeKey:loginTypeFaceBook};
         [userInfo setObject:dict forKey:userKey];
-        HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [[FavouriteList sharedInstance] loadFavListForUser:dict[useridKey]];
-        [self presentViewController:home animated:YES completion:nil];
+       
     }];
 }
 
@@ -299,6 +299,8 @@ dismissViewController:(UIViewController *)viewController {
         [self dismissViewControllerAnimated:true completion:nil];
     }else{
         [self setProfile];
+        HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+        [self presentViewController:home animated:YES completion:nil];
     }
 }
 
