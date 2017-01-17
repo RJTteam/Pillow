@@ -53,7 +53,7 @@
     self.signInButton.colorScheme = kGIDSignInButtonColorSchemeDark;
     NSArray *itemArray = [NSArray arrayWithObjects: @"Buyer", @"Seller", nil];
     self.buyerVSseller = [[UISegmentedControl alloc]initWithItems:itemArray];
-    _buyerVSseller.frame = CGRectMake(128, 198, 121, 28);
+    _buyerVSseller.frame = CGRectMake(124, 319, 121, 28);
     [_buyerVSseller addTarget:self action:@selector(buyerVSsellerAction:) forControlEvents: UIControlEventValueChanged];
     [self.view insertSubview:self.buyerVSseller aboveSubview:_emailTxtFld];
     
