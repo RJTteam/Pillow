@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *firstImage;
 @property (strong, nonatomic) IBOutlet UIImageView *secondImage;
 @property (strong, nonatomic) IBOutlet UIImageView *thirdImage;
+@property (weak, nonatomic) IBOutlet UILabel *contactInfoLabel;
 
 @property (strong,nonatomic) SDWebImageManager *imageManager;
 @property (strong,nonatomic) webProvider* myProvider;

@@ -14,6 +14,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <GooglePlaces/GooglePlaces.h>
 #import <SDwebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD.h>
 
 @interface EditPropertyVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate,GMSMapViewDelegate,GMSAutocompleteResultsViewControllerDelegate,UITextFieldDelegate>
 @property (nonatomic) NSInteger userID;
@@ -44,6 +45,8 @@
 @property(nonatomic,strong) GMSAutocompleteResultsViewController* resultsViewController;
 @property(nonatomic,strong) UISearchController* searchController;
 
+@property(nonatomic,strong) NSProgress *progressPecent;
+
 @end
 
 @implementation EditPropertyVC
@@ -61,7 +64,7 @@
         self.costTextFld.text = self.aProperty.propertyCost;
         self.sizeFld.text = self.aProperty.propertySize;
         self.descTextFld.text = self.aProperty.propertyDesc;
-        if ([self.aProperty.propertyStatus isEqualToString:@"yes"]) {
+        if ([self.aProperty.propertyStatus isEqualToString:@"Selliing"]) {
             self.statusSwitch.on = YES;
         }
         else{
@@ -115,20 +118,48 @@
                           uppropCostKey:self.costTextFld.text,
                           uppropSizeKey:self.sizeFld.text,
                           uppropDescKey:self.descTextFld.text,
-                          uppropStatusKey:[NSString stringWithFormat:@"%@",self.statusSwitch.on ? @"yes" : @"no"],
+                          uppropStatusKey:[NSString stringWithFormat:@"%@",self.statusSwitch.on ? @"Selliing" : @"Sold"],
                           uppropImg1Key:self.imageData1,
                           uppropImg2Key:self.imageData2,
                           uppropImg3Key:self.imageData3,
                           };
     if (self.aProperty == nil) {
-        [Property sellerAddWithParameters:dic];
+        [Property sellerAddWithParameters:dic progressHandler:^(NSProgress *progress) {
+            self.progressPecent = (progress);
+            NSLog(@"progress Process %lld",self.progressPecent.completedUnitCount);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showProgressBar];
+            });
+
+        }];
     }
     else{
-        [Property sellerEditWithParameters:self.propertyID parameter:dic];
+        [Property sellerEditWithParameters:self.propertyID parameter:dic progressHandler:^(NSProgress *progress) {
+            self.progressPecent = (progress);
+            NSLog(@"progress Process %@",self.progressPecent);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showProgressBar];
+            });
+        }];
     }
 }
 
+-(void)showProgressBar{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.label.text = @"Uploading...";
+    hud.progressObject = self.progressPecent;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+//        [self doSomeWorkWithProgressObject:progressObject];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hideAnimated:YES];
+        });
+    });
 
+    
+}
+
+#pragma mark-UIImagePickViewController
 -(void)SourceISCamera{
     self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:self.picker animated:YES completion:nil];
@@ -204,7 +235,9 @@
         self.address2 =  [[addressArray objectAtIndex:2] stringByAppendingString:[addressArray objectAtIndex:3]];
     }
     else{
-        assert(NO);
+        self.address1 = [[addressArray objectAtIndex:0] stringByAppendingString:[addressArray objectAtIndex:1]];
+        self.searchController.searchBar.text = self.address1;
+        self.address2 = [addressArray objectAtIndex:2];
     }
 
     self.latitude = [NSString stringWithFormat:@"%f",place.coordinate.latitude];

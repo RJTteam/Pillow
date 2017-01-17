@@ -8,20 +8,50 @@
 
 #import "ShowPropertyViewController.h"
 #import "FavouriteList.h"
+#import "User.h"
+#import "Contants.h"
+
 
 @interface ShowPropertyViewController ()
-
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *userMobile;
+@property (strong, nonatomic) NSString *userEmail;
+@property (strong, nonatomic) NSNumber *userid;
 @end
 
 @implementation ShowPropertyViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    if(!userInfo){
+        [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    self.userid = [userInfo objectForKey:useridKey];
+    [User userGetUserInfoWithUserId:self.userid.integerValue success:^(User *user) {
+        self.userName = user.username;
+        self.userEmail = user.email;
+        self.userMobile = user.mobile;
+        self.contactInfoLabel.text = [NSString stringWithFormat:@"Call %@ now With Number:%@",self.userName,self.userMobile];
+    } failure:^(NSString *errorMessage) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ERROR" message:errorMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.tabBarController dismissViewControllerAnimated:true completion:^{
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:userKey];
+            }];
+        }];
+        [alert addAction:action];
+        [self presentViewController:alert animated:true completion:nil];
+    }];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-   // self.myProvider = [webProvider sharedInstance];
-    
-    //NSLog(@"get current property -> %@",self.propertyToShow.propertyName);
     self.propertyID.text = self.propertyToShow.propertyID;
     if(self.propertyToShow.propertyType.length < 1){
         self.propertyType.text = @"N/A";
@@ -52,7 +82,7 @@
         self.propertyAdd.text = myAdd;
     }
     
-    
+
     //self.imageManager = [SDWebImageManager sharedManager];
     NSString* url1 = [self.propertyToShow.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     NSString* url2 = [self.propertyToShow.propertyImage2 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
@@ -61,12 +91,6 @@
     url1 = [newurl stringByAppendingString:url1];
     url2 = [newurl stringByAppendingString:url2];
     url3 = [newurl stringByAppendingString:url3];
-    
-    NSLog(@"url1 %@",url1);
-//    [self downLoadImage:url1 forImageView:self.firstImage];
-//    [self downLoadImage:url2 forImageView:self.secondImage];
-//    [self downLoadImage:url3 forImageView:self.thirdImage];
-    
     
     [self.firstImage sd_setImageWithURL:[NSURL URLWithString:url1] placeholderImage:[UIImage imageNamed:@"placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if(image == nil){
@@ -84,12 +108,25 @@
         }
     }];
     
+    UIBarButtonItem *shareBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareBtnClicked)];
+    self.navigationItem.rightBarButtonItem = shareBtn;
+}
+- (IBAction)phoneCallBtn:(id)sender {
+    NSString *phoneString = [NSString stringWithFormat:@"tel:%@",self.userMobile];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneString]options:@{} completionHandler:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)shareBtnClicked{
+    NSString *bodyStr = [NSString stringWithFormat:@"Hi, My Name is: %@ \n My Mobile Number: %@ \n My Email: %@ \n",self.userName,self.userMobile,self.userEmail];
+    NSString *propertyInfo = [NSString stringWithFormat:@"My Property Named %@, is located in %@ %@, for $%@. \n If interested please contact me",self.propertyName.text,self.propertyAdd.text,self.propertyZip.text,self.propertyCost.text];
+    
+    UIActivityViewController *MoreVC = [[UIActivityViewController alloc] initWithActivityItems:@[bodyStr,self.firstImage.image,propertyInfo] applicationActivities:nil];
+    MoreVC.excludedActivityTypes = @[UIActivityTypeOpenInIBooks,
+                                     UIActivityTypePrint,
+                                     UIActivityTypeAssignToContact];
+    [self presentViewController:MoreVC animated:YES completion:nil];
 }
+
 
 - (IBAction)addToFavirate:(UIButton *)sender {
     [[FavouriteList sharedInstance] addPropertyToFavourite:self.propertyToShow];
