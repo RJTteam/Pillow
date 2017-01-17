@@ -26,11 +26,35 @@
 				<string>com.googleusercontent.apps.1038420592102-i9rloj4dccfk7de27lf6ecs0q52aq8af</string>
 			</array>
 		</dict>
+		<dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb371396079891906</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.compurequest.Pillow</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>371396079891906</string>
+	<key>FacebookDisplayName</key>
+	<string>Pillow</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
 	</array>

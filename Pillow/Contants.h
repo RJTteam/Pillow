@@ -34,6 +34,11 @@ static NSString *const dateFormat = @"dd-MM-yyyy";
 
 //key in UserDefaults
 static NSString *const userKey = @"currentUser";
+static NSString *const loginTypeKey = @"login type";
+static NSString *const loginTypeGoogle = @"google";
+static NSString *const loginTypeFaceBook = @"facebook";
+static NSString *const loginTypeNormal = @"normal";
+static NSString *const imgUrlKey = @"imageUrl";
 
 //buyerKey sellerKey
 static NSString *const buyerContent = @"buyer";

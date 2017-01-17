@@ -13,15 +13,18 @@
 #import "BuyerProfileViewController.h"
 #import "FavouriteList.h"
 #import <Google/SignIn.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Contants.h"
+#import "GoogleSignInController.h"
 
 @import GoogleMaps;
 @import GooglePlaces;
 
-@interface AppDelegate ()<GIDSignInDelegate>
+@interface AppDelegate ()
 
 @property (strong, nonatomic) SellerProfileVC *sellerprofileVC;
 @property (strong, nonatomic) SellerPropertyVC *sellerPropertyVC;
+
 @end
 
 @implementation AppDelegate
@@ -32,7 +35,9 @@
     NSError *configError = nil;
     [[GGLContext sharedInstance] configureWithError:&configError];
     NSAssert(!configError, @"Error configuring Google services: %@", configError);
-    [GIDSignIn sharedInstance].delegate = self;
+    [GIDSignIn sharedInstance].delegate = [GoogleSignInController sharedInstance];
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [FavouriteList sharedInstance];
     [GMSServices provideAPIKey:@"AIzaSyCUN5ix7arYIgDZ_Nol_rpsnUnYzlvNn2M"];
@@ -46,12 +51,12 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:signIn];
     self.window.rootViewController = nav;
     
-//    SellerProfileVC *root = [[SellerProfileVC alloc] init];
-//    self.window.rootViewController = root;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
@@ -88,33 +93,9 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary *)options {
-    return [[GIDSignIn sharedInstance] handleURL:url
-                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
-                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
+    return [[GIDSignIn sharedInstance] handleURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]] || [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 
-- (void)signIn:(GIDSignIn *)signIn
-didSignInForUser:(GIDGoogleUser *)user
-     withError:(NSError *)error {
-    // Perform any operations on signed in user here.
-    if(!user){
-        return;
-    }
-    NSString *userId = user.userID;                  // For client-side use only!
-    NSString *fullName = user.profile.name;
-    NSString *email = user.profile.email;
-    NSDictionary *dict = @{
-                           emailKey : email,
-                           passwordKey : @"",
-                           usertypeKey : buyerContent,
-                           usernameKey : fullName,
-                           useridKey : userId
-                          };
-    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
-    [userdefault setObject:dict forKey:userKey];
-}
 
 @end

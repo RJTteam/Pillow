@@ -59,6 +59,12 @@
 		E881A13C1E2C6F2300DC960D /* signInBuyerBack.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */; };
 		E881A13E1E2C763500DC960D /* buyerProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E881A13D1E2C763500DC960D /* buyerProfile.jpg */; };
 		E881A1401E2CAD0200DC960D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E881A13F1E2CAD0200DC960D /* GoogleService-Info.plist */; };
+		E8B040061E2D4488007E3C92 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B040021E2D4488007E3C92 /* Bolts.framework */; };
+		E8B040071E2D4488007E3C92 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B040031E2D4488007E3C92 /* FBSDKCoreKit.framework */; };
+		E8B040081E2D4488007E3C92 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B040041E2D4488007E3C92 /* FBSDKLoginKit.framework */; };
+		E8B040091E2D4488007E3C92 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B040051E2D4488007E3C92 /* FBSDKShareKit.framework */; };
+		E8B040491E2DC700007E3C92 /* GoogleSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B040481E2DC700007E3C92 /* GoogleSignInController.m */; };
+		E8B0404C1E2DD0B9007E3C92 /* FaceBookSigInController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B0404B1E2DD0B9007E3C92 /* FaceBookSigInController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +152,14 @@
 		E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = signInBuyerBack.jpg; sourceTree = "<group>"; };
 		E881A13D1E2C763500DC960D /* buyerProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = buyerProfile.jpg; sourceTree = "<group>"; };
 		E881A13F1E2CAD0200DC960D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E8B040021E2D4488007E3C92 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		E8B040031E2D4488007E3C92 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E8B040041E2D4488007E3C92 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E8B040051E2D4488007E3C92 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		E8B040471E2DC700007E3C92 /* GoogleSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleSignInController.h; sourceTree = "<group>"; };
+		E8B040481E2DC700007E3C92 /* GoogleSignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleSignInController.m; sourceTree = "<group>"; };
+		E8B0404A1E2DD0B9007E3C92 /* FaceBookSigInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceBookSigInController.h; sourceTree = "<group>"; };
+		E8B0404B1E2DD0B9007E3C92 /* FaceBookSigInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceBookSigInController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +167,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8B040061E2D4488007E3C92 /* Bolts.framework in Frameworks */,
+				E8B040071E2D4488007E3C92 /* FBSDKCoreKit.framework in Frameworks */,
+				E8B040091E2D4488007E3C92 /* FBSDKShareKit.framework in Frameworks */,
+				E8B040081E2D4488007E3C92 /* FBSDKLoginKit.framework in Frameworks */,
 				6C1D68D11E2752EA0060B9A2 /* CoreLocation.framework in Frameworks */,
 				CDB37168AC49947DA0A6B598 /* libPods-Pillow.a in Frameworks */,
 			);
@@ -267,6 +285,10 @@
 		D0E4CB4FCDA593E942D4DDBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E8B040021E2D4488007E3C92 /* Bolts.framework */,
+				E8B040031E2D4488007E3C92 /* FBSDKCoreKit.framework */,
+				E8B040041E2D4488007E3C92 /* FBSDKLoginKit.framework */,
+				E8B040051E2D4488007E3C92 /* FBSDKShareKit.framework */,
 				6C1D68D01E2752EA0060B9A2 /* CoreLocation.framework */,
 				1EBF80297698DE6BCDAF229E /* libPods-Pillow.a */,
 			);
@@ -315,6 +337,8 @@
 		E84A3CEA1E27F48800B1902D /* User Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				E8B040471E2DC700007E3C92 /* GoogleSignInController.h */,
+				E8B040481E2DC700007E3C92 /* GoogleSignInController.m */,
 				E881A1391E2C6B8A00DC960D /* signInSellerBack.jpg */,
 				E881A13B1E2C6F2300DC960D /* signInBuyerBack.jpg */,
 				E84A3CAE1E26E5F400B1902D /* ForgetPwdViewController.h */,
@@ -323,6 +347,8 @@
 				E84A3CB71E26E5F400B1902D /* SignInViewController.m */,
 				E84A3CB91E26E5F400B1902D /* SignUpViewController.h */,
 				E84A3CBA1E26E5F400B1902D /* SignUpViewController.m */,
+				E8B0404A1E2DD0B9007E3C92 /* FaceBookSigInController.h */,
+				E8B0404B1E2DD0B9007E3C92 /* FaceBookSigInController.m */,
 			);
 			name = "User Authentication";
 			sourceTree = "<group>";
@@ -509,6 +535,8 @@
 				E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */,
 				C389DC161E2CA8970024F2F0 /* SellerInfoCell.m in Sources */,
 				6C1D69371E2C70EE0060B9A2 /* MapViewController.m in Sources */,
+				E8B0404C1E2DD0B9007E3C92 /* FaceBookSigInController.m in Sources */,
+				E8B040491E2DC700007E3C92 /* GoogleSignInController.m in Sources */,
 				6C1D69361E2C70EE0060B9A2 /* ShowPropertyViewController.m in Sources */,
 				C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */,
 				C32D02121E272CEA00045D5D /* SellerOwnPropertyCell.m in Sources */,

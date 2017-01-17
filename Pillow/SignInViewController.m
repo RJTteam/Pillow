@@ -15,9 +15,11 @@
 #import "User.h"
 #import "Contants.h"
 #import "FavouriteList.h"
+#import "GoogleSignInController.h"
+#import "FaceBookSigInController.h"
 
 
-@interface SignInViewController ()<UITextFieldDelegate, GIDSignInUIDelegate>
+@interface SignInViewController ()<UITextFieldDelegate, GIDSignInUIDelegate, FaceBookLoginControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTxtFld;
@@ -36,6 +38,12 @@
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if([FBSDKAccessToken currentAccessToken] != nil){
+        [self setProfile];
+        
+    }
+    //set up other things
     self.isBuyer = YES;
     UIBarButtonItem *skipButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:self action:@selector(skipSignInClicked)];
     self.navigationItem.rightBarButtonItem = skipButton;
@@ -61,6 +69,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //set GoogleSignInController's deleage to self
+    [GoogleSignInController sharedInstance].destinationController = self;
+    //set up FaceBookSignIn Controller
+    [FaceBookSigInController sharedInstance].delegate = self;
+    [FaceBookSigInController sharedInstance].readPermissions = @[@"public_profile",@"email"];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *dict = [userDefault objectForKey:userKey];
     if(dict){
@@ -162,7 +175,8 @@
         NSDictionary *dict = @{
                                emailKey : self.emailTxtFld.text,
                                passwordKey : self.pwdTxtFld.text,
-                               usertypeKey : self.isBuyer ? buyerContent : sellerContent
+                               usertypeKey : self.isBuyer ? buyerContent : sellerContent,
+                               loginTypeKey:loginTypeNormal
                                };
         [User userLoginWithParameters:dict success:^(User *user) {
             NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
@@ -192,15 +206,40 @@
     ForgetPwdViewController *vc = [[ForgetPwdViewController alloc] initWithNibName:@"ForgetPwdView" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (IBAction)googleClicked {
-    //TODO jump to google login service
-    assert(NO);
-}
 - (IBAction)facebookClicked {
     //TODO jump to facebook sigin clicked
-    assert(NO);
+    [[FaceBookSigInController sharedInstance] FBLoginWithViewController:self];
 }
 #pragma mark - Private Method
+
+-(void)popAlertWithTitle:(NSString *)title andMessage:(NSString *)message{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)setProfile{
+    NSDictionary *param = @{@"fields": @"id, name, email, picture.type(large)"};
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:param HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if(error != nil){
+            [self popAlertWithTitle:@"ERROR" andMessage:error.localizedDescription];
+            return;
+        }
+        NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+        NSString *imgUrl = [[result[@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        NSDictionary *dict = @{useridKey:(NSDictionary *)result[@"id"],
+                               emailKey: (NSDictionary *)result[@"email"],
+                               usernameKey:(NSDictionary *)result[@"name"],
+                               usertypeKey: buyerContent,
+                               imgUrlKey : imgUrl,
+                               loginTypeKey:loginTypeFaceBook};
+        [userInfo setObject:dict forKey:userKey];
+        [[FavouriteList sharedInstance] loadFavListForUser:dict[useridKey]];
+       
+    }];
+}
 
 - (void)setSegmentStatus{
     if(self.isBuyer){
@@ -246,6 +285,23 @@ presentViewController:(UIViewController *)viewController {
 - (void)signIn:(GIDSignIn *)signIn
 dismissViewController:(UIViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - FaceBookLoginControllerDelegate
+
+-(void)fbController:(FaceBookSigInController *)controller didFinishLoginWithResult:(FBSDKLoginManagerLoginResult *)result andError:(NSError *)error{
+    if(error != nil){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"FaceBook Login Error!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if(result.isCancelled){
+        [self dismissViewControllerAnimated:true completion:nil];
+    }else{
+        [self setProfile];
+        HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+        [self presentViewController:home animated:YES completion:nil];
+    }
 }
 
 @end

@@ -12,15 +12,17 @@
 #import "Contants.h"
 #import "User.h"
 #import "ImageStoreManager.h"
+#import <GOOGLE/SignIn.h>
+#import "FaceBookSigInController.h"
 
-@interface BuyerProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface BuyerProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, FaceBookLoginControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTxt;
 @property (weak, nonatomic) IBOutlet UITextField *emailTxt;
 @property (weak, nonatomic) IBOutlet UITextField *mobileTxt;
 @property (weak, nonatomic) IBOutlet UIButton *pickerBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (nonatomic,strong)UIImagePickerController*picker;
-@property (nonatomic,strong)NSNumber *userid;
+@property (strong, nonatomic)NSNumber *userid;
 @end
 
 @implementation BuyerProfileViewController
@@ -31,17 +33,66 @@
     [super viewDidLoad];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    [self setUpViews];
     if(!userInfo){
         [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     }
     self.userid = [userInfo objectForKey:useridKey];
-    [User userGetUserInfoWithUserId:self.userid.integerValue success:^(User *user) {
+    NSString *loginType = userInfo[loginTypeKey];
+    if([loginType isEqualToString:loginTypeNormal]){
+        [self getUserIconWithUserId:self.userid];
+    }else {
+        self.usernameTxt.text = userInfo[usernameKey];
+        self.emailTxt.text = userInfo[emailKey];
+        self.mobileTxt.text = @"";
+        NSString *imageUrl = userInfo[imgUrlKey];
+        [self setImageAsync:imageUrl];
+    }
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [FaceBookSigInController sharedInstance].delegate = self;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - Private Methods
+
+-(void)setImageAsync:(NSString *)imageUrl{
+    if(![imageUrl isEqualToString:@""]){
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.iconImage.image = [UIImage imageWithData:imageData];
+            });
+        });
+    }
+}
+
+-(void)setUpViews{
+    self.iconImage.layer.masksToBounds = true;
+    self.iconImage.layer.cornerRadius = self.iconImage.bounds.size.width / 2;
+    UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"sign out" style:UIBarButtonItemStylePlain target:self action:@selector(signOutButtonClicked)];
+    self.navigationItem.rightBarButtonItem = signOutButton;
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
+    backImageView.frame = self.view.bounds;
+    backImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [self.view insertSubview:backImageView atIndex:0];
+}
+
+-(void)getUserIconWithUserId:(NSNumber *)userid{
+    [User userGetUserInfoWithUserId:userid.integerValue success:^(User *user) {
         self.usernameTxt.text = user.username;
         self.emailTxt.text = user.email;
         self.mobileTxt.text = user.mobile;
-
+        
         ImageStoreManager *imageManager = [[ImageStoreManager alloc]init];
-        NSString *iconWithID = [NSString stringWithFormat:@"%@",self.userid];
+        NSString *iconWithID = [NSString stringWithFormat:@"%@",userid];
         NSData *iconData = [imageManager readimageDataWithimageName:iconWithID];
         if (iconData == nil) {
             self.iconImage.image =  [UIImage imageNamed:@"userAvatar"];
@@ -59,24 +110,19 @@
         [alert addAction:action];
         [self presentViewController:alert animated:true completion:nil];
     }];
-    UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"sign out" style:UIBarButtonItemStylePlain target:self action:@selector(signOutButtonClicked)];
-    self.navigationItem.rightBarButtonItem = signOutButton;
-    UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"buyerProfile.jpg"]];
-    backImageView.frame = self.view.bounds;
-    backImageView.contentMode = UIViewContentModeScaleAspectFill;
-//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-//    UIVisualEffectView *effect = [[UIVisualEffectView alloc]initWithEffect:blur];
-//    effect.frame = backImageView.bounds;
-//    [backImageView addSubview:effect];
-    [self.view insertSubview:backImageView atIndex:0];
-    //initilize favourite list singleton and load data from local
-//    [self testAddPropertyToFav];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)SourceISCamera{
+    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:self.picker animated:YES completion:nil];
 }
+
+-(void)sourceIsPhotoLibrary{
+    self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.picker animated:YES completion:nil];
+}
+
+#pragma mark - Event Methods
 
 - (IBAction)pickBtnClicked:(id)sender {
     self.picker = [[UIImagePickerController alloc]init];
@@ -98,11 +144,19 @@
     [actionSheet addAction:cancelAction];
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
-#pragma mark - Event Methods
 
 - (void)signOutButtonClicked{
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault removeObjectForKey:userKey];
+    NSDictionary *userInfo = [userDefault objectForKey:userKey];
+    NSString *loginType = userInfo[loginTypeKey];
+    if([loginType isEqualToString:loginTypeNormal]){
+        [userDefault removeObjectForKey:userKey];
+    }else if([loginType isEqualToString:loginTypeFaceBook]){
+        [[FaceBookSigInController sharedInstance] FBLogOut];
+    }else if([loginType isEqualToString:loginTypeGoogle]){
+        [[GIDSignIn sharedInstance] signOut];
+        [userDefault removeObjectForKey:userKey];
+    }
     [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -113,15 +167,7 @@
     [self.navigationController pushViewController:fav animated:true];
 }
 
--(void)SourceISCamera{
-    self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:self.picker animated:YES completion:nil];
-}
 
--(void)sourceIsPhotoLibrary{
-    self.picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:self.picker animated:YES completion:nil];
-}
 
 
 #pragma mark-UIImagePickViewController Delegate Netgids
@@ -134,11 +180,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - test method
-- (void)testAddPropertyToFav{
-    NSDictionary *dict = @{@"Property Id":@"12",@"Property Name":@"vdbsn",@"Property Type":@"Apartment",@"Property Category":@"1",@"Property Address1":@"vdndm",@"Property Address2":@"vxbnx",@"Property Zip":@"99",@"Property Image 1":@"www.rjtmobile.com/realestate/images/99/file_avatar1.jpg",@"Property Image 2":@"",@"Property Image 3":@"",@"Property Latitude":@"41.9425260",@"Property Longitude":@"-88.2673400",@"Property Cost":@"8598",@"Property Size":@"965",@"Property Desc":@"cvxn",@"Property Published Date":@"2016-07-20 14:11:25",@"Property Modify Date":@"0000-00-00 00:00:00",@"Property Status":@"yes",@"User Id":@"0"};
-    Property *p = [[Property alloc] initWithDictionary:dict];
-    [[FavouriteList sharedInstance] addPropertyToFavourite:p];
+#pragma mark - FaceBookLoginControllerDelegate
+
+- (void)fbControllerWillLogOut:(FaceBookSigInController *)controller{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+   [userDefault removeObjectForKey:userKey];
 }
 
 @end

@@ -162,7 +162,6 @@
                     <state key="normal" image="facebook"/>
                     <connections>
                         <action selector="facebookClicked" destination="-1" eventType="touchUpInside" id="4AQ-A0-yrT"/>
-                        <action selector="googleClicked" destination="-1" eventType="touchUpInside" id="oN2-ae-qh1"/>
                     </connections>
                 </button>
             </subviews>
