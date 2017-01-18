@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowPropertyViewController">
             <connections>
+                <outlet property="contactInfoLabel" destination="bav-Vv-MM6" id="psx-sN-OiH"/>
                 <outlet property="firstImage" destination="ob4-pT-lvJ" id="uIL-Vg-bVe"/>
                 <outlet property="propertyAdd" destination="wBe-ep-9Z4" id="6Dr-D6-D8A"/>
                 <outlet property="propertyCost" destination="ZAH-Nv-AHG" id="vGg-dn-eG3"/>
@@ -71,7 +72,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="propertyStatus:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63X-P8-Pc3">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PropertyStatus:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63X-P8-Pc3">
                                     <rect key="frame" x="32" y="271" width="123" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -161,6 +162,23 @@
                                     <state key="normal" image="favourite"/>
                                     <connections>
                                         <action selector="addToFavirate:" destination="-1" eventType="touchUpInside" id="14F-Er-2ou"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="bav-Vv-MM6">
+                                    <rect key="frame" x="32" y="314" width="335" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sc7-sG-faX">
+                                    <rect key="frame" x="32" y="314" width="301" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="phoneCallBtn:" destination="-1" eventType="touchUpInside" id="be5-GA-Uac"/>
                                     </connections>
                                 </button>
                             </subviews>

@@ -20,9 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-ZY-6ZV">
-                    <rect key="frame" x="0.0" y="42" width="375" height="573"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-ZY-6ZV">
+                    <rect key="frame" x="0.0" y="64" width="375" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="AeB-jI-TRc"/>
@@ -31,6 +30,14 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dbS-ZY-6ZV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="B3T-3L-DXU"/>
+                <constraint firstItem="dbS-ZY-6ZV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Nhb-TI-kOS"/>
+                <constraint firstAttribute="bottom" secondItem="dbS-ZY-6ZV" secondAttribute="bottom" constant="52" id="QM7-ti-6jQ"/>
+                <constraint firstAttribute="trailing" secondItem="dbS-ZY-6ZV" secondAttribute="trailing" id="cO3-S6-L34"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <point key="canvasLocation" x="33.5" y="68.5"/>
         </view>
     </objects>

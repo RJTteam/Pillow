@@ -415,7 +415,7 @@
 				TargetAttributes = {
 					C32D01D71E26DDFA00045D5D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 637NAX2FZ5;
+						DevelopmentTeam = 6N5G84BXLR;
 						ProvisioningStyle = Automatic;
 					};
 				};

@@ -20,10 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Hw-81-jfA">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Hw-81-jfA">
                     <rect key="frame" x="0.0" y="135" width="375" height="277"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="277" id="8cA-Cg-rfq"/>
+                    </constraints>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -31,10 +33,12 @@
                         <outlet property="delegate" destination="-1" id="aog-lt-TvZ"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBq-yg-xgd">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBq-yg-xgd">
                     <rect key="frame" x="104" y="440" width="167" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0WU-nd-j4O"/>
+                    </constraints>
                     <state key="normal" title="View MyProperty">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -42,10 +46,12 @@
                         <action selector="viewBtnClicked:" destination="-1" eventType="touchUpInside" id="mXd-GE-Z5d"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDV-Mu-xlN">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDV-Mu-xlN">
                     <rect key="frame" x="104" y="485" width="167" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="yIw-Ha-Leg"/>
+                    </constraints>
                     <state key="normal" title="Log Out">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -53,14 +59,34 @@
                         <action selector="logOutClicked:" destination="-1" eventType="touchUpInside" id="551-Lu-uRa"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To Pillow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVh-VY-eXI">
-                    <rect key="frame" x="49" y="83" width="276" height="56"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To Pillow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVh-VY-eXI">
+                    <rect key="frame" x="49" y="71" width="276" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="TXf-0U-D1z"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="27"/>
                     <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <constraints>
+                <constraint firstItem="xDV-Mu-xlN" firstAttribute="top" secondItem="VBq-yg-xgd" secondAttribute="bottom" constant="15" id="2wI-z7-vEt"/>
+                <constraint firstItem="VBq-yg-xgd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4Tn-Um-jLM"/>
+                <constraint firstItem="VBq-yg-xgd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="104" id="6O3-FQ-WwW"/>
+                <constraint firstItem="6Hw-81-jfA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MfB-fL-0Vy"/>
+                <constraint firstItem="xDV-Mu-xlN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MmD-b9-yF3"/>
+                <constraint firstItem="aVh-VY-eXI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="71" id="SHq-Ub-oz9"/>
+                <constraint firstItem="aVh-VY-eXI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="49" id="UsQ-YX-jay"/>
+                <constraint firstItem="xDV-Mu-xlN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="104" id="ZEI-nH-WGe"/>
+                <constraint firstItem="6Hw-81-jfA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZlO-Iw-Z1q"/>
+                <constraint firstAttribute="trailing" secondItem="aVh-VY-eXI" secondAttribute="trailing" constant="50" id="cMr-bp-3PY"/>
+                <constraint firstAttribute="trailing" secondItem="VBq-yg-xgd" secondAttribute="trailing" constant="104" id="g7e-aZ-HgK"/>
+                <constraint firstItem="VBq-yg-xgd" firstAttribute="top" secondItem="6Hw-81-jfA" secondAttribute="bottom" constant="28" id="gux-ej-fm4"/>
+                <constraint firstItem="6Hw-81-jfA" firstAttribute="top" secondItem="aVh-VY-eXI" secondAttribute="bottom" constant="8" id="jBK-R9-5Lc"/>
+                <constraint firstAttribute="trailing" secondItem="6Hw-81-jfA" secondAttribute="trailing" id="lKt-AZ-i8s"/>
+                <constraint firstItem="aVh-VY-eXI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mvd-j3-rJw"/>
+                <constraint firstAttribute="trailing" secondItem="xDV-Mu-xlN" secondAttribute="trailing" constant="104" id="w15-g7-AqJ"/>
+            </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>

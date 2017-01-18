@@ -12,4 +12,5 @@ target 'Pillow' do
   pod 'AFNetworking', '~> 3.0'
   pod 'SDWebImage', '~>3.8'
   pod 'Google/SignIn'
+  pod 'MBProgressHUD', '~> 1.0.0'
 end

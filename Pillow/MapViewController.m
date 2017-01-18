@@ -25,6 +25,7 @@
 
 @property(nonatomic,strong) GMSAutocompleteResultsViewController* resultsViewController;
 @property(nonatomic,strong) UISearchController* searchController;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
 
 @end
 
@@ -43,9 +44,9 @@
                          initWithSearchResultsController:_resultsViewController];
     _searchController.searchResultsUpdater = _resultsViewController;
     
-    self.searchBarView = [[UIView alloc]initWithFrame:CGRectMake(0,65, self.view.bounds.size.width, 50)];
-    
     [_searchController.searchBar sizeToFit];
+    _searchController.searchBar.placeholder = @"Search an area";
+    [[[_searchController.searchBar.subviews.firstObject subviews] firstObject] removeFromSuperview];
     _searchController.hidesNavigationBarDuringPresentation = NO;
     [self.searchBarView addSubview:_searchController.searchBar];
     self.navigationController.navigationBar.translucent = YES;
@@ -79,7 +80,7 @@
     
     // config the default location to Chicago below
     GMSCameraPosition* camera = [GMSCameraPosition cameraWithLatitude:41.942526 longitude:-88.26734 zoom:8 bearing:0 viewingAngle:0];
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 140, self.view.bounds.size.width, self.view.bounds.size.height-180) camera:camera];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, self.mainView.bounds.size.width, self.mainView.bounds.size.height) camera:camera];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.myLocationEnabled = YES;
     self.mapView.settings.compassButton = YES;
@@ -105,7 +106,7 @@
     //[self.certainSearchView addSubview:self.cancelCertainButton];
     
     //finally to add the map view
-    [self.view addSubview:self.mapView];
+    [self.mainView addSubview:self.mapView];
     
 }
 

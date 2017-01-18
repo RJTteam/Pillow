@@ -70,7 +70,7 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
     }];
 }
 
-+ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict{
++ (void)sellerEditWithParameters:(NSString *)propertyID parameter:(NSDictionary *)dict progressHandler:(void (^)(NSProgress *))progressBlock{
     NSString *destination = [NSString stringWithFormat:@"%@property&edit&pptyid=%@",baseUrl,propertyID];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -88,7 +88,8 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
         [formData appendPartWithFileData:imageData3 name:uppropImg3Key fileName:@"image3.jpg" mimeType:@"image/jpeg"];
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        NSLog(@"%f",1.0 *uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+//        progressBlock(1.0*uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+        progressBlock(uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *responseString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"success----%@----%@",[responseObject class],responseString);
@@ -98,11 +99,12 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
 
 }
 
-+ (void)sellerAddWithParameters:(NSDictionary *)dict{
++ (void)sellerAddWithParameters:(NSDictionary *)dict progressHandler:(void (^)(NSProgress *))progressBlock{
     NSString *destination = [baseUrl stringByAppendingString:@"property&add"];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
     //********************pramaters***************************
     //1.request path    2.parameter(not file pramater)dic   3.constructingBodyWithBlock 4.progress infomation 5 success handler 6.failure handler    [manager POST:destination parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
     [manager POST:destination parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -115,7 +117,8 @@ static NSString *const baseUrl = @"http://rjtmobile.com/realestate/register.php?
         [formData appendPartWithFileData:imageData3 name:uppropImg3Key fileName:@"image3.jpg" mimeType:@"image/jpeg"];
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        NSLog(@"%f",1.0 *uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+//        progressBlock(1.0*uploadProgress.completedUnitCount/uploadProgress.totalUnitCount);
+        progressBlock(uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *responseString = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"success----%@----%@",[responseObject class],responseString);
