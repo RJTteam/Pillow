@@ -70,6 +70,8 @@
                 self.iconImage.image = [UIImage imageWithData:imageData];
             });
         });
+    }else{
+        self.iconImage.image = [UIImage imageNamed:@"userAvatar"];
     }
 }
 
