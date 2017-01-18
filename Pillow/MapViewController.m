@@ -35,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.markersToShow = [[NSMutableSet alloc]init];
     
     //config the searchBar
     _resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
@@ -147,6 +148,8 @@
 
 - (void)shwoAll {
     
+    [self.mapView clear];
+    
     NSMutableArray* propertyArray = [NSMutableArray array];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:configuration];
@@ -202,6 +205,15 @@
     }
 }
 
+-(void)drawMarkersRelatedToSearchBar{
+    
+    for(CSMarker* m in self.markersToShow){
+        if(!m.map){
+            m.map = self.mapView;
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -217,6 +229,11 @@
     for(CSMarker* c in self.markers){
         c.map = nil;
     }
+    if(self.markersToShow){
+        for(CSMarker* c in self.markersToShow){
+            c.map = nil;
+        }
+    }
     if(self.markers.count > 0){
         [self.markers removeAllObjects];
     }
@@ -224,12 +241,22 @@
     
     CSMarker* marker = [[CSMarker alloc]init];
     marker.position = place.coordinate;
+    self.currentPosition = place.coordinate;
     marker.title = @"Input Address";
     marker.snippet = place.formattedAddress;
     marker.map = self.mapView;
     marker.icon = [UIImage imageNamed:@"self"];
     self.userSearchMarker = marker;
     [self.mapView animateToLocation:self.userSearchMarker.position];
+    
+    CLLocationCoordinate2D circleCenter = place.coordinate;
+    GMSCircle *circ = [GMSCircle circleWithPosition:circleCenter
+                                             radius:[self.range.text intValue]*METERS_PER_MILE];
+    
+    circ.fillColor = [UIColor colorWithRed:0.25 green:0 blue:0 alpha:0.05];
+    circ.strokeColor = [UIColor greenColor];
+    circ.strokeWidth = 2;
+    circ.map = self.mapView;
     
     _searchController.active = NO;
     // Do something with the selected place.
@@ -238,23 +265,52 @@
     NSLog(@"Place attributions %@", place.attributions.string);
     NSLog(@"placeID %@",place.placeID);
     
-
+    
     
     [[GMSGeocoder geocoder]reverseGeocodeCoordinate:CLLocationCoordinate2DMake(place.coordinate.latitude,place.coordinate.longitude)
                                   completionHandler:^(GMSReverseGeocodeResponse * response, NSError *error){
                                       for(GMSReverseGeocodeResult *result in response.results){
-                                         if(result.postalCode){
+                                          if(result.postalCode){
                                               self.zipCode = result.postalCode;
-                                              NSLog(@"postal code :%@", self.zipCode);
-                                         }
+                                              //NSLog(@"postal code :%@", self.zipCode);
+                                          }
                                       }
                                       NSDictionary* dic = @{@"ploc":self.zipCode,
                                                             @"pnear":self.range.text
                                                             };
                                       [self.mapProvider webServiceCall:dic withHandler:^(NSArray *arrayOfProperty, NSError *error, NSURLResponse *webStatus) {
                                           [[NSOperationQueue mainQueue]addOperationWithBlock:^{
-                                               self.markers = [self.mapManager createMarkerArrayWithArray:arrayOfProperty];
-                                              [self drawMarkers];
+                                              self.markers = [self.mapManager createMarkerArrayWithArray:arrayOfProperty];
+                                              
+                                              //NSLog(@"distance from center %@", [location1 distanceFromLocation:location2]);
+                                              CLLocation *location =[[CLLocation alloc] initWithLatitude:self.currentPosition.latitude longitude:self.currentPosition.longitude];
+                                              
+                                              self.markersToShow = [[NSMutableSet alloc]init];
+                                              int index = 0;
+                                              for(CSMarker* c in self.markers){
+                                                  CLLocation *loc = [[CLLocation alloc] initWithLatitude:c.position.latitude longitude:c.position.longitude];
+                                                  CLLocationDistance distanceMeter = [location distanceFromLocation:loc];
+                                                  NSLog(@"distance from %d to center %f",index,distanceMeter);
+                                                  
+                                                  float maxDistance = METERS_PER_MILE*self.range.text.intValue;
+                                                  NSLog(@"maxDistance is %f",maxDistance);
+                                                  
+                                                  if(distanceMeter <= maxDistance){
+                                                      [self.markersToShow addObject:c];
+                                                  }
+                                                  index++;
+                                              }
+                                              
+                                              if(self.markersToShow.count < 1){
+                                                  NSString* message = [NSString stringWithFormat:@"No property in your search area"];
+                                                  UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Sorry" message:message preferredStyle:UIAlertControllerStyleAlert];
+                                                  UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+                                                  [alert addAction:action];
+                                                  
+                                                  [self presentViewController:alert animated:YES completion:nil];
+                                              }else{
+                                                  [self drawMarkersRelatedToSearchBar];
+                                              }
                                           }];
                                       }];
                                   }];
@@ -311,6 +367,15 @@ didFailAutocompleteWithError:(NSError *)error {
 
 //Marker tapped
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(CSMarker *)marker{
+    
+    if(self.formorSelectedMarker == nil){
+        self.formorSelectedMarker = marker;
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+    }else{
+        self.formorSelectedMarker.icon = marker.icon = [GMSMarker markerImageWithColor:[UIColor redColor]];
+        self.formorSelectedMarker = marker;
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor greenColor]];
+    }
 
     self.currentProperty = marker.propertyStoredInMarker;
     NSString* url = [self.currentProperty.propertyImage1 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
@@ -431,8 +496,80 @@ didFailAutocompleteWithError:(NSError *)error {
 
 - (void)changeFromLabel:(id)sender
 {
-    self.range.text = textStr;
-    [self.range resignFirstResponder];
+    if(self.currentPosition.latitude && self.currentPosition.longitude){
+        if(self.markersToShow){
+            for(CSMarker* c in self.markersToShow){
+                c.map = nil;
+            }
+        }
+        if(self.markersToShow.count > 0){
+            [self.markersToShow removeAllObjects];
+        }
+        [self.mapView clear];
+        CLLocationCoordinate2D circleCenter = self.currentPosition;
+        GMSCircle *circ = [GMSCircle circleWithPosition:circleCenter
+                                                 radius:[self.range.text intValue]*METERS_PER_MILE];
+        
+        circ.fillColor = [UIColor colorWithRed:0.25 green:0 blue:0 alpha:0.05];
+        circ.strokeColor = [UIColor greenColor];
+        circ.strokeWidth = 2;
+        circ.map = self.mapView;
+        self.range.text = textStr;
+        [self.range resignFirstResponder];
+        
+        [[GMSGeocoder geocoder]reverseGeocodeCoordinate:CLLocationCoordinate2DMake(self.currentPosition.latitude,self.currentPosition.longitude)
+                                      completionHandler:^(GMSReverseGeocodeResponse * response, NSError *error){
+                                          for(GMSReverseGeocodeResult *result in response.results){
+                                              if(result.postalCode){
+                                                  self.zipCode = result.postalCode;
+                                                  //NSLog(@"postal code :%@", self.zipCode);
+                                              }
+                                          }
+                                          NSDictionary* dic = @{@"ploc":self.zipCode,
+                                                                @"pnear":textStr
+                                                                };
+                                          
+                                          NSLog(@"from range changed : %@",self.range.text);
+                                          
+                                          [self.mapProvider webServiceCall:dic withHandler:^(NSArray *arrayOfProperty, NSError *error, NSURLResponse *webStatus) {
+                                              [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+                                                  self.markers = [self.mapManager createMarkerArrayWithArray:arrayOfProperty];
+                                                  
+                                                  //NSLog(@"distance from center %@", [location1 distanceFromLocation:location2]);
+                                                  CLLocation *location =[[CLLocation alloc] initWithLatitude:self.currentPosition.latitude longitude:self.currentPosition.longitude];
+                                                  
+                                                  int index = 0;
+                                                  for(CSMarker* c in self.markers){
+                                                      CLLocation *loc = [[CLLocation alloc] initWithLatitude:c.position.latitude longitude:c.position.longitude];
+                                                      CLLocationDistance distanceMeter = [location distanceFromLocation:loc];
+                                                      NSLog(@"distance from %d to center %f",index,distanceMeter);
+                                                      
+                                                      float maxDistance = METERS_PER_MILE*self.range.text.intValue;
+                                                      NSLog(@"maxDistance is %f",maxDistance);
+                                                      
+                                                      if(distanceMeter <= maxDistance){
+                                                          [self.markersToShow addObject:c];
+                                                      }
+                                                      index++;
+                                                  }
+                                                  
+                                                  if(self.markersToShow.count < 1){
+                                                      NSString* message = [NSString stringWithFormat:@"No property in your search area"];
+                                                      UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Sorry" message:message preferredStyle:UIAlertControllerStyleAlert];
+                                                      UIAlertAction* action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+                                                      [alert addAction:action];
+                                                      
+                                                      [self presentViewController:alert animated:YES completion:nil];
+                                                  }else{
+                                                      [self drawMarkersRelatedToSearchBar];
+                                                  }
+                                              }];
+                                          }];
+                                      }];
+    }else{
+        self.range.text = textStr;
+        [self.range resignFirstResponder];
+    }
 }
 
 

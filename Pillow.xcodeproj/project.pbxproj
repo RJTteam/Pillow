@@ -11,7 +11,6 @@
 		6C1D68D11E2752EA0060B9A2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1D68D01E2752EA0060B9A2 /* CoreLocation.framework */; };
 		6C1D68D71E27551F0060B9A2 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D68D21E27551F0060B9A2 /* HomeViewController.xib */; };
 		6C1D69361E2C70EE0060B9A2 /* ShowPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */; };
-		6C1D69371E2C70EE0060B9A2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69311E2C70EE0060B9A2 /* MapViewController.m */; };
 		6C1D69381E2C70EE0060B9A2 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */; };
 		6C1D69391E2C70EE0060B9A2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D69351E2C70EE0060B9A2 /* ListTableViewController.m */; };
 		6C1D693C1E2C71200060B9A2 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D693A1E2C71200060B9A2 /* ListTableViewCell.xib */; };
@@ -23,6 +22,7 @@
 		6C1D694A1E2C777C0060B9A2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C1D69491E2C777C0060B9A2 /* MapViewController.xib */; };
 		6C1D694B1E2C94680060B9A2 /* FavouriteList.m in Sources */ = {isa = PBXBuildFile; fileRef = E881A1351E2BDE3900DC960D /* FavouriteList.m */; };
 		6C1D694C1E2C94970060B9A2 /* BuyerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E84A3CF81E29353700B1902D /* BuyerProfileViewController.m */; };
+		6C1D6A611E3025570060B9A2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D6A601E3025570060B9A2 /* MapViewController.m */; };
 		C32D01DD1E26DDFA00045D5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DC1E26DDFA00045D5D /* main.m */; };
 		C32D01E01E26DDFA00045D5D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C32D01DF1E26DDFA00045D5D /* AppDelegate.m */; };
 		C32D01E81E26DDFA00045D5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C32D01E71E26DDFA00045D5D /* Assets.xcassets */; };
@@ -77,8 +77,6 @@
 		6C1D68D21E27551F0060B9A2 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		6C1D692E1E2C70EE0060B9A2 /* ShowPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPropertyViewController.h; sourceTree = "<group>"; };
 		6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPropertyViewController.m; sourceTree = "<group>"; };
-		6C1D69301E2C70EE0060B9A2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		6C1D69311E2C70EE0060B9A2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6C1D69321E2C70EE0060B9A2 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		6C1D69341E2C70EE0060B9A2 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
@@ -93,6 +91,8 @@
 		6C1D69461E2C76990060B9A2 /* CSMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMarker.h; sourceTree = "<group>"; };
 		6C1D69471E2C76990060B9A2 /* CSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMarker.m; sourceTree = "<group>"; };
 		6C1D69491E2C777C0060B9A2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		6C1D6A5F1E3025570060B9A2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		6C1D6A601E3025570060B9A2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		C32D01D81E26DDFA00045D5D /* Pillow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pillow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32D01DC1E26DDFA00045D5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C32D01DE1E26DDFA00045D5D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -186,8 +186,8 @@
 				6C1D68BF1E2750030060B9A2 /* HomeViewController.m */,
 				6C1D692E1E2C70EE0060B9A2 /* ShowPropertyViewController.h */,
 				6C1D692F1E2C70EE0060B9A2 /* ShowPropertyViewController.m */,
-				6C1D69301E2C70EE0060B9A2 /* MapViewController.h */,
-				6C1D69311E2C70EE0060B9A2 /* MapViewController.m */,
+				6C1D6A5F1E3025570060B9A2 /* MapViewController.h */,
+				6C1D6A601E3025570060B9A2 /* MapViewController.m */,
 				6C1D69321E2C70EE0060B9A2 /* ListTableViewCell.h */,
 				6C1D69331E2C70EE0060B9A2 /* ListTableViewCell.m */,
 				6C1D69341E2C70EE0060B9A2 /* ListTableViewController.h */,
@@ -415,7 +415,7 @@
 				TargetAttributes = {
 					C32D01D71E26DDFA00045D5D = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 6N5G84BXLR;
+						DevelopmentTeam = 637NAX2FZ5;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -534,7 +534,6 @@
 				E84A3D011E2935C100B1902D /* User.m in Sources */,
 				E84A3D041E293D3A00B1902D /* PLNetworking.m in Sources */,
 				C389DC161E2CA8970024F2F0 /* SellerInfoCell.m in Sources */,
-				6C1D69371E2C70EE0060B9A2 /* MapViewController.m in Sources */,
 				E8B0404C1E2DD0B9007E3C92 /* FaceBookSigInController.m in Sources */,
 				E8B040491E2DC700007E3C92 /* GoogleSignInController.m in Sources */,
 				6C1D69361E2C70EE0060B9A2 /* ShowPropertyViewController.m in Sources */,
@@ -551,6 +550,7 @@
 				6C1D69381E2C70EE0060B9A2 /* ListTableViewCell.m in Sources */,
 				6C1D694B1E2C94680060B9A2 /* FavouriteList.m in Sources */,
 				C32D02161E2744FD00045D5D /* EditPropertyVC.m in Sources */,
+				6C1D6A611E3025570060B9A2 /* MapViewController.m in Sources */,
 				6C1D68CA1E2750030060B9A2 /* HomeViewController.m in Sources */,
 				6C1D694C1E2C94970060B9A2 /* BuyerProfileViewController.m in Sources */,
 			);

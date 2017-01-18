@@ -36,6 +36,10 @@
 @property (strong,nonatomic) UIImage* image;
 @property (strong,nonatomic) Property* currentProperty;
 @property (strong,nonatomic) UIButton* cancelCertainButton;
+@property (strong,nonatomic) NSMutableSet* markersToShow;
+@property (nonatomic) CLLocationCoordinate2D currentPosition;
+@property (strong,nonatomic) CSMarker* formorSelectedMarker;
+
 
 -(void)drawMarkers;
 
