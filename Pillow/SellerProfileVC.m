@@ -78,7 +78,6 @@
         [self presentViewController:alert animated:true completion:nil];
     }];
     
-
 }
 - (IBAction)viewBtnClicked:(id)sender {
     SellerPropertyVC *sellerPropertyVC = [[SellerPropertyVC alloc]initWithNibName:@"SellerPropertyVC" bundle:nil];
@@ -151,7 +150,8 @@
         [cell1.pickerBtn addTarget:self action:@selector(pickImage) forControlEvents:UIControlEventTouchUpInside];
         if (self.userIcon == nil) {
             cell1.userIcon.image = [UIImage imageNamed:@"userAvatar"];
-            cell1.userIcon.layer.cornerRadius = 56.0;
+            cell1.userIcon.layer.cornerRadius = cell1.userIcon.bounds.size.width / 2;
+            cell1.userIcon.layer.masksToBounds = YES;
         }
         else{
         cell1.userIcon.image = self.userIcon;
