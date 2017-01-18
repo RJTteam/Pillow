@@ -119,8 +119,14 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Update data source array here, something like [array removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Property *obj = [sellerPropertyArray objectAtIndex:indexPath.row];
+        NSInteger propertyID = [obj.propertyID integerValue];
+        [Property sellerDeleteWithParameters:propertyID faliure:^(NSString *errorMessage) {
+            NSLog(@"Error------%@",errorMessage);
+        }];
+        [sellerPropertyArray removeObjectAtIndex:indexPath.row];
+        [self.propertyList deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        [self.propertyList reloadData];
     }
 }
 
