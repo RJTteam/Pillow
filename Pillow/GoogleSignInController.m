@@ -38,10 +38,10 @@
                                usernameKey : fullName,
                                useridKey : userId,
                                imgUrlKey : img,
-                               loginTypeKey:loginTypeGoogle
                                };
         NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
         [userdefault setObject:dict forKey:userKey];
+        [userdefault setObject:loginTypeGoogle forKey:loginTypeKey];
         HomeViewController *home = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.destinationController presentViewController:home animated:YES completion:nil];
     }else{
