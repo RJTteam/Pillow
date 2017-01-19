@@ -16,6 +16,7 @@ static NSString *const searchURL = @"http://www.rjtmobile.com/realestate/getprop
 @interface FavouriteList ()
 
 @property(strong, nonatomic)NSMutableArray *innerList;
+@property(strong, nonatomic)NSMutableArray *deletedList;
 
 @end
 
@@ -25,6 +26,14 @@ static NSString *const searchURL = @"http://www.rjtmobile.com/realestate/getprop
 
 -(NSArray *)favList{
     return self.innerList;
+}
+
+- (instancetype)init{
+    if (self = [super init]){
+        self.innerList = [[NSMutableArray alloc] init];
+        self.deletedList = [[NSMutableArray alloc] init];
+    }
+    return self;
 }
 
 + (instancetype)sharedInstance{
@@ -60,8 +69,6 @@ static NSString *const searchURL = @"http://www.rjtmobile.com/realestate/getprop
         NSData *data = [NSData dataWithContentsOfFile:finalPath];
         NSArray *unpackedArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         self.innerList = [NSMutableArray arrayWithArray: unpackedArray];
-    }else{
-        self.innerList = [[NSMutableArray alloc] init];
     }
 }
 
@@ -91,13 +98,19 @@ static NSString *const searchURL = @"http://www.rjtmobile.com/realestate/getprop
             break;
         }
     }
+    for(NSDictionary *d in self.deletedList){
+        if([d[propSearchIDKey] isEqualToString:dict[propSearchIDKey]]){
+            [self.deletedList removeObject:d];
+            break;
+        }
+    }
     [self.innerList addObject:dict];
 }
 
 - (void)removePropertyFromFavourite:(Property *)property{
     for(NSDictionary *p in self.innerList){
         if([p[propSearchIDKey] isEqualToString:property.propertyID]){
-            [self.innerList removeObject:p];
+            [self.deletedList addObject:p];
             break;
         }
     }
@@ -106,6 +119,7 @@ static NSString *const searchURL = @"http://www.rjtmobile.com/realestate/getprop
 - (void)saveToLocalForUser:(NSString *)userid{
     NSString *path = [self getUserSavedPath:userid];
     NSString *savePath = [path stringByAppendingPathComponent:favDirKey];
+    [self.innerList removeObjectsInArray:self.deletedList];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.innerList];
     [data writeToFile:savePath atomically:true];
 }

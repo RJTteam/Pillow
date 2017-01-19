@@ -176,11 +176,11 @@
                                emailKey : self.emailTxtFld.text,
                                passwordKey : self.pwdTxtFld.text,
                                usertypeKey : self.isBuyer ? buyerContent : sellerContent,
-                               loginTypeKey:loginTypeNormal
                                };
         [User userLoginWithParameters:dict success:^(User *user) {
             NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
             [userdefault setObject:[user dictPresentation] forKey:userKey];
+            [userdefault setObject:loginTypeNormal forKey:loginTypeKey];
             HomeViewController* hvc = [[HomeViewController alloc]init];
             if([user.usertype isEqualToString:buyerContent]){
                 [[FavouriteList sharedInstance] loadFavListForUser:[NSString stringWithFormat:@"%lu", user.userid]];
@@ -207,7 +207,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)facebookClicked {
-    //TODO jump to facebook sigin clicked
     [[FaceBookSigInController sharedInstance] FBLoginWithViewController:self];
 }
 #pragma mark - Private Method
@@ -234,8 +233,9 @@
                                usernameKey:(NSDictionary *)result[@"name"],
                                usertypeKey: buyerContent,
                                imgUrlKey : imgUrl,
-                               loginTypeKey:loginTypeFaceBook};
+                               };
         [userInfo setObject:dict forKey:userKey];
+        [userInfo setObject:loginTypeFaceBook forKey:loginTypeKey];
         [[FavouriteList sharedInstance] loadFavListForUser:dict[useridKey]];
        
     }];

@@ -110,23 +110,6 @@
         cell = [parts objectAtIndex:0];
     }
     
-    
-    UIButton* addToFavirate = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-    addToFavirate.imageView.image = [UIImage imageNamed:@"favirate"];
-    [addToFavirate addTarget:self action:@selector(addFavirate:) forControlEvents:UIControlEventTouchUpInside];
-    addToFavirate.tag = indexPath.row;
-    [cell addSubview:addToFavirate];
-    
-//    UILabel* price = [[UILabel alloc]initWithFrame:CGRectMake(120, 10, 25, 15)];
-//    price.text = @"Price:";
-//    [cell addSubview:price];
-//    UILabel* type = [[UILabel alloc]initWithFrame:CGRectMake(120, 36, 25, 15)];
-//    type.text = @"Type:";
-//    [cell addSubview:type];
-//    UILabel* status = [[UILabel alloc]initWithFrame:CGRectMake(120, 62, 25, 15)];
-//    status.text = @"Status:";
-//    [cell addSubview:status];
-    
     Property* p = [propertyArray objectAtIndex:indexPath.row];
     cell.cellType.text = p.propertyType;
     if(p.propertyCost.length < 1){
@@ -176,7 +159,7 @@
             });
         }
     }];
-    
+    cell.addFavirate.tag = indexPath.row;
     [cell.addFavirate addTarget:self action:@selector(addFavirate:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;

@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "BuyerProfileViewController.h"
 #import "Contants.h"
+#import "FavouriteList.h"
 
 @interface HomeViewController ()
 
@@ -28,6 +29,9 @@
         isTourist = YES;
     }else{
         isBuyer = [userInfo[usertypeKey] isEqualToString:buyerContent];
+        if(isBuyer){
+            [[FavouriteList sharedInstance] loadFavListForUser:userInfo[useridKey]];
+        }
     }
     MapViewController * first = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     ListTableViewController * second = [[ListTableViewController alloc] initWithNibName:@"ListTableViewController" bundle:nil];

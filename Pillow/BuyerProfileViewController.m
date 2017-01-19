@@ -38,7 +38,7 @@
         [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
     }
     self.userid = [userInfo objectForKey:useridKey];
-    NSString *loginType = userInfo[loginTypeKey];
+    NSString *loginType = [userDefault objectForKey:loginTypeKey];
     if([loginType isEqualToString:loginTypeNormal]){
         [self getUserIconWithUserId:self.userid];
     }else {
@@ -151,14 +151,17 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *userInfo = [userDefault objectForKey:userKey];
     NSString *loginType = userInfo[loginTypeKey];
+    [[FavouriteList sharedInstance] saveToLocalForUser:userInfo[useridKey]];
     if([loginType isEqualToString:loginTypeNormal]){
         [userDefault removeObjectForKey:userKey];
     }else if([loginType isEqualToString:loginTypeFaceBook]){
         [[FaceBookSigInController sharedInstance] FBLogOut];
+        [userDefault removeObjectForKey:userKey];
     }else if([loginType isEqualToString:loginTypeGoogle]){
         [[GIDSignIn sharedInstance] signOut];
         [userDefault removeObjectForKey:userKey];
     }
+    [userDefault removeObjectForKey:loginTypeKey];
     [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 

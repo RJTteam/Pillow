@@ -11,6 +11,8 @@
 #import "FavouriteList.h"
 #import "ShowPropertyViewController.h"
 
+#pragma mark - ThumbnailCell
+
 @interface ThumbnailCell : UICollectionViewCell
 
 @property(strong, nonatomic)UIImageView *thumbnail;
@@ -72,6 +74,8 @@
 
 @end
 
+#pragma mark - DescriptCell
+/************************************************************************************************/
 @interface DescriptCell : UICollectionViewCell
 
 @property(strong, nonatomic)UIImageView *backImageView;
@@ -86,7 +90,6 @@
 
 @end
 
-/************************************************************************************************/
 
 @implementation DescriptCell
 
@@ -153,6 +156,8 @@
 
 @end
 
+
+#pragma mark - FavouriteCell
 /************************************************************************************************/
 
 @interface FavouriteCell()
